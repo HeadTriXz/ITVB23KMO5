@@ -117,7 +117,6 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     screenContainer: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "space-between",
         padding: 24
     },
     title: {

@@ -15,7 +15,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             foregroundImage: "./assets/images/adaptive_icon.png",
             backgroundColor: "#FFFFFF"
         },
-        package: "com.headtrixz.automaat"
+        package: "com.headtrixz.automaat",
+        softwareKeyboardLayoutMode: "pan"
     },
     plugins: [
         [
