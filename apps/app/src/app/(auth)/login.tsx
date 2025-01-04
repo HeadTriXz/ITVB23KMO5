@@ -2,12 +2,12 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { ErrorBox } from "@/components/ErrorBox";
 import { Image } from "expo-image";
-import { PasswordInput } from "@/components/PasswordInput";
-import { PrimaryButton } from "@/components/PrimaryButton";
+import { PasswordInput } from "@/components/input/PasswordInput";
+import { PrimaryButton } from "@/components/buttons/PrimaryButton";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedTextInput } from "@/components/ThemedTextInput";
+import { ThemedView } from "@/components/base/ThemedView";
+import { ThemedText } from "@/components/base/ThemedText";
+import { ThemedTextInput } from "@/components/base/ThemedTextInput";
 import { Theme } from "@/types/theme";
 
 import { useAuth } from "@/hooks/useAuth";
@@ -61,7 +61,7 @@ export default function LoginScreen() {
         <ThemedView style={styles.screenContainer}>
             <SafeAreaView style={{ flex: 1, width: "100%" }}>
                 <View style={styles.formContainer}>
-                    <Image source={theme.dark ? "splash-icon-dark" : "splash-icon"} style={styles.logo} />
+                    <Image source={theme.dark ? "logo-dark" : "logo"} style={styles.logo} />
                     <ThemedText style={styles.title} variant="headingLarge">
                         Welcome back! Glad to see you again!
                     </ThemedText>
@@ -111,8 +111,9 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.accent
     },
     logo: {
-        width: 75,
-        height: 75
+        width: 40,
+        height: 40,
+        margin: 20
     },
     screenContainer: {
         flex: 1,

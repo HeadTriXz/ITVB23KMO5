@@ -23,8 +23,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             "expo-asset",
             {
                 "assets": [
-                    "./assets/images/splash_icon.png",
-                    "./assets/images/splash_icon_dark.png"
+                    "./assets/images/logo.png",
+                    "./assets/images/logo_dark.png"
                 ]
             }
         ],

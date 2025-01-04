@@ -160,7 +160,7 @@ const icons: Record<string, SolarBoldDuotoneIconFunction> = {
             <Path
                 fill={color}
                 d="M2 12c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2 2 6.477 2 12Z"
-                opacity={0.5}
+                opacity={0.1}
             />
             <Path
                 fill={color}
@@ -173,7 +173,7 @@ const icons: Record<string, SolarBoldDuotoneIconFunction> = {
             <Path
                 fill={color}
                 d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10 10-4.477 10-10Z"
-                opacity={0.5}
+                opacity={0.1}
             />
             <Path
                 fill={color}

@@ -1,11 +1,11 @@
 import { Tabs, TabList, TabSlot, TabTrigger } from "expo-router/ui";
 
-import { StyleSheet } from "react-native";
-import { TabButton } from "@/components/TabButton";
-import { useTheme } from "@/hooks/useTheme";
-import { darkTheme } from "@/constants/theme";
 import { Redirect } from "expo-router";
+import { StyleSheet } from "react-native";
+import { TabButton } from "@/components/navbar/TabButton";
+import { darkTheme } from "@/constants/theme";
 import { useAuth } from "@/hooks/useAuth";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function TabLayout() {
     const { token } = useAuth();
@@ -18,19 +18,19 @@ export default function TabLayout() {
         <Tabs>
             <TabSlot />
             <TabList style={[ styles.tabList, { backgroundColor: theme.colors.navbar }]}>
-                <TabTrigger name="index" href="/" asChild>
+                <TabTrigger name="index" href="/(tabs)/(home)" asChild>
                     <TabButton icon="home-2">Home</TabButton>
                 </TabTrigger>
-                <TabTrigger name="favorites" href="/favorites" asChild>
+                <TabTrigger name="favorites" href="/(tabs)/favorites" asChild>
                     <TabButton icon="heart">Favorites</TabButton>
                 </TabTrigger>
-                <TabTrigger name="trips" href="/trips" asChild>
+                <TabTrigger name="trips" href="/(tabs)/trips" asChild>
                     <TabButton icon="calendar">Trips</TabButton>
                 </TabTrigger>
-                <TabTrigger name="support" href="/support" asChild>
+                <TabTrigger name="support" href="/(tabs)/support" asChild>
                     <TabButton icon="chat-round-dots">Service</TabButton>
                 </TabTrigger>
-                <TabTrigger name="profile" href="/profile" asChild>
+                <TabTrigger name="profile" href="/(tabs)/profile" asChild>
                     <TabButton icon="user-circle">Profile</TabButton>
                 </TabTrigger>
             </TabList>

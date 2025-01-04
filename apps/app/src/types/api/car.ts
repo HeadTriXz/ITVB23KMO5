@@ -82,3 +82,18 @@ export interface APIGetCarResult {
      */
     latitude: number;
 }
+
+/**
+ * The payload of a GET request for cars.
+ */
+export interface APIGetCarsBody {
+    /**
+     * The page number to retrieve (zero-based).
+     */
+    page?: number;
+
+    /**
+     * The size of the page.
+     */
+    size?: number;
+}

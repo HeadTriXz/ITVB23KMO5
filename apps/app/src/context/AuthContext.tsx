@@ -1,8 +1,8 @@
 import {
+    ReactNode,
     createContext,
     useEffect,
-    useState,
-    ReactNode
+    useState
 } from "react";
 import * as SecureStore from "expo-secure-store";
 
@@ -15,6 +15,8 @@ interface AuthContextProps {
 interface AuthProviderProps {
     children: ReactNode;
 }
+
+const AUTH_TOKEN_KEY = "token";
 
 export const AuthContext = createContext<AuthContextProps>({
     isReady: false,
@@ -29,7 +31,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     useEffect(() => {
         async function loadToken() {
             try {
-                const storedToken = await SecureStore.getItemAsync("token");
+                const storedToken = await SecureStore.getItemAsync(AUTH_TOKEN_KEY);
                 if (storedToken) {
                     setTokenState(storedToken);
                 }
@@ -46,9 +48,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const setToken = (newToken: string | null) => {
         setTokenState(newToken);
         if (newToken) {
-            SecureStore.setItemAsync("token", newToken);
+            SecureStore.setItemAsync(AUTH_TOKEN_KEY, newToken);
         } else {
-            SecureStore.deleteItemAsync("token");
+            SecureStore.deleteItemAsync(AUTH_TOKEN_KEY);
         }
     };
 

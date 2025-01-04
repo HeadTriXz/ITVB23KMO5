@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/base/ThemedView";
+import { ThemedText } from "@/components/base/ThemedText";
 
 export default function TripsScreen() {
     return (

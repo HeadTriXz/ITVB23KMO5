@@ -16,7 +16,7 @@ export function ThemedTextInput({ style, ...props }: TextInputProps) {
 
 const useStyles = (theme: Theme) => StyleSheet.create({
     input: {
-        backgroundColor: theme.colors.card,
+        backgroundColor: theme.colors.buttonSecondary,
         borderColor: theme.colors.border,
         borderRadius: 7,
         borderWidth: 1,

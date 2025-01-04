@@ -7,8 +7,8 @@ import {
 import type { ReactNode } from "react";
 import type { Theme } from "@/types/theme";
 
+import { ThemedText } from "@/components/base/ThemedText";
 import { useTheme } from "@/hooks/useTheme";
-import { ThemedText } from "@/components/ThemedText";
 
 export interface BaseButtonProps {
     children: ReactNode;
