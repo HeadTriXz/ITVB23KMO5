@@ -4,9 +4,9 @@ import type { SearchParams } from "@/types/search";
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { AvailableCarCard } from "@/components/AvailableCarCard";
+import { ErrorBox } from "@/components/ErrorBox";
 import { Header } from "@/components/header/Header";
 import { SearchWithFilter } from "@/components/SearchWithFilter";
-import { ThemedText } from "@/components/base/ThemedText";
 import { ThemedView } from "@/components/base/ThemedView";
 import { parseFiltersFromParams } from "@/utils/filterParams";
 import { useCallback } from "react";
@@ -61,9 +61,10 @@ export default function SearchResultsScreen() {
                 onEndReached={search.loadMore}
                 onEndReachedThreshold={0.5}
                 ListFooterComponent={renderFooter}
-                ListEmptyComponent={(
-                    <ThemedText>No cars found</ThemedText>
-                )}
+                ListEmptyComponent={search.isLoading
+                    ? <ActivityIndicator />
+                    : <ErrorBox message={search.error || "Could not find any cars"} />
+                }
                 refreshing={search.isLoading}
                 onRefresh={search.refresh}
             />

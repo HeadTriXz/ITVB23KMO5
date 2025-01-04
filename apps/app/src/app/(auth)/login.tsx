@@ -18,11 +18,10 @@ import { useAPI } from "@/hooks/useAPI";
 
 export default function LoginScreen() {
     const router = useRouter();
-    const api = useAPI();
-
     const theme = useTheme();
     const styles = useStyles(theme);
 
+    const { api } = useAPI();
     const { setToken } = useAuth();
 
     const [username, setUsername] = useState("");

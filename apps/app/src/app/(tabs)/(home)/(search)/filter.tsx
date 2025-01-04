@@ -83,6 +83,10 @@ export default function FilterScreen() {
     }, []);
 
     const updateNumeric = useCallback((key: keyof SearchFilters, value?: string) => {
+        if (isNaN(Number(value))) {
+            return;
+        }
+
         setFilters((prev: SearchFilters) => ({
             ...prev,
             [key]: value ? Number(value) : undefined
