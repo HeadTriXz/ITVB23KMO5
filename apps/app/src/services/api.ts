@@ -1,14 +1,25 @@
-import {
+import type {
     APIGetAccountResult,
     APIGetCarResult,
+    APIGetCarsBody,
     APIGetCustomerResult,
     APIPostLoginBody,
     APIPostLoginResult,
     APIPostRegisterBody
 } from "@/types/api";
 
+/**
+ * The options for a request to the API.
+ */
 export interface RequestOptions {
+    /**
+     * Whether the request requires authentication.
+     */
     auth?: boolean;
+
+    /**
+     * The body of the request.
+     */
     body?: any;
 }
 
@@ -49,9 +60,10 @@ export class APIService {
         });
     }
 
-    async getCars(): Promise<APIGetCarResult[]> {
+    async getCars(options: APIGetCarsBody = {}): Promise<APIGetCarResult[]> {
         return this.#get("/cars", {
-            auth: true
+            auth: true,
+            body: options
         });
     }
 
@@ -61,15 +73,15 @@ export class APIService {
         });
     }
 
-    async loginUser(payload: APIPostLoginBody): Promise<APIPostLoginResult> {
+    async loginUser(options: APIPostLoginBody): Promise<APIPostLoginResult> {
         return this.#post("/authenticate", {
-            body: payload
+            body: options
         });
     }
 
-    async registerUser(payload: APIPostRegisterBody): Promise<void> {
+    async registerUser(options: APIPostRegisterBody): Promise<void> {
         await this.#post("/register", {
-            body: payload
+            body: options
         });
     }
 
@@ -87,6 +99,7 @@ export class APIService {
 
     async #request(method: string, path: string, options: RequestOptions = {}): Promise<any> {
         const headers = new Headers();
+        const url = new URL(`${this.#baseURL}${path}`);
 
         if (options.auth) {
             if (!this.#token) {
@@ -97,17 +110,23 @@ export class APIService {
         }
 
         if (options.body) {
-            options.body = JSON.stringify(options.body);
-            headers.append("Content-Type", "application/json");
+            if (method === "GET") {
+                for (const key in options.body) {
+                    url.searchParams.append(key, options.body[key]);
+                }
+
+                delete options.body;
+            } else {
+                options.body = JSON.stringify(options.body);
+                headers.append("Content-Type", "application/json");
+            }
         }
 
-        const response = await fetch(`${this.#baseURL}${path}`, {
+        const response = await fetch(url, {
             method: method,
             headers: headers,
             body: options.body
         });
-
-        console.log(response);
 
         if (response.headers.get("Content-Type") === "application/json") {
             return response.json();

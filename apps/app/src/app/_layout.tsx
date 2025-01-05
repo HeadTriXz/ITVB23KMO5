@@ -1,4 +1,4 @@
-import React, { type ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 
 import { Stack, useRouter, useSegments } from "expo-router";
 import { APIProvider } from "@/context/APIContext";
@@ -28,8 +28,10 @@ function AuthGuard({ children }: AuthGuardProps) {
 
         const inAuthGroup = segments[0] === "(auth)";
         if (inAuthGroup && token) {
-            router.replace("/(tabs)");
+            router.dismissAll();
+            router.replace("/(tabs)/(home)");
         } else if (!inAuthGroup && !token) {
+            router.dismissAll();
             router.replace("/(auth)/login");
         }
     }, [token, segments, router, isReady]);

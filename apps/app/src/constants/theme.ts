@@ -59,7 +59,7 @@ export const darkTheme: Theme = {
         textSecondary: "#7F7F7F",
         accent: "#F76F53",
         buttonPrimary: "#FFFFFF",
-        buttonSecondary: "#000000",
+        buttonSecondary: "#171717",
         buttonDisabled: "#272727",
         border: "#272727",
         navbar: "#171717"

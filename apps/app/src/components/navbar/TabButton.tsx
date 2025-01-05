@@ -1,9 +1,9 @@
-import { Pressable, StyleSheet, View } from "react-native";
-import { Ref, forwardRef } from "react";
+import { type Ref, forwardRef } from "react";
 
+import { Pressable, StyleSheet, View } from "react-native";
 import { SolarIcon } from "@/icons/solar/SolarIcon";
 import { TabTriggerSlotProps } from "expo-router/build/ui";
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/base/ThemedText";
 import { darkTheme } from "@/constants/theme";
 
 export type TabButtonProps = TabTriggerSlotProps & {

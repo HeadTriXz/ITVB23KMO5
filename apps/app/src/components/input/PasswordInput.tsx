@@ -5,8 +5,9 @@ import {
     StyleSheet,
     View
 } from "react-native";
+import type { Theme } from "@/types/theme";
+
 import { Octicons } from "@expo/vector-icons";
-import { Theme } from "@/types/theme";
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -41,7 +42,7 @@ export function PasswordInput({ style, ...props }: TextInputProps) {
 const useStyles = (theme: Theme) => StyleSheet.create({
     container: {
         alignItems: "center",
-        backgroundColor: theme.colors.card,
+        backgroundColor: theme.colors.buttonSecondary,
         borderColor: theme.colors.border,
         borderRadius: 7,
         borderWidth: 1,

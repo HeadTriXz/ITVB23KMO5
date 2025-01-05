@@ -1,6 +1,7 @@
 import { type ViewProps, View, StyleSheet } from "react-native";
+import type { Theme } from "@/types/theme";
+
 import { useTheme } from "@/hooks/useTheme";
-import { Theme } from "@/types/theme";
 
 export function ThemedView({ style, ...props }: ViewProps) {
     const theme = useTheme();

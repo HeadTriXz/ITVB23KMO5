@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/base/ThemedText";
 
 export interface ErrorBoxProps {
     message: string;
