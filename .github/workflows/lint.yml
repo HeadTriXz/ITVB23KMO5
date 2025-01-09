@@ -38,6 +38,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          workdir: ./apps/app
 
       - name: Run ESLint
         if: ${{ github.event_name == 'push' }}
