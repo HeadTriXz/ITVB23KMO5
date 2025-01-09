@@ -49,7 +49,7 @@ export default function LoginScreen() {
             } else {
                 setError("Invalid username or password.");
             }
-        } catch (error) {
+        } catch {
             setError("Something went wrong. Please try again.");
         } finally {
             setIsLoading(false);
@@ -58,7 +58,7 @@ export default function LoginScreen() {
 
     return (
         <ThemedView style={styles.screenContainer}>
-            <SafeAreaView style={{ flex: 1, width: "100%" }}>
+            <SafeAreaView style={styles.contentContainer}>
                 <View style={styles.formContainer}>
                     <Image source={theme.dark ? "logo-dark" : "logo"} style={styles.logo} />
                     <ThemedText style={styles.title} variant="headingLarge">
@@ -93,6 +93,10 @@ export default function LoginScreen() {
 }
 
 const useStyles = (theme: Theme) => StyleSheet.create({
+    contentContainer: {
+        flex: 1,
+        width: "100%"
+    },
     footer: {
         alignItems: "center"
     },
@@ -110,17 +114,17 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.accent
     },
     logo: {
-        width: 40,
         height: 40,
-        margin: 20
+        margin: 20,
+        width: 40
     },
     screenContainer: {
-        flex: 1,
         alignItems: "center",
+        flex: 1,
         padding: 24
     },
     title: {
-        textAlign: "center",
-        marginBottom: 70
+        marginBottom: 70,
+        textAlign: "center"
     }
 });

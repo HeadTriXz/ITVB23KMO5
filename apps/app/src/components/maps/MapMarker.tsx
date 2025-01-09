@@ -19,35 +19,35 @@ export function MapMarker() {
 const useStyles = (theme: Theme) => StyleSheet.create({
     markerContainer: {
         alignItems: "center",
-        position: "absolute",
+        height: 20,
         left: 31,
+        position: "absolute",
         top: 30,
-        width: 20,
-        height: 20
+        width: 20
+    },
+    markerDot: {
+        backgroundColor: "#FFFFFF",
+        borderRadius: 4,
+        height: 8,
+        left: 4,
+        position: "absolute",
+        top: 4,
+        width: 8
     },
     markerPin: {
         backgroundColor: theme.colors.accent,
         borderColor: "#FFFFFF",
         borderRadius: 10,
         borderWidth: 2,
-        width: 20,
-        height: 20
-    },
-    markerDot: {
-        backgroundColor: "#FFFFFF",
-        borderRadius: 4,
-        position: "absolute",
-        left: 4,
-        top: 4,
-        width: 8,
-        height: 8
+        height: 20,
+        width: 20
     },
     markerShadow: {
         backgroundColor: "rgba(0, 0, 0, 0.2)",
         borderRadius: 7,
-        position: "absolute",
         bottom: -2,
-        width: 14,
-        height: 3
+        height: 3,
+        position: "absolute",
+        width: 14
     }
 });

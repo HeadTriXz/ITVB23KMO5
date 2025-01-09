@@ -133,6 +133,9 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         alignItems: "center",
         flex: 1
     },
+    specificationText: {
+        fontSize: 20
+    },
     specificationsDivider: {
         borderColor: theme.colors.border,
         borderLeftWidth: 1,
@@ -142,8 +145,5 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         flexDirection: "row",
         marginBottom: 40,
         marginTop: 16
-    },
-    specificationText: {
-        fontSize: 20
     }
 });

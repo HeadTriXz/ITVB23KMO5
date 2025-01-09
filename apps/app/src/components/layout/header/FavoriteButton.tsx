@@ -16,6 +16,7 @@ export function FavoriteButton({ id }: FavoriteButtonProps) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const onPress = useCallback(() => {
+        console.log(`Toggled favorite for car ${id}`);
         setIsFavorite(!isFavorite);
     }, [isFavorite]);
 

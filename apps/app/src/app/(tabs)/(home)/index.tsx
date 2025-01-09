@@ -47,7 +47,7 @@ export default function HomeScreen() {
             <ThemedText variant="headingMedium" style={styles.heading}>Available Cars</ThemedText>
             <FlatList
                 data={search.cars}
-                contentContainerStyle={{ gap: 15, paddingBottom: 25 }}
+                contentContainerStyle={styles.contentContainer}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <AvailableCarCard car={item} onPress={() => onCarPress(item)} />
@@ -60,14 +60,18 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+    centered: {
+        alignItems: "center",
+        justifyContent: "center"
+    },
     container: {
         flex: 1,
         padding: 24,
         paddingBottom: 76
     },
-    centered: {
-        alignItems: "center",
-        justifyContent: "center"
+    contentContainer: {
+        gap: 15,
+        paddingBottom: 25
     },
     heading: {
         marginBottom: 10

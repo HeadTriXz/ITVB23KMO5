@@ -46,10 +46,10 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         gap: 8
     },
     option: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
         borderRadius: 999,
-        borderWidth: 1
+        borderWidth: 1,
+        paddingHorizontal: 16,
+        paddingVertical: 8
     },
     selectedOption: {
         backgroundColor: theme.colors.accent,

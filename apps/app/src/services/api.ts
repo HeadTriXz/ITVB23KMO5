@@ -52,7 +52,7 @@ export class APIService {
     }
 
     async createRental(options: APIPostRentalBody): Promise<void> {
-        return this.#post("/rentals", {
+        await this.#post("/rentals", {
             auth: true,
             body: options
         });
@@ -106,15 +106,15 @@ export class APIService {
         this.#token = token;
     }
 
-    async #get(url: string, options: RequestOptions = {}): Promise<any> {
+    async #get<T>(url: string, options: RequestOptions = {}): Promise<T> {
         return this.#request("GET", url, options);
     }
 
-    async #post(url: string, options: RequestOptions = {}): Promise<any> {
+    async #post<T>(url: string, options: RequestOptions = {}): Promise<T> {
         return this.#request("POST", url, options);
     }
 
-    async #request(method: string, path: string, options: RequestOptions = {}): Promise<any> {
+    async #request<T>(method: string, path: string, options: RequestOptions = {}): Promise<T> {
         const headers = new Headers();
         const url = new URL(`${this.#baseURL}${path}`);
 
@@ -142,13 +142,13 @@ export class APIService {
         const response = await fetch(url, {
             method: method,
             headers: headers,
-            body: options.body
+            body: options.body as string
         });
 
         if (response.headers.get("Content-Type") === "application/json") {
-            return response.json();
+            return response.json() as Promise<T>;
         }
 
-        return null;
+        throw new Error("Unexpected response from the server.");
     }
 }

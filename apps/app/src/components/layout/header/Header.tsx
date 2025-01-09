@@ -50,15 +50,15 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     headerContainer: {
         backgroundColor: theme.colors.background,
-        borderColor: theme.colors.border,
         borderBottomWidth: 1,
+        borderColor: theme.colors.border,
         flex: 1
     },
     headerIcon: {
         height: 30,
-        width: 30,
         marginLeft: 8,
-        marginRight: 15
+        marginRight: 15,
+        width: 30
     },
     headerTitle: {
         color: theme.colors.textPrimary

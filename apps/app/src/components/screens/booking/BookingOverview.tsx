@@ -41,7 +41,7 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
                 }
 
                 setCar(car);
-            } catch (error) {
+            } catch {
                 setError("Failed to fetch car details.");
             } finally {
                 setIsLoading(false);
@@ -73,7 +73,7 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
             });
 
             onSuccess();
-        } catch (error) {
+        } catch {
             setError("Failed to create booking.");
         }
     }, [car, fromDate, toDate, onSuccess]);
