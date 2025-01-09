@@ -47,14 +47,23 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1
     },
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    image: {
+        aspectRatio: 16 / 9,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        width: "100%"
+    },
     mainInfo: {
         borderColor: theme.colors.border,
         borderTopWidth: 1,
         padding: 24
     },
-    header: {
+    pricing: {
         flexDirection: "row",
-        justifyContent: "space-between"
     },
     specifications: {
         borderColor: theme.colors.border,
@@ -65,14 +74,5 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     textSecondary: {
         color: theme.colors.textSecondary
-    },
-    pricing: {
-        flexDirection: "row",
-    },
-    image: {
-        aspectRatio: 16 / 9,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        width: "100%"
     }
 });

@@ -98,23 +98,23 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         paddingBottom: 76
     },
     recentHeader: {
+        alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
-        marginTop: 24,
-        marginBottom: 12
-    },
-    recentItem: {
-        flexDirection: "row",
-        alignItems: "center",
-        paddingVertical: 10,
-        gap: 15
+        marginBottom: 12,
+        marginTop: 24
     },
     recentIcon: {
-        padding: 6,
-        borderRadius: 100,
         borderColor: theme.colors.border,
-        borderWidth: 1
+        borderRadius: 100,
+        borderWidth: 1,
+        padding: 6
+    },
+    recentItem: {
+        alignItems: "center",
+        flexDirection: "row",
+        gap: 15,
+        paddingVertical: 10
     },
     recentText: {
         color: theme.colors.textSecondary,

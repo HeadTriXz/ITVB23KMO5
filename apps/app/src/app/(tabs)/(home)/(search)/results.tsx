@@ -53,7 +53,7 @@ export default function SearchResultsScreen() {
             <SearchWithFilter onFilter={onFilter} onFocus={onSearchFocus} value={params.query} />
             <FlatList
                 data={search.cars}
-                contentContainerStyle={{ gap: 15, paddingBottom: 25 }}
+                contentContainerStyle={styles.contentContainer}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <AvailableCarCard car={item} onPress={() => onCarPress(item)} />
@@ -77,6 +77,10 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 24,
         paddingBottom: 76
+    },
+    contentContainer: {
+        gap: 15,
+        paddingBottom: 25
     },
     footer: {
         paddingVertical: 15

@@ -44,8 +44,8 @@ export function LocationPreview({ latitude, longitude }: LocationPreviewProps) {
                 />
                 <MapMarker />
             </View>
-            <View style={{ flex: 1 }}>
-                <ThemedText style={{ flexWrap: "wrap", marginBottom: 4 }}>
+            <View style={styles.textContainer}>
+                <ThemedText style={styles.textLocation}>
                     {location?.formattedAddress}
                 </ThemedText>
                 <ThemedText variant="textSmall" style={styles.textSecondary}>Pick-up Location</ThemedText>
@@ -56,19 +56,26 @@ export function LocationPreview({ latitude, longitude }: LocationPreviewProps) {
 
 const useStyles = (theme: Theme) => StyleSheet.create({
     container: {
-        borderRadius: 10,
-        padding: 10,
+        alignItems: "center",
         backgroundColor: theme.colors.card,
         borderColor: theme.colors.border,
+        borderRadius: 10,
         borderWidth: 1,
         flexDirection: "row",
-        alignItems: "center",
-        gap: 15
+        gap: 15,
+        padding: 10
     },
     mapImage: {
         borderRadius: 5,
-        width: 80,
-        height: 80
+        height: 80,
+        width: 80
+    },
+    textContainer: {
+        flex: 1
+    },
+    textLocation: {
+        flexWrap: "wrap",
+        marginBottom: 4
     },
     textSecondary: {
         color: theme.colors.textSecondary

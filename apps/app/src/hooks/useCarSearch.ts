@@ -115,7 +115,7 @@ export function useCarSearch({ filters, query, pageSize = 20 }: UseCarSearchProp
             setAllFetchedCars(prev => [...prev, ...result]);
             setCurrentPage(nextPage);
             setHasMoreServer(result.length === pageSize);
-        } catch (err) {
+        } catch {
             setError("Failed to fetch more cars");
         } finally {
             setIsLoading(false);

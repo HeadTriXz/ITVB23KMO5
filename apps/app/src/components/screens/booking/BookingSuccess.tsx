@@ -31,12 +31,12 @@ export function BookingSuccess() {
 const styles = StyleSheet.create({
     contentContainer: {
         alignItems: "center",
-        justifyContent: "center",
-        flex: 1
+        flex: 1,
+        justifyContent: "center"
     },
     heading: {
-        marginTop: 30,
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop: 30
     },
     screenContainer: {
         flex: 1,

@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
     container: {
         marginBottom: 30
     },
-    header: {
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexDirection: "row"
-    },
     content: {
         paddingVertical: 10
+    },
+    header: {
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "space-between"
     }
 });

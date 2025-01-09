@@ -52,10 +52,10 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         paddingVertical: 13,
         width: "100%",
     },
-    input: {
-        color: theme.colors.textPrimary
-    },
     icon: {
         marginLeft: 10
+    },
+    input: {
+        color: theme.colors.textPrimary
     }
 });

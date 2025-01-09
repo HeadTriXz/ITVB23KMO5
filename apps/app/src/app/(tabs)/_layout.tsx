@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
         borderColor: darkTheme.colors.border,
         borderRadius: 10,
         borderWidth: 1,
+        bottom: 24,
         flexDirection: "row",
+        height: 62,
         justifyContent: "space-between",
+        left: 24,
         paddingHorizontal: 24,
         position: "absolute",
-        height: 62,
-        bottom: 24,
-        left: 24,
         right: 24
     }
 });

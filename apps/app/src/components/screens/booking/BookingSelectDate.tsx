@@ -226,11 +226,6 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
 }
 
 const styles = StyleSheet.create({
-    screenContainer: {
-        flex: 1,
-        padding: 24,
-        paddingBottom: 100
-    },
     calendarContainer: {
         flex: 1,
         gap: 15
@@ -241,6 +236,9 @@ const styles = StyleSheet.create({
     },
     dateDisplay: {
         marginTop: 15
+    },
+    nextButton: {
+        width: "50%"
     },
     pricingContainer: {
         alignItems: "flex-end"
@@ -253,7 +251,9 @@ const styles = StyleSheet.create({
     pricingText: {
         lineHeight: 20
     },
-    nextButton: {
-        width: "50%"
+    screenContainer: {
+        flex: 1,
+        padding: 24,
+        paddingBottom: 100
     }
 });

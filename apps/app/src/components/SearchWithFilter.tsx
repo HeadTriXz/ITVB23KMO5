@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 24
     },
-    searchBar: {
-        flex: 1,
-        width: undefined
-    },
     filterButton: {
         marginLeft: 10,
+        width: undefined
+    },
+    searchBar: {
+        flex: 1,
         width: undefined
     }
 });

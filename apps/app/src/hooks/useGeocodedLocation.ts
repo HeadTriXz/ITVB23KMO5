@@ -22,7 +22,7 @@ export function useGeocodedLocation(latitude: number, longitude: number) {
                 }
 
                 setLocation(location);
-            } catch (error) {
+            } catch {
                 setError("Failed to fetch location");
             } finally {
                 setIsLoading(false);

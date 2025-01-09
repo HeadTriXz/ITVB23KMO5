@@ -15,12 +15,17 @@ export default function BookingOverviewScreen() {
         throw new Error("Missing required parameters.");
     }
 
+    const onSuccess = () => {
+        router.dismissAll();
+        router.replace("/(tabs)/(home)/(car)/success");
+    }
+
     return (
         <BookingOverview
             id={Number(params.id)}
             fromDate={params.fromDate}
             toDate={params.toDate}
-            onSuccess={() => router.replace("/(tabs)/(home)/(car)/success")}
+            onSuccess={onSuccess}
         />
     );
 }

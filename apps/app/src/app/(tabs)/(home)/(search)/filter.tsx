@@ -170,6 +170,17 @@ export default function FilterScreen() {
 }
 
 const styles = StyleSheet.create({
+    applyButton: {
+        flexGrow: 1,
+        width: undefined
+    },
+    buttonContainer: {
+        flexDirection: "row"
+    },
+    clearButton: {
+        marginLeft: 10,
+        width: undefined
+    },
     container: {
         flex: 1,
         padding: 24,
@@ -178,16 +189,5 @@ const styles = StyleSheet.create({
     filterContainer: {
         flex: 1,
         marginBottom: -10
-    },
-    buttonContainer: {
-        flexDirection: "row"
-    },
-    applyButton: {
-        flexGrow: 1,
-        width: undefined
-    },
-    clearButton: {
-        marginLeft: 10,
-        width: undefined
     }
 });

@@ -15,18 +15,18 @@ export const ErrorBox = ({ message }: ErrorBoxProps) => (
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row",
         alignItems: "center",
         backgroundColor: "#FF000030",
         borderColor: "#BF0000",
-        borderWidth: 1,
         borderRadius: 7,
+        borderWidth: 1,
+        flexDirection: "row",
         padding: 13,
         width: "100%"
     },
     text: {
         color: "#BF0000",
-        marginLeft: 10,
-        flex: 1
+        flex: 1,
+        marginLeft: 10
     },
 });

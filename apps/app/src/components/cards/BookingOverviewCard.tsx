@@ -80,24 +80,24 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         gap: 10,
         padding: 24
     },
-    informationRow: {
-        alignItems: "center",
-        flexDirection: "row",
-        gap: 10
-    },
     image: {
         aspectRatio: 16 / 9,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         width: "100%"
     },
+    informationRow: {
+        alignItems: "center",
+        flexDirection: "row",
+        gap: 10
+    },
+    priceText: {
+        fontFamily: theme.fonts.headingMedium.fontFamily
+    },
     pricingRow: {
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-between"
-    },
-    priceText: {
-        fontFamily: theme.fonts.headingMedium.fontFamily
     },
     secondaryText: {
         color: theme.colors.textSecondary
