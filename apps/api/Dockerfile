@@ -7,5 +7,7 @@ COPY . .
 RUN addgroup -S automaat && adduser -S automaat -G automaat && chown -R automaat:automaat /app
 USER automaat
 
+RUN chmod +x mvnw
+
 EXPOSE 8080
 CMD ["./mvnw"]
