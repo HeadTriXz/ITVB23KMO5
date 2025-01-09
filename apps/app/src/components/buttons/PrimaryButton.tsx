@@ -23,7 +23,11 @@ export function PrimaryButton({ children, disabled, loading, onPress, style }: B
     const styles = useStyles(theme);
 
     if (typeof children === "string") {
-        children = <ThemedText variant="textBody" style={styles.text}>{children}</ThemedText>;
+        children = (
+            <ThemedText variant="textBody" style={[styles.text, disabled && styles.disabledText]}>
+                {children}
+            </ThemedText>
+        );
     }
 
     return (
@@ -49,6 +53,9 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     disabled: {
         backgroundColor: theme.colors.buttonDisabled
+    },
+    disabledText: {
+        color: theme.colors.textSecondary
     },
     text: {
         color: theme.colors.background,

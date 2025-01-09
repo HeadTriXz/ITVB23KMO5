@@ -38,7 +38,7 @@ describe('HealthComponent', () => {
   describe('refresh', () => {
     it('should call refresh on init', () => {
       // GIVEN
-      const health: Health = { status: 'UP', components: { mail: { status: 'UP', details: { mailDetail: 'mail' } } } };
+      const health: Health = { status: 'UP', components: { mail: { status: 'UP', detailsSection: { mailDetail: 'mail' } } } };
       jest.spyOn(service, 'checkHealth').mockReturnValue(of(health));
 
       // WHEN

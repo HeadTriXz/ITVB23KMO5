@@ -6,11 +6,11 @@ import { createParamsFromFilters, parseFiltersFromParams } from "@/utils/filterP
 import { useCallback, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-import { CollapsibleFilterSection } from "@/components/CollapsibleFilterSection";
-import { Header } from "@/components/header/Header";
-import { MultiSelectFilter } from "@/components/filters/MultiSelectFilter";
+import { CollapsibleFilterSection } from "@/components/forms/filters/CollapsibleFilterSection";
+import { Header } from "@/components/layout/header/Header";
+import { MultiSelectFilter } from "@/components/forms/filters/MultiSelectFilter";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
-import { RangeFilter } from "@/components/filters/RangeFilter";
+import { RangeFilter } from "@/components/forms/filters/RangeFilter";
 import { SearchWithFilter } from "@/components/SearchWithFilter";
 import { SecondaryButton } from "@/components/buttons/SecondaryButton";
 import { ThemedText } from "@/components/base/ThemedText";

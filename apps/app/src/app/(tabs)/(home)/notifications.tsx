@@ -1,7 +1,7 @@
 import type { Theme } from "@/types/theme";
 
 import { StyleSheet } from "react-native";
-import { Header } from "@/components/header/Header";
+import { Header } from "@/components/layout/header/Header";
 import { ThemedText } from "@/components/base/ThemedText";
 import { ThemedView } from "@/components/base/ThemedView";
 import { useTheme } from "@/hooks/useTheme";

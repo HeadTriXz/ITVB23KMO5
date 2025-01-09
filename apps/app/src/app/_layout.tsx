@@ -28,10 +28,16 @@ function AuthGuard({ children }: AuthGuardProps) {
 
         const inAuthGroup = segments[0] === "(auth)";
         if (inAuthGroup && token) {
-            router.dismissAll();
+            if (router.canDismiss()) {
+                router.dismissAll();
+            }
+
             router.replace("/(tabs)/(home)");
         } else if (!inAuthGroup && !token) {
-            router.dismissAll();
+            if (router.canDismiss()) {
+                router.dismissAll();
+            }
+
             router.replace("/(auth)/login");
         }
     }, [token, segments, router, isReady]);

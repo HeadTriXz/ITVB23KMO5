@@ -3,9 +3,9 @@ import type { SearchParams } from "@/types/search";
 
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { AvailableCarCard } from "@/components/AvailableCarCard";
+import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
 import { ErrorBox } from "@/components/ErrorBox";
-import { Header } from "@/components/header/Header";
+import { Header } from "@/components/layout/header/Header";
 import { SearchWithFilter } from "@/components/SearchWithFilter";
 import { ThemedView } from "@/components/base/ThemedView";
 import { parseFiltersFromParams } from "@/utils/filterParams";
@@ -32,7 +32,7 @@ export default function SearchResultsScreen() {
     }, []);
 
     const onCarPress = useCallback((car: APIGetCarResult) => {
-        console.log(`Car pressed: ${car.id}`);
+        router.push(`/(tabs)/(home)/(car)/${car.id}`);
     }, []);
 
     const renderFooter = () => {
