@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { ErrorBox } from "@/components/ErrorBox";
 import { Image } from "expo-image";
-import { PasswordInput } from "@/components/input/PasswordInput";
+import { PasswordInput } from "@/components/forms/input/PasswordInput";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedView } from "@/components/base/ThemedView";

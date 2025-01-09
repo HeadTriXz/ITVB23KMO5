@@ -5,7 +5,7 @@ import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { useCallback, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-import { Header } from "@/components/header/Header";
+import { Header } from "@/components/layout/header/Header";
 import { Ionicons } from "@expo/vector-icons";
 import { SearchWithFilter } from "@/components/SearchWithFilter";
 import { ThemedText } from "@/components/base/ThemedText";

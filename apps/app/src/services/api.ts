@@ -3,9 +3,12 @@ import type {
     APIGetCarResult,
     APIGetCarsBody,
     APIGetCustomerResult,
+    APIGetRentalBody,
+    APIGetRentalResult,
     APIPostLoginBody,
     APIPostLoginResult,
-    APIPostRegisterBody
+    APIPostRegisterBody,
+    APIPostRentalBody
 } from "@/types/api";
 
 /**
@@ -48,6 +51,13 @@ export class APIService {
         this.#baseURL = baseURL;
     }
 
+    async createRental(options: APIPostRentalBody): Promise<void> {
+        return this.#post("/rentals", {
+            auth: true,
+            body: options
+        });
+    }
+
     async getAccount(): Promise<APIGetAccountResult> {
         return this.#get("/account", {
             auth: true
@@ -70,6 +80,13 @@ export class APIService {
     async getCustomer(): Promise<APIGetCustomerResult> {
         return this.#get("/AM/me", {
             auth: true
+        });
+    }
+
+    async getRentals(options: APIGetRentalBody): Promise<APIGetRentalResult[]> {
+        return this.#get("/rentals", {
+            auth: true,
+            body: options
         });
     }
 

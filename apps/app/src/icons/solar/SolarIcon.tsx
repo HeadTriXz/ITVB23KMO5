@@ -1,3 +1,4 @@
+import type { IconProps } from "@expo/vector-icons/build/createIconSet";
 import type { ReactElement } from "react";
 
 import { SolarBold } from "@/icons/solar/SolarBold";
@@ -12,22 +13,7 @@ export type SolarIconVariant = "bold" | "duotone" | "outline";
 /**
  * The options for a Solar icon.
  */
-export interface SolarIconProps {
-    /**
-     * The name of the icon.
-     */
-    name: string;
-
-    /**
-     * The size of the icon.
-     */
-    size?: number;
-
-    /**
-     * The color of the icon.
-     */
-    color?: string;
-
+export interface SolarIconProps extends IconProps<string> {
     /**
      * The variant of the icon.
      */
@@ -41,19 +27,21 @@ export interface SolarIconProps {
  * @param size The size of the icon.
  * @param color The color of the icon.
  * @param variant The variant of the icon.
+ * @param props The additional props.
  */
 export function SolarIcon({
     name,
     size = 24,
     color = "#000000",
-    variant = "bold"
+    variant = "bold",
+    ...props
 }: SolarIconProps): ReactElement {
     switch (variant) {
         case "bold":
-            return <SolarBold name={name} size={size} color={color} />;
+            return <SolarBold name={name} size={size} color={color} {...props} />;
         case "duotone":
-            return <SolarBoldDuotone name={name} size={size} color={color} />;
+            return <SolarBoldDuotone name={name} size={size} color={color} {...props} />;
         case "outline":
-            return <SolarOutline name={name} size={size} color={color} />;
+            return <SolarOutline name={name} size={size} color={color} {...props} />;
     }
 }

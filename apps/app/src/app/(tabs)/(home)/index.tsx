@@ -2,8 +2,8 @@ import type { APIGetCarResult } from "@/types/api";
 
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
 
-import { AvailableCarCard } from "@/components/AvailableCarCard";
-import { Header } from "@/components/header/Header";
+import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
+import { Header } from "@/components/layout/header/Header";
 import { SearchWithFilter } from "@/components/SearchWithFilter";
 import { ThemedText } from "@/components/base/ThemedText";
 import { ThemedView } from "@/components/base/ThemedView";
@@ -20,15 +20,15 @@ export default function HomeScreen() {
     })
 
     const onFilter = useCallback(() => {
-        router.push("/filter");
+        router.push("/(tabs)/(home)/(search)/filter");
     }, []);
 
     const onCarPress = useCallback((car: APIGetCarResult) => {
-        console.log(`Car pressed: ${car.id}`);
+        router.push(`/(tabs)/(home)/(car)/${car.id}`);
     }, []);
 
     const onSearchFocus = useCallback(() => {
-        router.push("/search");
+        router.push("/(tabs)/(home)/(search)/search");
     }, []);
 
     if (search.isLoading) {
