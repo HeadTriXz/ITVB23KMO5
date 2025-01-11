@@ -1,6 +1,5 @@
+import { ThemedText, ThemedView } from "@/components/base";
 import { StyleSheet } from "react-native";
-import { ThemedView } from "@/components/base/ThemedView";
-import { ThemedText } from "@/components/base/ThemedText";
 
 export default function ProfileScreen() {
     return (

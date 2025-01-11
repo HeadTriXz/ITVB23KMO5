@@ -1,17 +1,14 @@
 import type { APIGetCarResult } from "@/types/api";
 
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { ErrorBox, WarningBox } from "@/components/common";
+import { ThemedText, ThemedView } from "@/components/base";
 import { useCallback, useEffect, useState } from "react";
 
 import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
-import { ErrorBox } from "@/components/ErrorBox";
-import { Header } from "@/components/layout/header/Header";
-import { ThemedText } from "@/components/base/ThemedText";
-import { ThemedView } from "@/components/base/ThemedView";
-import { WarningBox } from "@/components/WarningBox";
+import { Header } from "@/components/layout/header";
 import { useData } from "@/hooks/useData";
 import { useRouter } from "expo-router";
-
 
 export default function FavoritesScreen() {
     const router = useRouter();

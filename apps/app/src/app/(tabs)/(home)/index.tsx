@@ -1,12 +1,11 @@
 import type { APIGetCarResult } from "@/types/api";
 
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { ThemedText, ThemedView } from "@/components/base";
 
 import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
-import { Header } from "@/components/layout/header/Header";
-import { SearchWithFilter } from "@/components/SearchWithFilter";
-import { ThemedText } from "@/components/base/ThemedText";
-import { ThemedView } from "@/components/base/ThemedView";
+import { Header } from "@/components/layout/header";
+import { SearchWithFilter } from "@/components/common/forms";
 import { useCallback } from "react";
 import { useCarSearch } from "@/hooks/useCarSearch";
 import { useRouter } from "expo-router";

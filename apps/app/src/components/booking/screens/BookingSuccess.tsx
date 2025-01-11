@@ -1,8 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { ThemedText, ThemedView } from "@/components/base";
+
 import { Header } from "@/components/layout/header";
-import { PrimaryButton } from "@/components/buttons";
-import { SolarBoldDuotone } from "@/icons/solar/SolarBoldDuotone";
+import { PrimaryButton } from "@/components/common/buttons";
+import { SolarBoldDuotone } from "@/components/icons/solar";
 import { useRouter } from "expo-router";
 
 export function BookingSuccess() {

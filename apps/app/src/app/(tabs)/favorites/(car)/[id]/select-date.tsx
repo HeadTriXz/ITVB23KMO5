@@ -1,5 +1,5 @@
-import { BookingSelectDate } from "@/components/screens/booking";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { BookingSelectDate } from "@/components/booking/screens";
 
 export default function HomeSelectDateScreen() {
     const { id } = useLocalSearchParams<{ id: string }>();

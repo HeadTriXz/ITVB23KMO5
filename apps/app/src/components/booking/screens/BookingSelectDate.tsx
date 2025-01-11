@@ -2,16 +2,16 @@ import type { APIGetCarResult, APIGetRentalResult } from "@/types/api";
 import type { DateData } from "react-native-calendars";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { Calendar, DateDisplay } from "@/components/calendar";
+import { Calendar, DateDisplay } from "@/components/booking/calendar";
 import { ThemedText, ThemedView } from "@/components/base";
 import { getDatesBetween, getDateString, isDateInRange } from "@/utils/dates";
 import { useCallback, useEffect, useState } from "react";
 
-import { BookingHeader } from "@/components/BookingHeader";
+import { BookingHeader } from "@/components/booking/BookingHeader";
 import { Header } from "@/components/layout/header";
 import { MAX_RENTAL_DAYS } from "@/constants/rental";
-import { PrimaryButton } from "@/components/buttons";
-import { WarningBox } from "@/components/WarningBox";
+import { PrimaryButton } from "@/components/common/buttons";
+import { WarningBox } from "@/components/common";
 import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";
 

@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import { SearchBar } from "@/components/forms/input/SearchBar";
-import { SecondaryButton } from "@/components/buttons/SecondaryButton";
+import { SearchBar } from "@/components/common/forms/input/SearchBar";
+import { SecondaryButton } from "@/components/common/buttons/SecondaryButton";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
 import { useTheme } from "@/hooks/useTheme";

@@ -1,4 +1,4 @@
-import { BookingSelectDate } from "@/components/screens/booking";
+import { BookingSelectDate } from "@/components/booking/screens";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 export default function HomeSelectDateScreen() {

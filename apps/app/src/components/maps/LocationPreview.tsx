@@ -3,7 +3,7 @@ import type { Theme } from "@/types/theme";
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";
 import { getStaticMapURL, openAddressOnMap } from "@/utils/location";
 
-import { ErrorBox } from "@/components/ErrorBox";
+import { ErrorBox } from "@/components/common/ErrorBox";
 import { Image } from "expo-image";
 import { MapMarker } from "@/components/maps/MapMarker";
 import { ThemedText } from "@/components/base";

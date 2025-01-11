@@ -1,9 +1,9 @@
 import type { IconProps } from "@expo/vector-icons/build/createIconSet";
 import type { ReactElement } from "react";
 
-import { SolarBold } from "@/icons/solar/SolarBold";
-import { SolarBoldDuotone } from "@/icons/solar/SolarBoldDuotone";
-import { SolarOutline } from "@/icons/solar/SolarOutline";
+import { SolarBold } from "@/components/icons/solar/SolarBold";
+import { SolarBoldDuotone } from "@/components/icons/solar/SolarBoldDuotone";
+import { SolarOutline } from "@/components/icons/solar/SolarOutline";
 
 /**
  * The variant of the Solar icon.

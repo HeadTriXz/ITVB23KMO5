@@ -1,20 +1,24 @@
 import type { SearchFilters, SearchParams } from "@/types/search";
 
-import { BODY_TYPES, CAR_BRANDS_AND_MODELS, FUEL_TYPES } from "@/constants/cars";
+import {
+    BODY_TYPES,
+    CAR_BRANDS_AND_MODELS,
+    FUEL_TYPES
+} from "@/constants/cars";
+import {
+    CollapsibleFilterSection,
+    MultiSelectFilter,
+    RangeFilter,
+    SearchWithFilter
+} from "@/components/common/forms";
+import { PrimaryButton, SecondaryButton } from "@/components/common/buttons";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { ThemedText, ThemedView } from "@/components/base";
 import { createParamsFromFilters, parseFiltersFromParams } from "@/utils/filterParams";
 import { useCallback, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-import { CollapsibleFilterSection } from "@/components/forms/filters/CollapsibleFilterSection";
-import { Header } from "@/components/layout/header/Header";
-import { MultiSelectFilter } from "@/components/forms/filters/MultiSelectFilter";
-import { PrimaryButton } from "@/components/buttons/PrimaryButton";
-import { RangeFilter } from "@/components/forms/filters/RangeFilter";
-import { SearchWithFilter } from "@/components/SearchWithFilter";
-import { SecondaryButton } from "@/components/buttons/SecondaryButton";
-import { ThemedText } from "@/components/base/ThemedText";
-import { ThemedView } from "@/components/base/ThemedView";
+import { Header } from "@/components/layout/header";
 
 type ArrayKeys<T> = {
     [K in keyof Required<T>]: Exclude<T[K], undefined> extends string[] ? K : never;

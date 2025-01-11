@@ -1,6 +1,6 @@
 import { type ReactNode, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
-import { SolarBoldDuotone } from "@/icons/solar/SolarBoldDuotone";
+import { SolarBoldDuotone } from "@/components/icons/solar/SolarBoldDuotone";
 import { ThemedText } from "@/components/base/ThemedText";
 import { useTheme } from "@/hooks/useTheme";
 

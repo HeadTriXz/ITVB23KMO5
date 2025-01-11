@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 
-import { SolarOutline } from "@/icons/solar/SolarOutline";
+import { SolarOutline } from "@/components/icons/solar/SolarOutline";
 import { Theme } from "@/types/theme";
 import { useCallback } from "react";
 import { useRouter } from "expo-router";

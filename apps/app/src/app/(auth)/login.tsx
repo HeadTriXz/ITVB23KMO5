@@ -1,13 +1,9 @@
+import { ErrorBox, PasswordInput, PrimaryButton } from "@/components/common";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { ThemedText, ThemedTextInput, ThemedView } from "@/components/base";
 
-import { ErrorBox } from "@/components/ErrorBox";
 import { Image } from "expo-image";
-import { PasswordInput } from "@/components/forms/input/PasswordInput";
-import { PrimaryButton } from "@/components/buttons/PrimaryButton";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemedView } from "@/components/base/ThemedView";
-import { ThemedText } from "@/components/base/ThemedText";
-import { ThemedTextInput } from "@/components/base/ThemedTextInput";
 import { Theme } from "@/types/theme";
 
 import { useAuth } from "@/hooks/useAuth";

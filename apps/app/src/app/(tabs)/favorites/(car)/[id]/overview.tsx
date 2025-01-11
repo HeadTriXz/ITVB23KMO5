@@ -1,5 +1,5 @@
-import { BookingOverview } from "@/components/screens/booking";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { BookingOverview } from "@/components/booking/screens";
 
 type BookingOverviewParams = {
     id: string;

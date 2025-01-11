@@ -2,11 +2,12 @@ import type { APIGetCarResult } from "@/types/api";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useCallback, useEffect, useState } from "react";
-import { BookingHeader } from "@/components/BookingHeader";
+
+import { BookingHeader } from "@/components/booking/BookingHeader";
 import { BookingOverviewCard } from "@/components/cards/BookingOverviewCard";
-import { ErrorBox } from "@/components/ErrorBox";
+import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
-import { PrimaryButton } from "@/components/buttons";
+import { PrimaryButton } from "@/components/common/buttons";
 import { ThemedView } from "@/components/base";
 import { useData } from "@/hooks/useData";
 

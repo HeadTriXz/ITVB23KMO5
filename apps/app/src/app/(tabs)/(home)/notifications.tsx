@@ -1,7 +1,7 @@
+import { ThemedText, ThemedView } from "@/components/base";
+
 import { StyleSheet } from "react-native";
-import { Header } from "@/components/layout/header/Header";
-import { ThemedText } from "@/components/base/ThemedText";
-import { ThemedView } from "@/components/base/ThemedView";
+import { Header } from "@/components/layout/header";
 
 export default function NotificationsScreen() {
     return (

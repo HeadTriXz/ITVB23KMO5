@@ -2,15 +2,15 @@ import type { APIGetCarResult } from "@/types/api";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ThemedText, ThemedView } from "@/components/base";
 import { useEffect, useState } from "react";
-import { BookingHeader } from "@/components/BookingHeader";
-import { ErrorBox } from "@/components/ErrorBox";
-import { Header } from "@/components/layout/header/Header";
+
+import { BookingHeader } from "@/components/booking/BookingHeader";
+import { ErrorBox } from "@/components/common";
+import { Header } from "@/components/layout/header";
 import { Image } from "expo-image";
 import { LocationPreview } from "@/components/maps/LocationPreview";
-import { PrimaryButton } from "@/components/buttons/PrimaryButton";
-import { ThemedText } from "@/components/base/ThemedText";
-import { ThemedView } from "@/components/base/ThemedView";
+import { PrimaryButton } from "@/components/common/buttons";
 import { prettyFuel } from "@/utils/car";
 import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";

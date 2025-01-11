@@ -3,7 +3,7 @@ import type { Theme } from "@/types/theme";
 import { Tabs, TabList, TabSlot, TabTrigger } from "expo-router/ui";
 import { Redirect } from "expo-router";
 import { StyleSheet } from "react-native";
-import { TabButton } from "@/components/layout/navbar/TabButton";
+import { TabButton } from "@/components/layout/navigation/TabButton";
 import { darkTheme } from "@/constants/theme";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";

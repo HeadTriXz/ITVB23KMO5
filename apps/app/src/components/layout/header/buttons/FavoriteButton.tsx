@@ -1,7 +1,7 @@
 import { type TextStyle, StyleSheet, TouchableOpacity } from "react-native";
 
 import { useCallback, useEffect, useState } from "react";
-import { SolarIcon } from "@/icons/solar/SolarIcon";
+import { SolarIcon } from "@/components/icons/solar/SolarIcon";
 import { Theme } from "@/types/theme";
 import { useTheme } from "@/hooks/useTheme";
 import { useData } from "@/hooks/useData";

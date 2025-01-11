@@ -1,7 +1,7 @@
 import type { DateData } from "react-native-calendars";
 import type { Theme } from "@/types/theme";
 
-import { CalendarArrow } from "@/components/calendar/CalendarArrow";
+import { CalendarArrow } from "@/components/booking/calendar/CalendarArrow";
 import { Calendar as RNCalendar } from "react-native-calendars";
 import { StyleSheet } from "react-native";
 import { getDateString } from "@/utils/dates";

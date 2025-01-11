@@ -1,7 +1,7 @@
 import { type ViewStyle, StyleSheet, TextInput, View } from "react-native";
 import type { Theme } from "@/types/theme";
 
-import { SolarOutline } from "@/icons/solar/SolarOutline";
+import { SolarOutline } from "@/components/icons/solar/SolarOutline";
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 

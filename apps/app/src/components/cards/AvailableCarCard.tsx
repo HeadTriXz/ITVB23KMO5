@@ -4,7 +4,7 @@ import type { Theme } from "@/types/theme";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { FavoriteButton } from "@/components/layout/header";
 import { Image } from "expo-image";
-import { ThemedText } from "@/components/base/ThemedText";
+import { ThemedText } from "@/components/base";
 import { prettyFuel } from "@/utils/car";
 import { useTheme } from "@/hooks/useTheme";
 

@@ -1,7 +1,7 @@
 import { type Ref, forwardRef } from "react";
 
 import { Pressable, StyleSheet, View } from "react-native";
-import { SolarIcon } from "@/icons/solar/SolarIcon";
+import { SolarIcon } from "@/components/icons/solar/SolarIcon";
 import { TabTriggerSlotProps } from "expo-router/build/ui";
 import { ThemedText } from "@/components/base/ThemedText";
 import { darkTheme } from "@/constants/theme";

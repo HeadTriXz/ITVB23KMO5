@@ -1,5 +1,5 @@
-import { AvailableCarDetails } from "@/components/screens/booking/AvailableCarDetails";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { AvailableCarDetails } from "@/components/booking/screens/AvailableCarDetails";
 
 export default function CarDetailsScreen() {
     const router = useRouter();
