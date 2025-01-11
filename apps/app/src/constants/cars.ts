@@ -3,6 +3,19 @@ export interface LabeledValue {
     value: string;
 }
 
+export type CarBrand =
+    "Toyota"
+    | "Honda"
+    | "Ford"
+    | "Chevrolet"
+    | "BMW"
+    | "Mercedes-Benz"
+    | "Audi"
+    | "Jeep"
+    | "Nissan"
+    | "Subaru"
+    | "Hyundai";
+
 export const CAR_BRANDS_AND_MODELS = [
     { brand: "Toyota", models: ["Camry", "RAV4 Hybrid", "Highlander", "4Runner"] },
     { brand: "Honda", models: ["CR-V", "Civic", "Fit"] },
@@ -14,8 +27,8 @@ export const CAR_BRANDS_AND_MODELS = [
     { brand: "Jeep", models: ["Wrangler", "Cherokee"] },
     { brand: "Nissan", models: ["Altima", "Murano"] },
     { brand: "Subaru", models: ["Outback", "Forester"] },
-    { brand: "Hyundai", models: ["Santa Fe", "Kona Electric"] },
-];
+    { brand: "Hyundai", models: ["Santa Fe", "Kona Electric"] }
+] satisfies Array<{ brand: CarBrand, models: string[] }>;
 
 export const FUEL_TYPES: LabeledValue[] = [
     { value: "GASOLINE", label: "Gasoline" },

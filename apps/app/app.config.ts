@@ -24,7 +24,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             {
                 "assets": [
                     "./assets/images/logo.png",
-                    "./assets/images/logo_dark.png"
+                    "./assets/images/logo_dark.png",
+                    "./assets/images/brands/bmw.png",
+                    "./assets/images/brands/mercedes.png",
+                    "./assets/images/brands/nissan.png",
+                    "./assets/images/brands/toyota.png",
+                    "./assets/images/brands/bmw_dark.png",
+                    "./assets/images/brands/mercedes_dark.png",
+                    "./assets/images/brands/nissan_dark.png",
+                    "./assets/images/brands/toyota_dark.png"
                 ]
             }
         ],
