@@ -1,8 +1,8 @@
 import { type ReactNode, useEffect } from "react";
 
 import { Stack, useRouter, useSegments } from "expo-router";
-import { APIProvider } from "@/context/APIContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { DataProvider } from "@/context/DataContext";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
@@ -58,14 +58,14 @@ function AuthGuard({ children }: AuthGuardProps) {
 export default function RootLayout() {
     return (
         <AuthProvider>
-            <APIProvider>
+            <DataProvider>
                 <ThemeProvider>
                     <StatusBar style="auto" />
                     <AuthGuard>
                         <Stack screenOptions={{ headerShown: false }} />
                     </AuthGuard>
                 </ThemeProvider>
-            </APIProvider>
+            </DataProvider>
         </AuthProvider>
     )
 }

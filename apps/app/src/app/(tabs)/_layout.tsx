@@ -1,5 +1,6 @@
-import { Tabs, TabList, TabSlot, TabTrigger } from "expo-router/ui";
+import type { Theme } from "@/types/theme";
 
+import { Tabs, TabList, TabSlot, TabTrigger } from "expo-router/ui";
 import { Redirect } from "expo-router";
 import { StyleSheet } from "react-native";
 import { TabButton } from "@/components/layout/navbar/TabButton";
@@ -14,10 +15,12 @@ export default function TabLayout() {
     }
 
     const theme = useTheme();
+    const styles = useStyles(theme);
+
     return (
         <Tabs>
             <TabSlot />
-            <TabList style={[ styles.tabList, { backgroundColor: theme.colors.navbar }]}>
+            <TabList style={styles.tabList}>
                 <TabTrigger name="index" href="/(tabs)/(home)" asChild>
                     <TabButton icon="home-2">Home</TabButton>
                 </TabTrigger>
@@ -38,9 +41,10 @@ export default function TabLayout() {
     );
 }
 
-const styles = StyleSheet.create({
+const useStyles = (theme: Theme) => StyleSheet.create({
     tabList: {
         alignItems: "center",
+        backgroundColor: theme.colors.navbar,
         borderColor: darkTheme.colors.border,
         borderRadius: 10,
         borderWidth: 1,

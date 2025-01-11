@@ -1,23 +1,42 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { type TextStyle, StyleSheet, TouchableOpacity } from "react-native";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SolarIcon } from "@/icons/solar/SolarIcon";
 import { Theme } from "@/types/theme";
 import { useTheme } from "@/hooks/useTheme";
+import { useData } from "@/hooks/useData";
 
 interface FavoriteButtonProps {
     id: number;
+    style?: TextStyle;
 }
 
-export function FavoriteButton({ id }: FavoriteButtonProps) {
+export function FavoriteButton({ id, style }: FavoriteButtonProps) {
+    const { storage } = useData();
+
     const theme = useTheme();
     const styles = useStyles(theme);
 
     const [isFavorite, setIsFavorite] = useState(false);
 
-    const onPress = useCallback(() => {
-        console.log(`Toggled favorite for car ${id}`);
-        setIsFavorite(!isFavorite);
+    useEffect(() => {
+        storage!.favorites
+            .isFavorite(id)
+            .then(setIsFavorite);
+    }, [id]);
+
+    const onPress = useCallback(async () => {
+        try {
+            if (isFavorite) {
+                await storage!.favorites.removeFavorite(id);
+            } else {
+                await storage!.favorites.addFavorite(id);
+            }
+
+            setIsFavorite(!isFavorite);
+        } catch (error) {
+            console.error("Failed to toggle favorite", error);
+        }
     }, [isFavorite]);
 
     return (
@@ -27,7 +46,7 @@ export function FavoriteButton({ id }: FavoriteButtonProps) {
                 size={24}
                 color={isFavorite ? theme.colors.accent : theme.colors.textSecondary}
                 variant={isFavorite ? "bold" : "outline"}
-                style={styles.icon}
+                style={[styles.icon, style]}
             />
         </TouchableOpacity>
     );

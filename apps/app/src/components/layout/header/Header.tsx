@@ -1,8 +1,7 @@
 import { StyleSheet, View } from "react-native";
 
-import { BackButton } from "@/components/layout/header/BackButton";
+import { BackButton, NotificationButton } from "@/components/layout/header/buttons";
 import { Image } from "expo-image";
-import { NotificationButton } from "@/components/layout/header/NotificationButton";
 import { Stack } from "expo-router";
 import { Theme } from "@/types/theme";
 import { useTheme } from "@/hooks/useTheme";

@@ -26,6 +26,11 @@ type APIGetRentalBodyNumericFilters =
 type APIGetRentalBodyStringFilters = "code" | "state";
 
 /**
+ * The body of a PATCH request for a rental.
+ */
+export type APIPatchRentalBody = Partial<APIPostRentalBody>;
+
+/**
  * The response of a GET request for a rental.
  */
 export interface APIGetRentalResult {
@@ -83,7 +88,7 @@ export interface APIGetRentalResult {
 /**
  * The body of a GET request for rentals.
  */
-export interface APIGetRentalBody extends
+export interface APIGetRentalsBody extends
     APIGetDateFilters<APIGetRentalBodyDateFilters>,
     APIGetNumericFilters<APIGetRentalBodyNumericFilters>,
     APIGetStringFilters<APIGetRentalBodyStringFilters>

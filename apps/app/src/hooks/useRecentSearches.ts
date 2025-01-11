@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "expo-sqlite/kv-store";
 
 const RECENT_SEARCHES_KEY = "recent_searches";
 const MAX_RECENT_SEARCHES = 5;

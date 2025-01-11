@@ -8,7 +8,7 @@ import { ErrorBox } from "@/components/ErrorBox";
 import { Header } from "@/components/layout/header";
 import { PrimaryButton } from "@/components/buttons";
 import { ThemedView } from "@/components/base";
-import { useAPI } from "@/hooks/useAPI";
+import { useData } from "@/hooks/useData";
 
 interface BookingOverviewProps {
     id: number;
@@ -18,7 +18,7 @@ interface BookingOverviewProps {
 }
 
 export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOverviewProps) {
-    const { api } = useAPI();
+    const { api } = useData();
 
     const [car, setCar] = useState<APIGetCarResult | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -27,8 +27,8 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const car = await api.getCar(id);
-                const rentals = await api.getRentals({
+                const car = await api!.cars.getCar(id);
+                const rentals = await api!.rentals.getRentals({
                     "carId.equals": car.id,
                     "fromDate.greaterThanOrEqual": fromDate,
                     "toDate.lessThanOrEqual": toDate,
@@ -57,8 +57,8 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
         }
 
         try {
-            const customer = await api.getCustomer();
-            await api.createRental({
+            const customer = await api!.customers.getCustomer();
+            await api!.rentals.createRental({
                 car: {
                     id: car.id
                 },

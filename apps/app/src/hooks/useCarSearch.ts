@@ -1,7 +1,7 @@
 import type { APIGetCarResult } from "@/types/api";
 import type { SearchFilters } from "@/types/search";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useAPI } from "@/hooks/useAPI";
+import { useData } from "@/hooks/useData";
 
 interface UseCarSearchProps {
     filters: SearchFilters;
@@ -19,7 +19,7 @@ interface UseCarSearchReturn {
 }
 
 export function useCarSearch({ filters, query, pageSize = 20 }: UseCarSearchProps): UseCarSearchReturn {
-    const { api, isAuthenticated } = useAPI();
+    const { api, isAuthenticated } = useData();
 
     const [allFetchedCars, setAllFetchedCars] = useState<APIGetCarResult[]>([]);
     const [currentPage, setCurrentPage] = useState(0);
@@ -83,7 +83,7 @@ export function useCarSearch({ filters, query, pageSize = 20 }: UseCarSearchProp
         setAllFetchedCars([]);
 
         try {
-            const result = await api.getCars({
+            const result = await api!.cars.getCars({
                 page: 0,
                 size: pageSize
             });
@@ -107,7 +107,7 @@ export function useCarSearch({ filters, query, pageSize = 20 }: UseCarSearchProp
 
         try {
             const nextPage = currentPage + 1;
-            const result = await api.getCars({
+            const result = await api!.cars.getCars({
                 page: nextPage,
                 size: pageSize
             });

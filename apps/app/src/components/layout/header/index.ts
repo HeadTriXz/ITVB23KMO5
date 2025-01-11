@@ -1,4 +1,2 @@
-export { BackButton } from "./BackButton";
-export { FavoriteButton } from "./FavoriteButton";
+export { BackButton, FavoriteButton, NotificationButton } from "./buttons";
 export { Header } from "./Header";
-export { NotificationButton } from "./NotificationButton";

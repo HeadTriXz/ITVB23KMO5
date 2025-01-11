@@ -54,7 +54,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
                     "image": "./assets/images/splash_icon_dark.png"
                 }
             }
-        ]
+        ],
+        "expo-sqlite"
     ],
     experiments: {
         typedRoutes: true

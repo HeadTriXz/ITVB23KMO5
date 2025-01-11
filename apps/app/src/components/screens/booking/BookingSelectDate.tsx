@@ -6,13 +6,14 @@ import { Calendar, DateDisplay } from "@/components/calendar";
 import { ThemedText, ThemedView } from "@/components/base";
 import { getDatesBetween, getDateString, isDateInRange } from "@/utils/dates";
 import { useCallback, useEffect, useState } from "react";
+
+import { BookingHeader } from "@/components/BookingHeader";
 import { Header } from "@/components/layout/header";
 import { MAX_RENTAL_DAYS } from "@/constants/rental";
 import { PrimaryButton } from "@/components/buttons";
 import { WarningBox } from "@/components/WarningBox";
-import { useAPI } from "@/hooks/useAPI";
+import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";
-import { BookingHeader } from "@/components/BookingHeader";
 
 interface SelectDateProps {
     carId: number;
@@ -20,7 +21,7 @@ interface SelectDateProps {
 }
 
 export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
-    const { api } = useAPI();
+    const { api } = useData();
     const theme = useTheme();
 
     const [fromDate, setFromDate] = useState<string | null>(null);
@@ -131,8 +132,8 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const car = await api.getCar(carId);
-                const rentals = await api.getRentals({
+                const car = await api!.cars.getCar(carId);
+                const rentals = await api!.rentals.getRentals({
                     "carId.equals": car.id,
                     "toDate.greaterThanOrEqual": getDateString(new Date()),
                     "state.notEquals": "RETURNED",

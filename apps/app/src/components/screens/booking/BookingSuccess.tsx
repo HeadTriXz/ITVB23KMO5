@@ -8,7 +8,7 @@ import { useRouter } from "expo-router";
 export function BookingSuccess() {
     const router = useRouter();
     const onHomePress = () => {
-        router.dismissAll();
+        router.replace("/(tabs)/(home)/");
     };
 
     return (

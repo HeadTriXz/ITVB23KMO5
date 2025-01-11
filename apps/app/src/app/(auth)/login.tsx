@@ -11,17 +11,17 @@ import { ThemedTextInput } from "@/components/base/ThemedTextInput";
 import { Theme } from "@/types/theme";
 
 import { useAuth } from "@/hooks/useAuth";
+import { useData } from "@/hooks/useData";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
-import { useAPI } from "@/hooks/useAPI";
 
 export default function LoginScreen() {
     const router = useRouter();
     const theme = useTheme();
     const styles = useStyles(theme);
 
-    const { api } = useAPI();
+    const { api, isReady } = useData();
     const { setToken } = useAuth();
 
     const [username, setUsername] = useState("");
@@ -35,7 +35,7 @@ export default function LoginScreen() {
         setIsLoading(true);
 
         try {
-            const response = await api.loginUser({
+            const response = await api!.account.loginUser({
                 username: username,
                 password: password,
                 rememberMe: true
@@ -43,7 +43,7 @@ export default function LoginScreen() {
 
             if (response?.id_token) {
                 setToken(response.id_token);
-                api.setToken(response.id_token);
+                api!.rest.setToken(response.id_token);
 
                 router.replace("/");
             } else {
@@ -55,6 +55,10 @@ export default function LoginScreen() {
             setIsLoading(false);
         }
     };
+
+    if (!isReady) {
+        return null;
+    }
 
     return (
         <ThemedView style={styles.screenContainer}>

@@ -12,7 +12,7 @@ import { PrimaryButton } from "@/components/buttons/PrimaryButton";
 import { ThemedText } from "@/components/base/ThemedText";
 import { ThemedView } from "@/components/base/ThemedView";
 import { prettyFuel } from "@/utils/car";
-import { useAPI } from "@/hooks/useAPI";
+import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";
 
 interface CarDetailsProps {
@@ -21,7 +21,7 @@ interface CarDetailsProps {
 }
 
 export function AvailableCarDetails({ id, onBook }: CarDetailsProps) {
-    const { api } = useAPI();
+    const { api } = useData();
     const theme = useTheme();
     const styles = useStyles(theme);
 
@@ -30,7 +30,7 @@ export function AvailableCarDetails({ id, onBook }: CarDetailsProps) {
     const [error, setError] = useState<string>("");
 
     useEffect(() => {
-        api.getCar(Number(id))
+        api!.cars.getCar(Number(id))
             .then(setCar)
             .catch(() => setError("Failed to fetch car details."))
             .finally(() => setIsLoading(false));
