@@ -1,4 +1,4 @@
-import { AvailableCarDetails } from "@/components/screens/booking/AvailableCarDetails";
+import { AvailableCarDetails } from "@/components/booking/screens/AvailableCarDetails";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 export default function CarDetailsScreen() {

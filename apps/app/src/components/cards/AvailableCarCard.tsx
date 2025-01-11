@@ -2,23 +2,30 @@ import type { APIGetCarResult } from "@/types/api";
 import type { Theme } from "@/types/theme";
 
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { FavoriteButton } from "@/components/layout/header";
 import { Image } from "expo-image";
-import { ThemedText } from "@/components/base/ThemedText";
+import { ThemedText } from "@/components/base";
 import { prettyFuel } from "@/utils/car";
 import { useTheme } from "@/hooks/useTheme";
 
 interface ListItemProps {
     car: APIGetCarResult;
     onPress: () => void;
+    withFavoriteButton?: boolean;
 }
 
-export function AvailableCarCard({ car, onPress }: ListItemProps) {
+export function AvailableCarCard({ car, onPress, withFavoriteButton }: ListItemProps) {
     const theme = useTheme();
     const styles = useStyles(theme);
 
     return (
         <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
             <Image source={{ uri: `data:image/png;base64,${car.picture}` }} style={styles.image} />
+            {withFavoriteButton && (
+                <View style={styles.favoriteButtonContainer}>
+                    <FavoriteButton id={car.id} style={styles.favoriteButton} />
+                </View>
+            )}
             <View style={styles.mainInfo}>
                 <View style={styles.header}>
                     <ThemedText variant="headingSmall">{car.brand}</ThemedText>
@@ -46,6 +53,14 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderColor: theme.colors.border,
         borderRadius: 10,
         borderWidth: 1
+    },
+    favoriteButton: {
+        backgroundColor: theme.colors.card,
+    },
+    favoriteButtonContainer: {
+        position: "absolute",
+        right: 10,
+        top: 10
     },
     header: {
         flexDirection: "row",

@@ -2,9 +2,9 @@ import type { APIGetCarResult } from "@/types/api";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { ErrorBox } from "@/components/ErrorBox";
+import { ErrorBox } from "@/components/common";
 import { Image } from "expo-image";
-import { SolarOutline } from "@/icons/solar/SolarOutline";
+import { SolarOutline } from "@/components/icons/solar";
 import { ThemedText } from "@/components/base";
 import { humanReadableDate } from "@/utils/dates";
 import { useGeocodedLocation } from "@/hooks/useGeocodedLocation";

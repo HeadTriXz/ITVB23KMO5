@@ -69,9 +69,9 @@ export interface APIGetAccountResult {
 }
 
 /**
- * The response of a GET request to activate an account.
+ * The payload for a GET request to activate an account.
  */
-export interface APIGetActivateResult {
+export interface APIGetActivateBody {
     /**
      * The activation key for the account.
      */
@@ -122,11 +122,6 @@ export interface APIPostLoginResult {
      */
     id_token: string;
 }
-
-/**
- * The payload for a POST request to initialize a password reset (email).
- */
-export type APIPostResetPasswordInitBody = string;
 
 /**
  * The payload for a POST request to register a new account.
