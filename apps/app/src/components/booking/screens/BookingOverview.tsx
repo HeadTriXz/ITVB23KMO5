@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/header";
 import { PrimaryButton } from "@/components/common/buttons";
 import { ThemedView } from "@/components/base";
 import { useData } from "@/hooks/useData";
+import { useRentals } from "@/hooks/useRentals";
 
 interface BookingOverviewProps {
     id: number;
@@ -24,6 +25,8 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
     const [car, setCar] = useState<APIGetCarResult | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string>("");
+
+    const { createRental } = useRentals();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,7 +62,7 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
 
         try {
             const customer = await api!.customers.getCustomer();
-            await api!.rentals.createRental({
+            await createRental({
                 car: {
                     id: car.id
                 },

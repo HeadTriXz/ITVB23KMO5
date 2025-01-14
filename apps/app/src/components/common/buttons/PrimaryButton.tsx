@@ -32,7 +32,7 @@ export function PrimaryButton({ children, disabled, loading, onPress, style }: B
 
     return (
         <TouchableOpacity
-            style={[styles.container, disabled && styles.disabled, style]}
+            style={[styles.container, disabled && styles.disabled, loading && styles.loading, style]}
             onPress={onPress}
             disabled={disabled || loading}
         >
@@ -47,8 +47,8 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         backgroundColor: theme.colors.buttonPrimary,
         borderRadius: 7,
         flexDirection: "row",
+        height: 52,
         paddingHorizontal: 20,
-        paddingVertical: 13,
         width: "100%"
     },
     disabled: {
@@ -56,6 +56,9 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     disabledText: {
         color: theme.colors.textSecondary
+    },
+    loading: {
+        justifyContent: "center"
     },
     text: {
         color: theme.colors.background,

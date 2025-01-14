@@ -136,8 +136,16 @@ export class RESTClient {
             body: options.body as string
         });
 
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
+
         if (response.headers.get("Content-Type") === "application/json") {
             return response.json() as Promise<T>;
+        }
+
+        if (response.status === 204) {
+            return null as T;
         }
 
         throw new Error("Unexpected response from the server.");

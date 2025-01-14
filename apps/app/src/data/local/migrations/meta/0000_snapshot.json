@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "b575433c-8847-4245-acf4-ca66385b30e7",
+  "id": "9c16637d-3da6-4440-bb2e-05ba2077e9f3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cars": {
@@ -121,7 +121,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -218,7 +218,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },

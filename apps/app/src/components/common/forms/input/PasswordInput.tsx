@@ -47,15 +47,16 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderRadius: 7,
         borderWidth: 1,
         flexDirection: "row",
+        height: 52,
         justifyContent: "space-between",
         paddingHorizontal: 20,
-        paddingVertical: 13,
-        width: "100%",
+        width: "100%"
     },
     icon: {
         marginLeft: 10
     },
     input: {
-        color: theme.colors.textPrimary
+        color: theme.colors.textPrimary,
+        flex: 1
     }
 });

@@ -1,4 +1,4 @@
-import type { APIGetCarResult } from "@/types/api";
+import type { Car } from "@/data/local/schema";
 import type { Theme } from "@/types/theme";
 
 import { BackButton, FavoriteButton } from "@/components/layout/header";
@@ -8,7 +8,7 @@ import { View } from "react-native";
 import { useTheme } from "@/hooks/useTheme";
 
 interface BookingHeaderProps {
-    car: APIGetCarResult;
+    car: Car;
 }
 
 export function BookingHeader({ car }: BookingHeaderProps) {

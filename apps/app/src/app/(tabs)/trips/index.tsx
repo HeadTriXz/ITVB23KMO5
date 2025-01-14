@@ -1,16 +1,17 @@
-import type { APIGetCarResult, APIGetRentalResult } from "@/types/api";
+import type { Rental } from "@/data/local/schema";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { ErrorBox, WarningBox } from "@/components/common";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Header } from "@/components/layout/header";
 import { ThemedView } from "@/components/base";
 import { TripCard } from "@/components/cards/TripCard";
 import { TripsTabBar } from "@/components/layout/navigation/TripsTabBar";
-import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";
+import { useRouter } from "expo-router";
+import { useRentals } from "@/hooks/useRentals";
 
 enum TripsTab {
     Active = "Active",
@@ -25,48 +26,20 @@ const EMPTY_STATE_MESSAGES = {
 };
 
 export default function TripsScreen() {
-    const { api } = useData();
     const theme = useTheme();
     const styles = useStyles(theme);
+    const router = useRouter();
 
+    const { error, isLoading, rentals, refresh } = useRentals();
     const [selectedTab, setSelectedTab] = useState<TripsTab>(TripsTab.Active);
-    const [rentals, setRentals] = useState<APIGetRentalResult[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string>("");
 
-    const fetchData = async () => {
-        setIsLoading(true);
-
-        try {
-            const customer = await api!.customers.getCustomer();
-            const rentals = await api!.rentals.getRentals({
-                "customerId.equals": customer.id,
-                "sort": ["toDate,desc"]
-            });
-
-            for (const rental of rentals) {
-                if (!rental.car || rental.car.model !== undefined) {
-                    continue;
-                }
-
-                rental.car = await api!.cars.getCar(rental.car.id);
-            }
-
-            setRentals(rentals);
-        } catch {
-            setError("Failed to fetch rentals.");
-        } finally {
-            setIsLoading(false);
+    const onTripPress = (rental: Rental) => {
+        if (rental.state === "RETURNED") {
+            return router.push(`/(tabs)/(home)/${rental.car.id}`);
         }
-    }
 
-    const onTripPress = (rental: APIGetRentalResult) => {
-        console.log("Trip pressed", rental.id);
+        router.push(`/(tabs)/trips/${rental.id}`);
     }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const selectedRentals = useMemo(() => {
         switch (selectedTab) {
@@ -102,7 +75,7 @@ export default function TripsScreen() {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <TripCard
-                        car={item.car as APIGetCarResult}
+                        car={item.car}
                         rental={item}
                         onPress={() => onTripPress(item)}
                     />
@@ -112,7 +85,7 @@ export default function TripsScreen() {
                     : <WarningBox message={EMPTY_STATE_MESSAGES[selectedTab]} />
                 }
                 refreshing={isLoading}
-                onRefresh={fetchData}
+                onRefresh={refresh}
             />
         </ThemedView>
     );

@@ -39,16 +39,27 @@ export class RentalsAPI {
     }
 
     /**
+     * Deletes a rental.
+     *
+     * @param id The ID of the rental.
+     */
+    async deleteRental(id: number): Promise<void> {
+        return this.#rest.delete(`/rentals/${id}`, {
+            auth: true
+        });
+    }
+
+    /**
      * Edits a rental.
      *
      * @param id The ID of the rental.
      * @param options The rental data.
      * @returns The edited rental.
      */
-    async editRental(id: string, options: APIPatchRentalBody): Promise<APIGetRentalResult> {
+    async editRental(id: number, options: APIPatchRentalBody): Promise<APIGetRentalResult> {
         return this.#rest.patch(`/rentals/${id}`, {
             auth: true,
-            body: options
+            body: { ...options, id }
         });
     }
 
@@ -58,7 +69,7 @@ export class RentalsAPI {
      * @param id The ID of the rental.
      * @returns The rental.
      */
-    async getRental(id: string): Promise<APIGetRentalResult> {
+    async getRental(id: number): Promise<APIGetRentalResult> {
         return this.#rest.get(`/rentals/${id}`, {
             auth: true
         });

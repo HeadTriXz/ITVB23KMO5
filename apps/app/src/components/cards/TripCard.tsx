@@ -1,4 +1,4 @@
-import type { APIGetCarResult, APIGetRentalResult } from "@/types/api";
+import type { Car, Rental } from "@/data/local/schema";
 import type { Theme } from "@/types/theme";
 
 import { OverdueTag, PaidTag, PendingTag } from "@/components/PaymentStatusTag";
@@ -11,8 +11,8 @@ import { humanReadableDate } from "@/utils/dates";
 import { useTheme } from "@/hooks/useTheme";
 
 interface ListItemProps {
-    car: APIGetCarResult;
-    rental: APIGetRentalResult;
+    car: Car;
+    rental: Rental;
     onPress: () => void;
 }
 
