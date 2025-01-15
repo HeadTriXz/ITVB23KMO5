@@ -55,7 +55,7 @@ export default function TripDetailsScreen() {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />
-                <ErrorBox message={error} />
+                <ErrorBox message={error.message} />
             </ThemedView>
         );
     }
@@ -73,14 +73,14 @@ export default function TripDetailsScreen() {
     const renderNavigateButton = () => {
         if (isActive) {
             return (
-                <NavigateButton destination="/" icon="sledgehammer">
+                <NavigateButton destination={`/(tabs)/trips/${id}/damage`} icon="sledgehammer">
                     Report Damage
                 </NavigateButton>
             );
         }
 
         return (
-            <NavigateButton destination="/" icon="clock-circle">
+            <NavigateButton destination={`/(tabs)/trips/${id}/adjust-date`} icon="clock-circle">
                 Adjust Booking Date
             </NavigateButton>
         );

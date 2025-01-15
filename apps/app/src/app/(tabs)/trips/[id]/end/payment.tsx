@@ -21,12 +21,12 @@ export default function PaymentScreen() {
     const { editRentalAsync } = useEditRental();
 
     const { id } = useLocalSearchParams<{ id: string }>();
-    const { error: rentalError, isLoading: isRentalLoading, rental } = useRental(Number(id), {
+    const { error: rentalError, isLoading, rental } = useRental(Number(id), {
         skipStorageLoad: true
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [error, setError] = useState<string>();
+    const [error, setError] = useState<string>("");
 
     if (!data.location || !data.mileage) {
         return (
@@ -43,7 +43,7 @@ export default function PaymentScreen() {
         }
 
         setIsSubmitting(true);
-        setError(undefined);
+        setError("");
 
         try {
             await api.inspections.createInspection({
@@ -73,12 +73,12 @@ export default function PaymentScreen() {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />
-                <ErrorBox message={rentalError} />
+                <ErrorBox message={rentalError.message} />
             </ThemedView>
         );
     }
 
-    if (isRentalLoading || !rental?.car) {
+    if (isLoading || !rental?.car) {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />

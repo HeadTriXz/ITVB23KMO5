@@ -7,13 +7,9 @@ import { SolarBoldDuotone } from "@/components/icons/solar";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 
-export default function PaymentSuccessScreen() {
+export default function ReportDamageSuccessScreen() {
     const theme = useTheme();
     const router = useRouter();
-    const onHomePress = () => {
-        router.dismissAll();
-        router.push("/(tabs)/(home)/");
-    };
 
     return (
         <ThemedView style={styles.screenContainer}>
@@ -21,13 +17,15 @@ export default function PaymentSuccessScreen() {
             <View style={styles.contentContainer}>
                 <SolarBoldDuotone name="verified-check" size={100} color={theme.colors.textPrimary} />
                 <ThemedText variant="headingLarge" style={styles.heading}>
-                    Payment Confirmed
+                    Damage Reported
                 </ThemedText>
                 <ThemedText style={styles.text}>
-                    Your payment has been successfully processed.
+                    Your damage report has been successfully submitted.
                 </ThemedText>
             </View>
-            <PrimaryButton onPress={onHomePress}>Back to Home</PrimaryButton>
+            <PrimaryButton onPress={() => router.back()}>
+                Go Back
+            </PrimaryButton>
         </ThemedView>
     );
 }

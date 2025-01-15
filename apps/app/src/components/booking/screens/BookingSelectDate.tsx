@@ -15,22 +15,41 @@ import { WarningBox } from "@/components/common";
 import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";
 
-interface SelectDateProps {
-    carId: number;
-    onNext: (fromDate: string, toDate: string) => void;
+interface SelectDateButtonProps {
+    isLoading?: boolean;
+    label?: string;
+    onPress: (fromDate: string, toDate: string) => void;
 }
 
-export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
+interface SelectDateProps {
+    button: SelectDateButtonProps;
+    carId: number;
+    excludedRentals?: number[];
+    initialFromDate?: string | null;
+    initialToDate?: string | null;
+}
+
+export function BookingSelectDate({
+    carId,
+    excludedRentals,
+    initialFromDate = null,
+    initialToDate = null,
+    button: {
+        isLoading = false,
+        label = "Next",
+        onPress
+    }
+}: SelectDateProps) {
     const { api } = useData();
     const theme = useTheme();
 
-    const [fromDate, setFromDate] = useState<string | null>(null);
-    const [toDate, setToDate] = useState<string | null>(null);
+    const [fromDate, setFromDate] = useState<string | null>(initialFromDate);
+    const [toDate, setToDate] = useState<string | null>(initialToDate);
     const [days, setDays] = useState<number>(0);
 
     const [car, setCar] = useState<APIGetCarResult | null>(null);
     const [rentals, setRentals] = useState<APIGetRentalResult[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingRentals, setIsLoadingRentals] = useState(true);
 
     const [warning, setWarning] = useState<string>("");
     const [error, setError] = useState<string>("");
@@ -85,7 +104,7 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
                 const end = new Date(rental.toDate);
 
                 for (const date of getDatesBetween(start, end)) {
-                    dates[date] = { color: "orange", textColor: theme.colors.card };
+                    dates[date] = { color: "#FFE7CC", textColor: "#CB7A00" };
                 }
 
                 dates[getDateString(end)].endingDay = true;
@@ -135,6 +154,7 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
                 const car = await api!.cars.getCar(carId);
                 const rentals = await api!.rentals.getRentals({
                     "carId.equals": car.id,
+                    "id.notIn": excludedRentals,
                     "toDate.greaterThanOrEqual": getDateString(new Date()),
                     "state.notEquals": "RETURNED",
                     "sort": ["fromDate,asc"]
@@ -146,12 +166,12 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
                 console.error(error);
                 setError("Failed to fetch car details.");
             } finally {
-                setIsLoading(false);
+                setIsLoadingRentals(false);
             }
         }
 
         fetchData();
-    }, [carId]);
+    }, [carId, excludedRentals]);
 
     useEffect(() => {
         if (fromDate && toDate) {
@@ -175,9 +195,9 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
 
     const handleNext = useCallback(() => {
         if (fromDate && toDate) {
-            onNext(fromDate, toDate);
+            onPress(fromDate, toDate);
         }
-    }, [fromDate, toDate, onNext]);
+    }, [fromDate, toDate, onPress]);
 
     if (error) {
         return (
@@ -188,7 +208,7 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
         );
     }
 
-    if (isLoading || !car) {
+    if (isLoadingRentals || !car) {
         return (
             <ThemedView style={styles.screenContainer}>
                 <Header withBackButton />
@@ -217,8 +237,13 @@ export function BookingSelectDate({ carId, onNext }: SelectDateProps) {
                         <ThemedText variant="headingMedium" style={styles.pricingText}>€{days * car.price}</ThemedText>
                         <ThemedText>total</ThemedText>
                     </View>
-                    <PrimaryButton onPress={handleNext} style={styles.nextButton} disabled={!fromDate || !toDate}>
-                        Next
+                    <PrimaryButton
+                        onPress={handleNext}
+                        style={styles.nextButton}
+                        loading={isLoading}
+                        disabled={!fromDate || !toDate}
+                    >
+                        {label}
                     </PrimaryButton>
                 </View>
             </View>

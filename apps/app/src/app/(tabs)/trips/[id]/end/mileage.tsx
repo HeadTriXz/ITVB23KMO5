@@ -60,7 +60,7 @@ export default function UploadMileageScreen() {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />
-                <ErrorBox message={error} />
+                <ErrorBox message={error.message} />
             </ThemedView>
         );
     }
@@ -95,7 +95,7 @@ export default function UploadMileageScreen() {
                             value={mileage?.toString()}
                         />
                     </View>
-                    <View style={[styles.section, styles.imageSection]}>
+                    <View style={styles.imageSection}>
                         <View>
                             <ThemedText variant="headingMedium">
                                 Upload Photo
@@ -135,6 +135,7 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     imageSection: {
         flex: 1,
+        gap: 15,
         justifyContent: "space-between",
         marginBottom: 15
     },

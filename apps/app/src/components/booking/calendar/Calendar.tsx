@@ -71,6 +71,9 @@ const useCalendarTheme = (theme: Theme) => ({
         container: {
             backgroundColor: theme.colors.card,
             padding: 19
+        },
+        monthView: {
+            backgroundColor: theme.colors.card
         }
     },
     "stylesheet.calendar.period": {
