@@ -1,8 +1,7 @@
-import type { APIGetRentalResult } from "@/types/api";
 import type { Rental } from "@/data/local/schema";
 
 import { useCallback, useEffect, useState } from "react";
-import { useData } from "./useData";
+import { useData } from "../useData";
 import { transformRental } from "@/utils/transforms";
 
 interface UseRentalOptions {

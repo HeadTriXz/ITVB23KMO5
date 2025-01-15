@@ -11,7 +11,7 @@ import { Header } from "@/components/layout/header";
 import { ImageUpload } from "@/components/ImageUpload";
 import { PrimaryButton } from "@/components/common/buttons";
 import { useEndRental } from "@/hooks/useEndRental";
-import { useRental } from "@/hooks/useRental";
+import { useRental } from "@/hooks/rentals/useRental";
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 

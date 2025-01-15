@@ -9,9 +9,9 @@ import { Header } from "@/components/layout/header";
 import { ThemedView } from "@/components/base";
 import { TripCard } from "@/components/cards/TripCard";
 import { TripsTabBar } from "@/components/layout/navigation/TripsTabBar";
-import { useTheme } from "@/hooks/useTheme";
+import { useRentals } from "@/hooks/rentals/useRentals";
 import { useRouter } from "expo-router";
-import { useRentals } from "@/hooks/useRentals";
+import { useTheme } from "@/hooks/useTheme";
 
 enum TripsTab {
     Active = "Active",
@@ -42,6 +42,10 @@ export default function TripsScreen() {
     }
 
     const selectedRentals = useMemo(() => {
+        if (!rentals) {
+            return [];
+        }
+
         switch (selectedTab) {
             case TripsTab.Active:
                 return rentals.filter((rental) => rental.state === "ACTIVE");
@@ -81,7 +85,7 @@ export default function TripsScreen() {
                     />
                 )}
                 ListEmptyComponent={error
-                    ? <ErrorBox message={error} />
+                    ? <ErrorBox message={error.message} />
                     : <WarningBox message={EMPTY_STATE_MESSAGES[selectedTab]} />
                 }
                 refreshing={isLoading}

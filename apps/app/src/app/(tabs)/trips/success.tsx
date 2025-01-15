@@ -9,6 +9,7 @@ import { useRouter } from "expo-router";
 export default function PaymentSuccessScreen() {
     const router = useRouter();
     const onHomePress = () => {
+        router.dismissAll();
         router.push("/(tabs)/(home)/");
     };
 

@@ -1,9 +1,12 @@
 import type { APIGetCarResult } from "@/types/api";
+import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
+import { ThemedText, ThemedView } from "@/components/base";
 import { BookingHeader } from "@/components/booking/BookingHeader";
+import { ConfirmationModal } from "@/components/common/ConfirmationModal";
 import { DateDisplay } from "@/components/booking/calendar";
 import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
@@ -11,19 +14,16 @@ import { Image } from "expo-image";
 import { LocationPreview } from "@/components/maps/LocationPreview";
 import { NavigateButton } from "@/components/common/buttons/NavigateButton";
 import { PrimaryButton } from "@/components/common/buttons";
-import { ThemedText, ThemedView } from "@/components/base";
-import { useRental } from "@/hooks/useRental";
-import { ConfirmationModal } from "@/components/common/ConfirmationModal";
+import { useDeleteRental } from "@/hooks/rentals/useDeleteRental";
+import { useRental } from "@/hooks/rentals/useRental";
 import { useState } from "react";
-import type { Theme } from "@/types/theme";
 import { useTheme } from "@/hooks/useTheme";
-import { useRentals } from "@/hooks/useRentals";
 
 export default function TripDetailsScreen() {
     const theme = useTheme();
     const styles = useStyles(theme);
 
-    const { deleteRental } = useRentals();
+    const { deleteRentalAsync } = useDeleteRental();
     const { id } = useLocalSearchParams<{ id: string }>();
     const { error, isLoading, rental } = useRental(Number(id));
 
@@ -40,14 +40,11 @@ export default function TripDetailsScreen() {
     };
 
     const onCancel = async () => {
-        setIsCancelling(true);
-
         try {
-            await deleteRental(Number(id));
+            await deleteRentalAsync(Number(id));
 
             router.back();
-        } catch (e) {
-            console.error(e);
+        } catch {
             setShowCancelModal(false);
         } finally {
             setIsCancelling(false);

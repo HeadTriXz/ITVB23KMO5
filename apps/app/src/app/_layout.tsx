@@ -1,11 +1,13 @@
 import { type ReactNode, useEffect } from "react";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { AuthProvider } from "@/context/AuthContext";
 import { DataProvider } from "@/context/DataContext";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useOnlineManager } from "@/hooks/useOnlineManager";
 
 import * as SplashScreen from "expo-splash-screen";
 
@@ -56,16 +58,22 @@ function AuthGuard({ children }: AuthGuardProps) {
 }
 
 export default function RootLayout() {
+    useOnlineManager();
+
+    const queryClient = new QueryClient();
+
     return (
-        <AuthProvider>
-            <DataProvider>
-                <ThemeProvider>
-                    <StatusBar style="auto" />
-                    <AuthGuard>
-                        <Stack screenOptions={{ headerShown: false }} />
-                    </AuthGuard>
-                </ThemeProvider>
-            </DataProvider>
-        </AuthProvider>
+        <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+                <DataProvider>
+                    <ThemeProvider>
+                        <StatusBar style="auto" />
+                        <AuthGuard>
+                            <Stack screenOptions={{ headerShown: false }} />
+                        </AuthGuard>
+                    </ThemeProvider>
+                </DataProvider>
+            </AuthProvider>
+        </QueryClientProvider>
     )
 }

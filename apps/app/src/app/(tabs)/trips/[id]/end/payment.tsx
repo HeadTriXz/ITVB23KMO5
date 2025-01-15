@@ -1,4 +1,6 @@
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+
 import { BookingHeader } from "@/components/booking/BookingHeader";
 import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
@@ -6,18 +8,17 @@ import { PaymentOverviewCard } from "@/components/cards/PaymentOverviewCard";
 import { PrimaryButton } from "@/components/common/buttons";
 import { ThemedView } from "@/components/base";
 import { useData } from "@/hooks/useData";
+import { useEditRental } from "@/hooks/rentals/useEditRental";
 import { useEndRental } from "@/hooks/useEndRental";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { useRental } from "@/hooks/useRental";
+import { useRental } from "@/hooks/rentals/useRental";
 import { useState } from "react";
-import { useRentals } from "@/hooks/useRentals";
 
 export default function PaymentScreen() {
     const router = useRouter();
 
     const { api } = useData();
     const { data } = useEndRental();
-    const { editRental } = useRentals();
+    const { editRentalAsync } = useEditRental();
 
     const { id } = useLocalSearchParams<{ id: string }>();
     const { error: rentalError, isLoading: isRentalLoading, rental } = useRental(Number(id), {
@@ -53,7 +54,7 @@ export default function PaymentScreen() {
                 photoContentType: "image/jpeg"
             });
 
-            await editRental(Number(id), {
+            await editRentalAsync(Number(id), {
                 latitude: data.location.latitude,
                 longitude: data.location.longitude,
                 state: "RETURNED"

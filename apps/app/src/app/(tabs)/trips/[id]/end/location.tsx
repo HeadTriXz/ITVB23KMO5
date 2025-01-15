@@ -11,7 +11,7 @@ import { PermissionStatus } from "expo-location";
 import { PrimaryButton } from "@/components/common/buttons";
 import { SelectableButton } from "@/components/common/buttons/SelectableButton";
 import { useEndRental } from "@/hooks/useEndRental";
-import { useRental } from "@/hooks/useRental";
+import { useRental } from "@/hooks/rentals/useRental";
 import * as Location from "expo-location";
 
 export default function UploadLocationScreen() {
