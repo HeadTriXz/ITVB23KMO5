@@ -5,8 +5,10 @@ import { Header } from "@/components/layout/header";
 import { PrimaryButton } from "@/components/common/buttons";
 import { SolarBoldDuotone } from "@/components/icons/solar";
 import { useRouter } from "expo-router";
+import { useTheme } from "@/hooks/useTheme";
 
 export function BookingSuccess() {
+    const theme = useTheme();
     const router = useRouter();
     const onHomePress = () => {
         router.replace("/(tabs)/(home)/");
@@ -16,7 +18,7 @@ export function BookingSuccess() {
         <ThemedView style={styles.screenContainer}>
             <Header />
             <View style={styles.contentContainer}>
-                <SolarBoldDuotone name="verified-check" size={100} />
+                <SolarBoldDuotone name="verified-check" size={100} color={theme.colors.textPrimary} />
                 <ThemedText variant="headingLarge" style={styles.heading}>
                     Booking Confirmed
                 </ThemedText>

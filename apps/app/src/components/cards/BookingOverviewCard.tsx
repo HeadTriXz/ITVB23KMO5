@@ -37,13 +37,13 @@ export function BookingOverviewCard({ car, fromDate, toDate }: BookingOverviewCa
             <Image source={{ uri: `data:image/png;base64,${car.picture}` }} style={styles.image} />
             <View style={styles.contentContainer}>
                 <View style={styles.informationRow}>
-                    <SolarOutline name="calendar" size={24} />
+                    <SolarOutline name="calendar" size={24} color={theme.colors.textPrimary} />
                     <ThemedText>
                         {humanReadableDate(fromDate)} - {humanReadableDate(toDate)}
                     </ThemedText>
                 </View>
                 <View style={styles.informationRow}>
-                    <SolarOutline name="map-point" size={24} />
+                    <SolarOutline name="map-point" size={24} color={theme.colors.textPrimary} />
                     <ThemedText>{location.formattedAddress}</ThemedText>
                 </View>
             </View>

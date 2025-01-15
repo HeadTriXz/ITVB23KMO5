@@ -55,7 +55,7 @@ export default function TripDetailsScreen() {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />
-                <ErrorBox message={error} />
+                <ErrorBox message={error.message} />
             </ThemedView>
         );
     }
@@ -80,7 +80,7 @@ export default function TripDetailsScreen() {
         }
 
         return (
-            <NavigateButton destination="/" icon="clock-circle">
+            <NavigateButton destination={`/(tabs)/trips/${id}/adjust-date`} icon="clock-circle">
                 Adjust Booking Date
             </NavigateButton>
         );
