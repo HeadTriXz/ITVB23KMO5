@@ -15,7 +15,7 @@ CREATE TABLE `cars` (
 CREATE TABLE `favorites` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`car_id` integer NOT NULL,
-	FOREIGN KEY (`car_id`) REFERENCES `cars`(`id`) ON UPDATE no action ON DELETE no action
+	FOREIGN KEY (`car_id`) REFERENCES `cars`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
 CREATE TABLE `recent_searches` (
@@ -31,5 +31,5 @@ CREATE TABLE `rentals` (
 	`longitude` real NOT NULL,
 	`state` text NOT NULL,
 	`to_date` text NOT NULL,
-	FOREIGN KEY (`car_id`) REFERENCES `cars`(`id`) ON UPDATE no action ON DELETE no action
+	FOREIGN KEY (`car_id`) REFERENCES `cars`(`id`) ON UPDATE no action ON DELETE cascade
 );

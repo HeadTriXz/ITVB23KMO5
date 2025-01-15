@@ -62,6 +62,7 @@ export default function HomeScreen() {
                 renderItem={({ item }) => (
                     <AvailableCarCard car={item} onPress={() => onCarPress(item)} />
                 )}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
                 ListHeaderComponent={(
                     <>
                         <ThemedText variant="headingMedium" style={styles.heading}>Top Brands</ThemedText>
@@ -97,10 +98,12 @@ const styles = StyleSheet.create({
         paddingBottom: 76
     },
     contentContainer: {
-        gap: 15,
         paddingBottom: 25
     },
     heading: {
         marginBottom: 10
+    },
+    separator: {
+        height: 15
     }
 });

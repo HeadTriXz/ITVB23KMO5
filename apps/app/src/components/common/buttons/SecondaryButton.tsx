@@ -32,7 +32,7 @@ export function SecondaryButton({ children, disabled, loading, onPress, style }:
 
     return (
         <TouchableOpacity
-            style={[styles.container, disabled && styles.disabled, style]}
+            style={[styles.container, disabled && styles.disabled, loading && styles.loading, style]}
             onPress={onPress}
             disabled={disabled || loading}
         >
@@ -49,8 +49,8 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderRadius: 7,
         borderWidth: 1,
         flexDirection: "row",
+        height: 52,
         paddingHorizontal: 20,
-        paddingVertical: 13,
         width: "100%"
     },
     disabled: {
@@ -58,6 +58,9 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     disabledText: {
         color: theme.colors.textSecondary
+    },
+    loading: {
+        justifyContent: "center"
     },
     text: {
         color: theme.colors.textPrimary,

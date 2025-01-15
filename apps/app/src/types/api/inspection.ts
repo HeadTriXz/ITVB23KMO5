@@ -67,22 +67,22 @@ export interface APIPostInspectionBody {
     /**
      * The code of the inspection.
      */
-    code: string;
+    code?: string;
 
     /**
      * The mileage of the car at the time of the inspection.
      */
-    odometer: number;
+    odometer?: number;
 
     /**
      * The result of the inspection.
      */
-    result: string;
+    result?: string;
 
     /**
      * The description of the inspection.
      */
-    description: string;
+    description?: string;
 
     /**
      * A base64 encoded string representing the photo of the inspection.
@@ -97,20 +97,15 @@ export interface APIPostInspectionBody {
     /**
      * The date the inspection was completed.
      */
-    completed: string;
+    completed?: string;
 
     /**
      * The unique identifier of the car that was inspected.
      */
-    carId: number;
-
-    /**
-     * The unique identifier of the employee that performed the inspection.
-     */
-    employeeId: number;
+    car: PartialResponse<APIGetCarResult>;
 
     /**
      * The unique identifier of the rental associated with the inspection.
      */
-    rentalId: number;
+    rental: PartialResponse<APIGetRentalResult>;
 }

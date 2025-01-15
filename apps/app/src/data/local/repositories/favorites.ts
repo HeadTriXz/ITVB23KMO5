@@ -4,11 +4,6 @@ import { eq } from "drizzle-orm";
 import * as schema from "@/data/local/schema";
 
 /**
- * Represents a favorite car.
- */
-export type FavoriteCar = typeof schema.favorites.$inferSelect;
-
-/**
  * The repository for the favorite cars table.
  */
 export class FavoritesRepository {
@@ -55,7 +50,7 @@ export class FavoritesRepository {
      *
      * @returns A list of favorite cars.
      */
-    getLiveFavorites(): FavoriteCar[] {
+    getLiveFavorites(): schema.Favorite[] {
         const { data } = useLiveQuery(this.#db.query.favorites.findMany());
         return data;
     }

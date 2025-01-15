@@ -1,11 +1,12 @@
-import { ErrorBox, PasswordInput, PrimaryButton } from "@/components/common";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText, ThemedTextInput, ThemedView } from "@/components/base";
 
+import { ErrorBox } from "@/components/common";
 import { Image } from "expo-image";
+import { PasswordInput } from "@/components/common/forms";
+import { PrimaryButton } from "@/components/common/buttons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Theme } from "@/types/theme";
-
 import { useAuth } from "@/hooks/useAuth";
 import { useData } from "@/hooks/useData";
 import { useRouter } from "expo-router";
@@ -94,8 +95,7 @@ export default function LoginScreen() {
 
 const useStyles = (theme: Theme) => StyleSheet.create({
     contentContainer: {
-        flex: 1,
-        width: "100%"
+        flex: 1
     },
     footer: {
         alignItems: "center"
@@ -107,8 +107,7 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     formContainer: {
         alignItems: "center",
         flex: 1,
-        gap: 15,
-        width: "100%"
+        gap: 15
     },
     link: {
         color: theme.colors.accent
