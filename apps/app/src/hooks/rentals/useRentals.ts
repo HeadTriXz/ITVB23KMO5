@@ -16,7 +16,7 @@ export function useRentals(options: UseRentalsOptions = {}) {
     const queryClient = useQueryClient();
     const { api, storage } = useData();
 
-    const [isLoadingStorage, setisLoadingStorage] = useState(true);
+    const [isLoadingStorage, setIsLoadingStorage] = useState(true);
 
     useEffect(() => {
         if (options.skipStorageLoad || !storage) {
@@ -32,7 +32,7 @@ export function useRentals(options: UseRentalsOptions = {}) {
             .catch((err) => {
                 console.error("Failed to load rentals from storage:", err);
             })
-            .finally(() => setisLoadingStorage(false));
+            .finally(() => setIsLoadingStorage(false));
     }, [options.skipStorageLoad, storage, queryClient]);
 
     const { data: rentals, isLoading, error, refetch } = useQuery({

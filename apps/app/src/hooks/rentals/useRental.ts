@@ -1,6 +1,7 @@
-import type { Rental } from "@/data/local/schema";
+import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useCallback, useEffect, useState } from "react";
+import { QueryKeys } from "@/constants/queryKeys";
 import { useData } from "../useData";
 import { transformRental } from "@/utils/transforms";
 
@@ -12,91 +13,54 @@ interface UseRentalOptions {
 }
 
 export function useRental(id: number, options: UseRentalOptions = {}) {
+    const queryClient = useQueryClient();
     const { api, storage } = useData();
 
-    const [rental, setRental] = useState<Rental | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string>("");
+    const [isLoadingStorage, setIsLoadingStorage] = useState(true);
 
-    /**
-     * Loads the rental from storage
-     */
-    const loadFromStorage = useCallback(async () => {
-        try {
-            const stored = await storage!.rentals.get(id);
-            if (stored) {
-                setRental(stored);
-            }
-        } catch (err) {
-            console.error("Failed to load rental from storage:", err);
-        }
-    }, [id, storage]);
-
-    /**
-     * Updates the rental in storage
-     */
-    const updateStorage = useCallback(async (rental: Rental) => {
-        try {
-            await storage!.cars.upsert(rental.car);
-            await storage!.rentals.upsert(rental);
-        } catch (err) {
-            console.error("Failed to update rental in storage:", err);
-        }
-    }, [id, storage]);
-
-    /**
-     * Fetches the rental from the API and updates storage if successful
-     */
-    const fetchFromAPI = useCallback(async () => {
-        if (!api) {
+    useEffect(() => {
+        if (options.skipStorageLoad || !storage) {
             return;
         }
 
-        setError("");
-        setIsLoading(true); // TODO: Deal with the fact that isLoading will be ture if there is no network.
+        storage.rentals.get(id)
+            .then((stored) => {
+                if (stored) {
+                    queryClient.setQueryData(QueryKeys.RENTAL(id), stored);
+                }
+            })
+            .catch((err) => {
+                console.error("Failed to load rental from storage:", err);
+            })
+            .finally(() => setIsLoadingStorage(false));
+    }, [options.skipStorageLoad, storage, queryClient]);
 
-        try {
+    const { data: rental, isLoading, error, refetch } = useQuery({
+        enabled: !isLoadingStorage || options.skipStorageLoad,
+        queryKey: QueryKeys.RENTAL(id),
+        queryFn: async () => {
+            if (!api || !storage) {
+                throw new Error("The app is not ready yet.");
+            }
+
             const rental = await api.rentals.getRental(id);
             if (rental.car && rental.car.model === undefined) {
                 rental.car = await api.cars.getCar(rental.car.id);
             }
 
-            if (!rental.car) {
-                return setError("Failed to fetch car details.");
-            }
-
             const transformed = transformRental(rental);
 
-            setRental(transformed);
-            await updateStorage(transformed);
-        } catch {
-            setError("Failed to fetch rental details.");
-        } finally {
-            setIsLoading(false);
+            await storage.cars.upsert(transformed.car);
+            await storage.rentals.upsert(transformed);
+
+            return transformed;
         }
-    }, [api, id, updateStorage]);
-
-    /**
-     * Initialize the rental data
-     */
-    useEffect(() => {
-        const initialize = async () => {
-            setIsLoading(true);
-
-            if (!options.skipStorageLoad) {
-                await loadFromStorage();
-            }
-
-            await fetchFromAPI();
-        };
-
-        initialize();
-    }, [loadFromStorage, fetchFromAPI, options.skipStorageLoad]);
+    });
 
     return {
         rental,
         isLoading,
         error,
-        refresh: fetchFromAPI
+        refresh: refetch
     };
 }
