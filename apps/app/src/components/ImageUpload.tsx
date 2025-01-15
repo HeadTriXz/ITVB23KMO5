@@ -64,7 +64,6 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         flex: 1,
-        marginTop: 10,
         maxHeight: 200,
         overflow: "hidden"
     },

@@ -73,7 +73,7 @@ export default function TripDetailsScreen() {
     const renderNavigateButton = () => {
         if (isActive) {
             return (
-                <NavigateButton destination="/" icon="sledgehammer">
+                <NavigateButton destination={`/(tabs)/trips/${id}/damage`} icon="sledgehammer">
                     Report Damage
                 </NavigateButton>
             );

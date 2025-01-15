@@ -101,7 +101,7 @@ export default function UploadLocationScreen() {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />
-                <ErrorBox message={rentalError} />
+                <ErrorBox message={rentalError.message} />
             </ThemedView>
         );
     }

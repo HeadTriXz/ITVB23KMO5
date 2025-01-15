@@ -46,20 +46,20 @@ export function PaymentOverviewCard({ rental }: PaymentOverviewCardProps) {
             <Image source={{ uri: `data:image/png;base64,${rental.car.picture}` }} style={styles.image} />
             <View style={styles.contentContainer}>
                 <View style={styles.informationRow}>
-                    <SolarOutline name="calendar" size={24} />
+                    <SolarOutline name="calendar" size={24} color={theme.colors.textPrimary} />
                     <ThemedText>
                         {humanReadableDate(rental.fromDate)} - {humanReadableDate(rental.toDate)}
                     </ThemedText>
                 </View>
                 <View style={styles.informationRow}>
-                    <SolarOutline name="map-point" size={24} />
+                    <SolarOutline name="map-point" size={24} color={theme.colors.textPrimary} />
                     <ThemedText>{location.formattedAddress}</ThemedText>
                 </View>
             </View>
             <View style={styles.contentContainer}>
                 <ThemedText style={[styles.heading, styles.secondaryText]}>Payment Method</ThemedText>
                 <View style={styles.row}>
-                    <VisaIcon height={15} width={48} />
+                    <VisaIcon height={15} width={48} fill={theme.colors.textPrimary} />
                     <ThemedText style={styles.heading}>••••  ••••  ••••  1234</ThemedText>
                 </View>
             </View>
