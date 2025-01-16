@@ -82,6 +82,7 @@ export default function TripsScreen() {
                         car={item.car}
                         rental={item}
                         onPress={() => onTripPress(item)}
+                        withPaymentStatus
                     />
                 )}
                 ListEmptyComponent={error

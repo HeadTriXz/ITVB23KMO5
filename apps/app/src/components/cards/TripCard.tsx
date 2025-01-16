@@ -14,9 +14,10 @@ interface ListItemProps {
     car: Car;
     rental: Rental;
     onPress: () => void;
+    withPaymentStatus?: boolean;
 }
 
-export function TripCard({ car, rental, onPress }: ListItemProps) {
+export function TripCard({ car, rental, onPress, withPaymentStatus }: ListItemProps) {
     const theme = useTheme();
     const styles = useStyles(theme);
 
@@ -54,7 +55,7 @@ export function TripCard({ car, rental, onPress }: ListItemProps) {
                         {humanReadableDate(rental.fromDate)} - {humanReadableDate(rental.toDate)}
                     </ThemedText>
                 </View>
-                {renderPaymentStatus()}
+                {withPaymentStatus && renderPaymentStatus()}
             </View>
         </TouchableOpacity>
     );
