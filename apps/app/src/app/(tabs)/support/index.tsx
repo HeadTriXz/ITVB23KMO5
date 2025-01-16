@@ -25,7 +25,7 @@ export default function SupportScreen() {
                 <NavigateButton destination="/(tabs)/support/damage" icon="sledgehammer">
                     Report Damage
                 </NavigateButton>
-                <NavigateButton destination="/" icon="question-circle">
+                <NavigateButton destination="/(tabs)/support/faq" icon="question-circle">
                     Frequently Asked
                 </NavigateButton>
             </View>
