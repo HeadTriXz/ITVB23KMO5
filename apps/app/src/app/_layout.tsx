@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { AuthProvider } from "@/context/AuthContext";
 import { DataProvider } from "@/context/DataContext";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
@@ -67,10 +68,12 @@ export default function RootLayout() {
             <AuthProvider>
                 <DataProvider>
                     <ThemeProvider>
-                        <StatusBar style="auto" />
-                        <AuthGuard>
-                            <Stack screenOptions={{ headerShown: false }} />
-                        </AuthGuard>
+                        <KeyboardProvider>
+                            <StatusBar style="auto" />
+                            <AuthGuard>
+                                <Stack screenOptions={{ headerShown: false }} />
+                            </AuthGuard>
+                        </KeyboardProvider>
                     </ThemeProvider>
                 </DataProvider>
             </AuthProvider>

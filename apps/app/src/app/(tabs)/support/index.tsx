@@ -19,7 +19,7 @@ export default function SupportScreen() {
                 </ThemedText>
             </View>
             <View style={styles.buttonContainer}>
-                <NavigateButton destination="/" icon="dialog">
+                <NavigateButton destination="/(tabs)/support/chat" icon="dialog">
                     Contact Live Chat
                 </NavigateButton>
                 <NavigateButton destination="/(tabs)/support/damage" icon="sledgehammer">

@@ -9,6 +9,19 @@ export function getDateString(date: Date): string {
 }
 
 /**
+ * Get the current time in the format "HH:MM"
+ *
+ * @param date The date to format.
+ * @returns The formatted time.
+ */
+export function humanReadableTime(date: Date): string {
+    return date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit"
+    });
+}
+
+/**
  * Get the current date in the format "Mon DD, YYYY"
  *
  * @param date The date to format.
