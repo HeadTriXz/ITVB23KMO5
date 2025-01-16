@@ -14,4 +14,4 @@ export const VisaIcon = (props: SvgProps) => (
             </ClipPath>
         </Defs>
     </Svg>
-)
+);
