@@ -11,7 +11,7 @@ import { useTheme } from "@/hooks/useTheme";
 export default function TabLayout() {
     const { token } = useAuth();
     if (!token) {
-        return <Redirect href="/(auth)/login" />;
+        return <Redirect href="/(auth)/welcome" />;
     }
 
     const theme = useTheme();

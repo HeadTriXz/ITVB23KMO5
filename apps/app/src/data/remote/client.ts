@@ -136,12 +136,18 @@ export class RESTClient {
             body: options.body as string
         });
 
-        if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
+        if (response.headers.get("Content-Type") === "application/problem+json") {
+            const data = await response.json() as T;
+
+            throw new Error((data as any).detail || "Request failed.");
         }
 
         if (response.headers.get("Content-Type") === "application/json") {
-            return response.json() as Promise<T>;
+            return response.json() as T;
+        }
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
         }
 
         if (response.status === 204) {
