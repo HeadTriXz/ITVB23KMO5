@@ -61,12 +61,15 @@ export function DataProvider({ children }: DataProviderProps) {
     }, [success, isReady]);
 
     useEffect(() => {
-        if (context.api && token) {
-            context.api.rest.setToken(token);
-            setContext({
-                ...context,
-                isAuthenticated: true
-            });
+        if (!context.api) {
+            return;
+        }
+
+        context.api.rest.setToken(token);
+        setContext({ ...context, isAuthenticated: !!token });
+
+        if (!token) {
+            context.storage?.clear();
         }
     }, [context.api, token]);
 

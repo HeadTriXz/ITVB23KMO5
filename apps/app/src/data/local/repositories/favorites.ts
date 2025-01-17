@@ -34,6 +34,13 @@ export class FavoritesRepository {
     }
 
     /**
+     * Clears the favorite cars.
+     */
+    async clear(): Promise<void> {
+        await this.#db.delete(schema.favorites);
+    }
+
+    /**
      * Gets a list of favorite cars.
      *
      * @returns A list of favorite cars.

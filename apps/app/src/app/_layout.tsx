@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect } from "react";
+import React, { type ReactNode, useEffect } from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter, useSegments } from "expo-router";
@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useOnlineManager } from "@/hooks/useOnlineManager";
 
 import * as SplashScreen from "expo-splash-screen";
+import { useTheme } from "@/hooks/useTheme";
 
 interface AuthGuardProps {
     children: ReactNode;
@@ -41,7 +42,7 @@ function AuthGuard({ children }: AuthGuardProps) {
                 router.dismissAll();
             }
 
-            router.replace("/(auth)/login");
+            router.replace("/(auth)/welcome");
         }
     }, [token, segments, router, isReady]);
 
@@ -58,6 +59,24 @@ function AuthGuard({ children }: AuthGuardProps) {
     return children;
 }
 
+function AppLayout() {
+    const theme = useTheme();
+
+    return (
+        <>
+            <StatusBar style="auto" />
+            <AuthGuard>
+                <Stack screenOptions={{
+                    contentStyle: {
+                        backgroundColor: theme.colors.background
+                    },
+                    headerShown: false
+                }}/>
+            </AuthGuard>
+        </>
+    );
+}
+
 export default function RootLayout() {
     useOnlineManager();
 
@@ -69,10 +88,7 @@ export default function RootLayout() {
                 <DataProvider>
                     <ThemeProvider>
                         <KeyboardProvider>
-                            <StatusBar style="auto" />
-                            <AuthGuard>
-                                <Stack screenOptions={{ headerShown: false }} />
-                            </AuthGuard>
+                            <AppLayout />
                         </KeyboardProvider>
                     </ThemeProvider>
                 </DataProvider>

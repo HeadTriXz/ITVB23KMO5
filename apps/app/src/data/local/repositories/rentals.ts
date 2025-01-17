@@ -24,8 +24,14 @@ export class RentalsRepository {
     async bulkOverwrite(rentals: schema.Rental[]): Promise<void> {
         await this.#db.transaction(async (tx) => {
             await tx.delete(schema.rentals);
-            await tx.insert(schema.rentals).values(rentals);
+            if (rentals.length > 0) {
+                await tx.insert(schema.rentals).values(rentals);
+            }
         });
+    }
+
+    async clear(): Promise<void> {
+        await this.#db.delete(schema.rentals);
     }
 
     async delete(id: number): Promise<void> {
