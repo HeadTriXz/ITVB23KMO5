@@ -55,7 +55,11 @@ export default function LoginScreen() {
             } else {
                 setError("Invalid username or password.");
             }
-        } catch {
+        } catch (err: unknown) {
+            if (err instanceof Error && err.message.includes("was not activated")) {
+                return router.replace("/activate");
+            }
+
             setError("Invalid username or password.");
         } finally {
             setIsLoading(false);

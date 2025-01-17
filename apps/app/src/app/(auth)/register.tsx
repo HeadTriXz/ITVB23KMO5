@@ -58,7 +58,7 @@ export default function RegisterScreen() {
                 password: data.password
             });
 
-            router.dismissTo("/welcome");
+            router.replace("/activate");
         } catch (err: unknown) {
             if (err instanceof Error) {
                 return setError(err.message);
