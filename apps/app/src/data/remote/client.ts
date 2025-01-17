@@ -150,10 +150,6 @@ export class RESTClient {
             throw new Error(`Request failed with status ${response.status}`);
         }
 
-        if (response.status === 204) {
-            return null as T;
-        }
-
-        throw new Error("Unexpected response from the server.");
+        return null as T;
     }
 }

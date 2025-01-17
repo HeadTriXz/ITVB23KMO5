@@ -21,6 +21,10 @@ export class CarsRepository {
         this.#db = db;
     }
 
+    async clear(): Promise<void> {
+        await this.#db.delete(schema.cars);
+    }
+
     async deleteOrphans(): Promise<void> {
         const used = this.#db.select({ id: schema.rentals.carId })
             .from(schema.rentals)

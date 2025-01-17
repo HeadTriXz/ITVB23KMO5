@@ -36,4 +36,13 @@ export class LocalStorage {
         this.favorites = new FavoritesRepository(db);
         this.rentals = new RentalsRepository(db);
     }
+
+    /**
+     * Clears all data from the storage.
+     */
+    async clear() {
+        await this.cars.clear();
+        await this.favorites.clear();
+        await this.rentals.clear();
+    }
 }

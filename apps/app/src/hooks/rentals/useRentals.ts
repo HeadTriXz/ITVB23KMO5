@@ -63,7 +63,10 @@ export function useRentals(options: UseRentalsOptions = {}) {
                 return transformRental({ ...rental, car: cars[index] });
             });
 
-            await storage.cars.upsertMany(transformed.map((rental) => rental.car));
+            if (transformed.length > 0) {
+                await storage.cars.upsertMany(transformed.map((rental) => rental.car));
+            }
+
             await storage.rentals.bulkOverwrite(transformed);
             await storage.cars.deleteOrphans();
 
