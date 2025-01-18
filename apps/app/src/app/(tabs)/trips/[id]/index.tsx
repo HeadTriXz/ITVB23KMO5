@@ -6,7 +6,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 
 import { ThemedText, ThemedView } from "@/components/base";
 import { BookingHeader } from "@/components/booking/BookingHeader";
-import { ConfirmationModal } from "@/components/common/ConfirmationModal";
+import { ConfirmationModal } from "@/components/common/modals/ConfirmationModal";
 import { DateDisplay } from "@/components/booking/calendar";
 import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";

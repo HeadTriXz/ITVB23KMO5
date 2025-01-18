@@ -27,3 +27,18 @@ export interface APIGetCustomerResult {
      */
     from: string;
 }
+
+/**
+ * The payload of a PATCH request to update a customer.
+ */
+export interface APIPatchCustomerBody {
+    /**
+     * The last name of the customer.
+     */
+    lastName?: string;
+
+    /**
+     * The first name of the customer.
+     */
+    firstName?: string;
+}

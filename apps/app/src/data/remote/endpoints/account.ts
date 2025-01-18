@@ -1,6 +1,7 @@
 import type {
     APIGetAccountResult,
     APIGetActivateBody,
+    APIPostAccountBody,
     APIPostChangePasswordBody,
     APIPostLoginBody,
     APIPostLoginResult,
@@ -46,6 +47,18 @@ export class AccountAPI {
      */
     async changePassword(options: APIPostChangePasswordBody): Promise<void> {
         await this.#rest.post("/account/change-password", {
+            auth: true,
+            body: options
+        });
+    }
+
+    /**
+     * Updates the account details of the authenticated user.
+     *
+     * @param options The options for the request.
+     */
+    async editAccount(options: APIPostAccountBody): Promise<void> {
+        await this.#rest.post("/account", {
             auth: true,
             body: options
         });
