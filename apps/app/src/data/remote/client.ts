@@ -117,7 +117,7 @@ export class RESTClient {
             headers.append("Authorization", `Bearer ${this.#token}`);
         }
 
-        if (options.body) {
+        if (options.body && typeof options.body !== "string") {
             options.body = JSON.stringify(options.body);
             headers.append("Content-Type", "application/json");
         }

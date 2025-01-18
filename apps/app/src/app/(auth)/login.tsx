@@ -66,6 +66,10 @@ export default function LoginScreen() {
         }
     };
 
+    const onForgotPassword = () => {
+        router.push("/reset-password");
+    }
+
     if (!isReady) {
         return null;
     }
@@ -98,7 +102,7 @@ export default function LoginScreen() {
                             placeholder="Enter your password"
                             autoCapitalize="none"
                         />
-                        <TouchableOpacity style={styles.forgotButton}>
+                        <TouchableOpacity style={styles.forgotButton} onPress={onForgotPassword}>
                             <ThemedText variant="link" style={styles.forgotText}>Forgot Password?</ThemedText>
                         </TouchableOpacity>
                         <PrimaryButton
