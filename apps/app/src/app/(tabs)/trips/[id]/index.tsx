@@ -2,6 +2,7 @@ import type { APIGetCarResult } from "@/types/api";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { NavigateButton, PrimaryButton } from "@/components/common/buttons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 import { ThemedText, ThemedView } from "@/components/base";
@@ -12,8 +13,6 @@ import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
 import { Image } from "expo-image";
 import { LocationPreview } from "@/components/maps/LocationPreview";
-import { NavigateButton } from "@/components/common/buttons/NavigateButton";
-import { PrimaryButton } from "@/components/common/buttons";
 import { useDeleteRental } from "@/hooks/rentals/useDeleteRental";
 import { useRental } from "@/hooks/rentals/useRental";
 import { useState } from "react";

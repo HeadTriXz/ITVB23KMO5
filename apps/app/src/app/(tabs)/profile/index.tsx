@@ -1,13 +1,12 @@
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { NavigateButton, SecondaryButton } from "@/components/common/buttons";
 import { ThemedText, ThemedView } from "@/components/base";
 
 import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
 import { Image } from "expo-image";
-import { NavigateButton } from "@/components/common/buttons/NavigateButton";
-import { SecondaryButton } from "@/components/common/buttons";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";
 import { useAccount } from "@/hooks/account/useAccount";
@@ -64,7 +63,7 @@ export default function ProfileScreen() {
                             <NavigateButton destination="/profile/settings/account" icon="user">
                                 Account
                             </NavigateButton>
-                            <NavigateButton destination="/" icon="pallete-2">
+                            <NavigateButton destination="/profile/settings/appearance" icon="pallete-2">
                                 Appearance
                             </NavigateButton>
                             <NavigateButton destination="/" icon="bell">
