@@ -1,17 +1,18 @@
 import { type Address, AddressForm } from "@/components/common/forms/input/AddressForm";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { PrimaryButton, SelectableButton } from "@/components/common/buttons";
 import { ThemedText, ThemedView } from "@/components/base";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
+
 import { BookingHeader } from "@/components/booking/BookingHeader";
 import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
 import { PermissionStatus } from "expo-location";
-import { PrimaryButton } from "@/components/common/buttons";
-import { SelectableButton } from "@/components/common/buttons/SelectableButton";
 import { useEndRental } from "@/hooks/useEndRental";
 import { useRental } from "@/hooks/rentals/useRental";
+
 import * as Location from "expo-location";
 
 export default function UploadLocationScreen() {

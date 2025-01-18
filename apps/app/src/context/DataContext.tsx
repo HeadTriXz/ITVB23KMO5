@@ -1,4 +1,9 @@
-import { type ReactNode, createContext, useEffect, useState } from "react";
+import {
+    type ReactNode,
+    createContext,
+    useEffect,
+    useState
+} from "react";
 
 import { API } from "@/data/remote/api";
 import { LocalStorage } from "@/data/local/storage";
@@ -7,6 +12,7 @@ import { db } from "@/data/local/database";
 import { useAuth } from "@/hooks/useAuth";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 
+import AsyncStorage from "expo-sqlite/kv-store";
 import migrations from "@/data/local/migrations/migrations";
 
 interface DataProviderProps {
@@ -61,16 +67,28 @@ export function DataProvider({ children }: DataProviderProps) {
     }, [success, isReady]);
 
     useEffect(() => {
-        if (!context.api) {
-            return;
-        }
+        const handleTokenChange = async () => {
+            if (!context.api) {
+                return;
+            }
 
-        context.api.rest.setToken(token);
-        setContext({ ...context, isAuthenticated: !!token });
+            try {
+                context.api.rest.setToken(token);
 
-        if (!token) {
-            context.storage?.clear();
-        }
+                if (!token) {
+                    await Promise.all([
+                        context.storage?.clear(),
+                        AsyncStorage.clear()
+                    ]);
+                }
+
+                setContext({ ...context, isAuthenticated: !!token });
+            } catch (err: unknown) {
+                console.error(err);
+            }
+        };
+
+        handleTokenChange();
     }, [context.api, token]);
 
     if (error) {

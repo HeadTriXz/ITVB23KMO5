@@ -79,6 +79,41 @@ export interface APIGetActivateBody {
 }
 
 /**
+ * The payload for a POST request to update account details.
+ */
+export interface APIPostAccountBody {
+    /**
+     * The email address associated with the account.
+     */
+    email?: string;
+
+    /**
+     * The first name of the account holder.
+     */
+    firstName?: string;
+
+    /**
+     * The URL of the profile image.
+     */
+    imageUrl?: string;
+
+    /**
+     * The language key for the account.
+     */
+    langKey?: string;
+
+    /**
+     * The last name of the account holder.
+     */
+    lastName?: string;
+
+    /**
+     * The login name for the account.
+     */
+    login: string;
+}
+
+/**
  * The payload for a POST request to change the password.
  */
 export interface APIPostChangePasswordBody {

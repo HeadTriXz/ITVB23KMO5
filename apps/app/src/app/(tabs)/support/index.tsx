@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { ThemedText, ThemedView } from "@/components/base";
 
 import { Header } from "@/components/layout/header";
-import { NavigateButton } from "@/components/common/buttons/NavigateButton";
+import { NavigateButton } from "@/components/common/buttons";
 import { SolarBoldDuotone } from "@/components/icons/solar";
 import { useTheme } from "@/hooks/useTheme";
 

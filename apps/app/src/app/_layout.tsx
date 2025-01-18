@@ -5,13 +5,14 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import { AuthProvider } from "@/context/AuthContext";
 import { DataProvider } from "@/context/DataContext";
 import { KeyboardProvider } from "react-native-keyboard-controller";
+import { SettingsProvider } from "@/context/SettingsContext";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
 import { useOnlineManager } from "@/hooks/useOnlineManager";
+import { useTheme } from "@/hooks/useTheme";
 
 import * as SplashScreen from "expo-splash-screen";
-import { useTheme } from "@/hooks/useTheme";
 
 interface AuthGuardProps {
     children: ReactNode;
@@ -86,11 +87,13 @@ export default function RootLayout() {
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
                 <DataProvider>
-                    <ThemeProvider>
-                        <KeyboardProvider>
-                            <AppLayout />
-                        </KeyboardProvider>
-                    </ThemeProvider>
+                    <SettingsProvider>
+                        <ThemeProvider>
+                            <KeyboardProvider>
+                                <AppLayout />
+                            </KeyboardProvider>
+                        </ThemeProvider>
+                    </SettingsProvider>
                 </DataProvider>
             </AuthProvider>
         </QueryClientProvider>

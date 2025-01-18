@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
 import { Modal, StyleSheet, View } from "react-native";
-import { PrimaryButton, SecondaryButton } from "../common/buttons";
-import { ThemedText, ThemedView } from "../base";
+import { PrimaryButton, SecondaryButton } from "../buttons";
+import { ThemedText, ThemedView } from "../../base";
 
 interface ConfirmationModalProps {
     cancelText?: string;
