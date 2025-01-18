@@ -66,17 +66,22 @@ export default function ProfileScreen() {
                             <NavigateButton destination="/profile/settings/appearance" icon="pallete-2">
                                 Appearance
                             </NavigateButton>
-                            <NavigateButton destination="/" icon="bell">
-                                Notifications
+                        </View>
+                    </View>
+
+                    <View>
+                        <ThemedText variant="headingMedium" style={styles.heading}>
+                            Support
+                        </ThemedText>
+                        <View style={styles.settingsGroup}>
+                            <NavigateButton destination="/support" icon="question-circle">
+                                Help
                             </NavigateButton>
                         </View>
                     </View>
                 </View>
 
                 <View style={styles.footer}>
-                    <NavigateButton destination="/support" icon="question-circle">
-                        Help
-                    </NavigateButton>
                     <SecondaryButton onPress={onSignOut}>
                         Sign Out
                     </SecondaryButton>
