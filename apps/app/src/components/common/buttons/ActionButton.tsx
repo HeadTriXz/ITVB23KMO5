@@ -9,24 +9,40 @@ import { useTheme } from "@/hooks/useTheme";
 
 interface ActionButtonProps {
     children: ReactNode;
+    disabled?: boolean;
     onPress?: () => void;
     icon?: string;
     subtitle?: string;
     style?: ViewStyle;
 }
 
-export function ActionButton({ children, onPress, icon, subtitle, style }: ActionButtonProps) {
+export function ActionButton({ children, disabled, onPress, icon, subtitle, style }: ActionButtonProps) {
     const theme = useTheme();
     const styles = useStyles(theme);
 
     if (typeof children === "string") {
-        children = <ThemedText style={styles.text}>{children}</ThemedText>;
+        children = (
+            <ThemedText style={[styles.text, disabled && styles.disabledText]}>
+                {children}
+            </ThemedText>
+        );
     }
 
     return (
-        <TouchableOpacity style={[styles.container, style]} onPress={onPress} activeOpacity={0.7}>
+        <TouchableOpacity
+            style={[styles.container, disabled && styles.disabled, style]}
+            onPress={onPress}
+            disabled={disabled}
+            activeOpacity={0.7}
+        >
             <View style={styles.content}>
-                {icon && <SolarBoldDuotone name={icon} size={24} color={theme.colors.textPrimary} />}
+                {icon && (
+                    <SolarBoldDuotone
+                        name={icon}
+                        size={24}
+                        color={disabled ? theme.colors.textSecondary : theme.colors.textPrimary}
+                    />
+                )}
                 {children}
             </View>
             <View style={styles.content}>
@@ -52,6 +68,12 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         gap: 15
+    },
+    disabled: {
+        backgroundColor: theme.colors.buttonDisabled
+    },
+    disabledText: {
+        color: theme.colors.textSecondary
     },
     secondaryText: {
         color: theme.colors.textSecondary,

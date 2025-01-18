@@ -3,15 +3,19 @@ import { ThemedText, ThemedView } from "@/components/base";
 
 import { Header } from "@/components/layout/header";
 import { NavigateButton } from "@/components/common/buttons";
+import { NetworkWarningBox } from "@/components/common";
 import { SolarBoldDuotone } from "@/components/icons/solar";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useTheme } from "@/hooks/useTheme";
 
 export default function SupportScreen() {
+    const { isConnected } = useNetworkStatus();
     const theme = useTheme();
 
     return (
         <ThemedView style={styles.container}>
             <Header title="Support" />
+            {isConnected ? null : <NetworkWarningBox />}
             <View style={styles.heading}>
                 <SolarBoldDuotone name="dialog" size={100} color={theme.colors.textPrimary} />
                 <ThemedText variant="headingLarge" style={styles.headingText}>
@@ -19,10 +23,10 @@ export default function SupportScreen() {
                 </ThemedText>
             </View>
             <View style={styles.buttonContainer}>
-                <NavigateButton destination="/(tabs)/support/chat" icon="dialog">
+                <NavigateButton destination="/(tabs)/support/chat" icon="dialog" disabled={!isConnected}>
                     Contact Live Chat
                 </NavigateButton>
-                <NavigateButton destination="/(tabs)/support/damage" icon="sledgehammer">
+                <NavigateButton destination="/(tabs)/support/damage" icon="sledgehammer" disabled={!isConnected}>
                     Report Damage
                 </NavigateButton>
                 <NavigateButton destination="/(tabs)/support/faq" icon="question-circle">
@@ -43,10 +47,11 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 100,
         paddingHorizontal: 24,
-        paddingTop: 40
+        paddingTop: 24
     },
     heading: {
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: 16
     },
     headingText: {
         maxWidth: "80%",

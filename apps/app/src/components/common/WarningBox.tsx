@@ -1,13 +1,14 @@
-import { View, StyleSheet } from "react-native";
+import { type ViewStyle, View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemedText } from "@/components/base/ThemedText";
 
 export interface WarningBoxProps {
     message: string;
+    style?: ViewStyle;
 }
 
-export const WarningBox = ({ message }: WarningBoxProps) => (
-    <View style={styles.container}>
+export const WarningBox = ({ message, style }: WarningBoxProps) => (
+    <View style={[styles.container, style]}>
         <Ionicons name="warning-outline" size={24} color="#CB7A00" />
         <ThemedText style={styles.text}>{message}</ThemedText>
     </View>

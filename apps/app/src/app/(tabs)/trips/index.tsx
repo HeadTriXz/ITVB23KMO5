@@ -2,13 +2,14 @@ import type { Rental } from "@/data/local/schema";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
-import { ErrorBox, WarningBox } from "@/components/common";
+import { ErrorBox, NetworkWarningBox, WarningBox } from "@/components/common";
 import { useMemo, useState } from "react";
 
 import { Header } from "@/components/layout/header";
 import { ThemedView } from "@/components/base";
 import { TripCard } from "@/components/cards/TripCard";
 import { TripsTabBar } from "@/components/layout/navigation/TripsTabBar";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRentals } from "@/hooks/rentals/useRentals";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
@@ -30,15 +31,18 @@ export default function TripsScreen() {
     const styles = useStyles(theme);
     const router = useRouter();
 
+    const { isConnected, runWhenConnected } = useNetworkStatus();
     const { error, isLoading, rentals, refresh } = useRentals();
     const [selectedTab, setSelectedTab] = useState<TripsTab>(TripsTab.Active);
 
     const onTripPress = (rental: Rental) => {
-        if (rental.state === "RETURNED") {
-            return router.push(`/(tabs)/(home)/${rental.car.id}`);
-        }
+        runWhenConnected(() => {
+            if (rental.state === "RETURNED") {
+                return router.push(`/(tabs)/(home)/${rental.car.id}`);
+            }
 
-        router.push(`/(tabs)/trips/${rental.id}`);
+            router.push(`/(tabs)/trips/${rental.id}`);
+        });
     }
 
     const selectedRentals = useMemo(() => {
@@ -89,6 +93,7 @@ export default function TripsScreen() {
                     ? <ErrorBox message={error.message} />
                     : <WarningBox message={EMPTY_STATE_MESSAGES[selectedTab]} />
                 }
+                ListHeaderComponent={isConnected ? null : <NetworkWarningBox />}
                 refreshing={isLoading}
                 onRefresh={refresh}
             />

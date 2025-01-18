@@ -41,7 +41,10 @@ export function useAccount(options: UseAccountOptions = {}) {
                 throw new Error("The app is not ready yet.");
             }
 
-            return api.account.getAccount();
+            const account = await api.account.getAccount();
+            await AsyncStorage.setItem(ACCOUNT_STORAGE_KEY, JSON.stringify(account));
+
+            return account;
         }
     });
 
