@@ -36,13 +36,13 @@ export default function TripsScreen() {
     const [selectedTab, setSelectedTab] = useState<TripsTab>(TripsTab.Active);
 
     const onTripPress = (rental: Rental) => {
-        runWhenConnected(() => {
-            if (rental.state === "RETURNED") {
-                return router.push(`/(tabs)/(home)/${rental.car.id}`);
-            }
+        if (rental.state === "RETURNED") {
+            return runWhenConnected(() => {
+                router.push(`/(tabs)/(home)/${rental.car.id}`);
+            });
+        }
 
-            router.push(`/(tabs)/trips/${rental.id}`);
-        });
+        router.push(`/(tabs)/trips/${rental.id}`);
     }
 
     const selectedRentals = useMemo(() => {

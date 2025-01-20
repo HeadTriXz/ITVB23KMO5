@@ -9,6 +9,8 @@ import { MapMarker } from "@/components/maps/MapMarker";
 import { ThemedText } from "@/components/base";
 import { useGeocodedLocation } from "@/hooks/useGeocodedLocation";
 import { useTheme } from "@/hooks/useTheme";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
+import { WarningBox } from "@/components/common";
 
 interface LocationPreviewProps {
     latitude: number;
@@ -20,7 +22,13 @@ export function LocationPreview({ latitude, longitude }: LocationPreviewProps) {
     const styles = useStyles(theme);
 
     const mapURL = getStaticMapURL(latitude, longitude);
+
+    const { isConnected } = useNetworkStatus();
     const { error, isLoading, location } = useGeocodedLocation(latitude, longitude);
+
+    if (!isConnected) {
+        return <WarningBox message="No internet connection. Please connect to the internet to view the location." />;
+    }
 
     if (isLoading) {
         return <ActivityIndicator />;

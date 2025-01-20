@@ -14,6 +14,7 @@ import { Header } from "@/components/layout/header";
 import { Image } from "expo-image";
 import { LocationPreview } from "@/components/maps/LocationPreview";
 import { useDeleteRental } from "@/hooks/rentals/useDeleteRental";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRental } from "@/hooks/rentals/useRental";
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
@@ -22,7 +23,9 @@ export default function TripDetailsScreen() {
     const theme = useTheme();
     const styles = useStyles(theme);
 
+    const { isConnected, runWhenConnected } = useNetworkStatus();
     const { deleteRentalAsync } = useDeleteRental();
+
     const { id } = useLocalSearchParams<{ id: string }>();
     const { error, isLoading, rental } = useRental(Number(id));
 
@@ -31,11 +34,13 @@ export default function TripDetailsScreen() {
     const [isCancelling, setIsCancelling] = useState(false);
 
     const onEndPress = () => {
-        if (rental?.state === "ACTIVE") {
-            return router.push(`/(tabs)/trips/${id}/end/mileage`);
-        }
+        runWhenConnected(() => {
+            if (rental?.state === "ACTIVE") {
+                return router.push(`/(tabs)/trips/${id}/end/mileage`);
+            }
 
-        setShowCancelModal(true);
+            setShowCancelModal(true);
+        });
     };
 
     const onCancel = async () => {
@@ -72,14 +77,14 @@ export default function TripDetailsScreen() {
     const renderNavigateButton = () => {
         if (isActive) {
             return (
-                <NavigateButton destination={`/(tabs)/trips/${id}/damage`} icon="sledgehammer">
+                <NavigateButton destination={`/(tabs)/trips/${id}/damage`} icon="sledgehammer" disabled={!isConnected}>
                     Report Damage
                 </NavigateButton>
             );
         }
 
         return (
-            <NavigateButton destination={`/(tabs)/trips/${id}/adjust-date`} icon="clock-circle">
+            <NavigateButton destination={`/(tabs)/trips/${id}/adjust-date`} icon="clock-circle" disabled={!isConnected}>
                 Adjust Booking Date
             </NavigateButton>
         );
@@ -97,7 +102,7 @@ export default function TripDetailsScreen() {
                         <LocationPreview latitude={rental.latitude} longitude={rental.longitude} />
                         {renderNavigateButton()}
                     </View>
-                    <PrimaryButton onPress={onEndPress}>
+                    <PrimaryButton onPress={onEndPress} loading={isCancelling} disabled={!isConnected}>
                         {isActive ? "End Booking" : "Cancel Booking"}
                     </PrimaryButton>
                 </View>
