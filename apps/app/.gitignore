@@ -35,6 +35,8 @@ build/
 android/
 ios/
 web/
+*.apk
+*.aab
 
 # Secrets
 .env
