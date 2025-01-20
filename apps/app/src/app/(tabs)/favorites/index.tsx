@@ -1,18 +1,20 @@
 import type { APIGetCarResult } from "@/types/api";
 
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
-import { ErrorBox, WarningBox } from "@/components/common";
+import { ErrorBox, NetworkWarningBox, WarningBox } from "@/components/common";
 import { ThemedText, ThemedView } from "@/components/base";
 import { useCallback, useEffect, useState } from "react";
 
 import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
 import { Header } from "@/components/layout/header";
 import { useData } from "@/hooks/useData";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRouter } from "expo-router";
 
 export default function FavoritesScreen() {
     const router = useRouter();
     const { api, storage } = useData();
+    const { isConnected, runWhenConnected } = useNetworkStatus();
 
     const [cars, setCars] = useState<APIGetCarResult[]>([]);
     const [error, setError] = useState<string>("");
@@ -21,7 +23,9 @@ export default function FavoritesScreen() {
     const favorites = storage!.favorites.getLiveFavorites();
 
     const onCarPress = (car: APIGetCarResult) => {
-        router.push(`/(tabs)/favorites/(car)/${car.id}`);
+        runWhenConnected(() => {
+            router.push(`/(tabs)/favorites/(car)/${car.id}`);
+        });
     };
 
     const fetchCars = useCallback(async () => {
@@ -43,15 +47,6 @@ export default function FavoritesScreen() {
     useEffect(() => {
         fetchCars();
     }, [favorites]);
-
-    if (error) {
-        return (
-            <ThemedView style={styles.container}>
-                <Header withNotificationsButton />
-                <ErrorBox message={error} />
-            </ThemedView>
-        );
-    }
 
     if (isLoading) {
         return (
@@ -75,8 +70,11 @@ export default function FavoritesScreen() {
                 )}
                 ListEmptyComponent={isLoading
                     ? <ActivityIndicator />
-                    : <WarningBox message="You have no favorite cars." />
+                    : error
+                        ? <ErrorBox message={error} />
+                        : <WarningBox message="You have no favorite cars." />
                 }
+                ListHeaderComponent={isConnected ? null : <NetworkWarningBox />}
                 refreshing={isLoading}
                 onRefresh={fetchCars}
             />

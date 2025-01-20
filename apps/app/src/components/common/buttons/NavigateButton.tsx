@@ -7,15 +7,16 @@ import { ActionButton } from "@/components/common/buttons/ActionButton";
 interface NavigateButtonProps {
     children: ReactNode;
     destination: Href;
+    disabled?: boolean;
     icon?: string;
     style?: ViewStyle;
 }
 
-export function NavigateButton({ children, destination, icon, style }: NavigateButtonProps) {
+export function NavigateButton({ children, destination, disabled, icon, style }: NavigateButtonProps) {
     const router = useRouter();
 
     return (
-        <ActionButton onPress={() => router.push(destination)} icon={icon} style={style}>
+        <ActionButton onPress={() => router.push(destination)} icon={icon} style={style} disabled={disabled}>
             {children}
         </ActionButton>
     );

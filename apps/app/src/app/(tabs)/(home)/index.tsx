@@ -2,6 +2,7 @@ import type { APIGetCarResult } from "@/types/api";
 import type { CarBrand } from "@/constants/cars";
 
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { ErrorBox, NetworkWarningBox } from "@/components/common";
 import { ThemedText, ThemedView } from "@/components/base";
 
 import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
@@ -10,11 +11,14 @@ import { SearchWithFilter } from "@/components/common/forms";
 import { TopBrandCard } from "@/components/cards/TopBrandCard";
 import { createParamsFromFilters } from "@/utils/filterParams";
 import { useCarSearch } from "@/hooks/useCarSearch";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRouter } from "expo-router";
 
 import React from "react";
 
 export default function HomeScreen() {
+    const { isConnected, runWhenConnected } = useNetworkStatus();
+
     const router = useRouter();
     const search = useCarSearch({
         filters: {},
@@ -23,24 +27,31 @@ export default function HomeScreen() {
     })
 
     const onFilter = () => {
-        router.push("/(tabs)/(home)/(search)/filter");
+        runWhenConnected(() => {
+            router.push("/(tabs)/(home)/(search)/filter");
+        });
     };
 
     const onCarPress = (car: APIGetCarResult) => {
-        router.push(`/(tabs)/(home)/(car)/${car.id}`);
+        runWhenConnected(() => {
+            router.push(`/(tabs)/(home)/(car)/${car.id}`);
+        });
     };
 
     const onSearchFocus = () => {
-        router.push("/(tabs)/(home)/(search)/search");
+        runWhenConnected(() => {
+            router.push("/(tabs)/(home)/(search)/search");
+        });
     };
 
     const onBrandPress = (brand: CarBrand) => {
-        const params = createParamsFromFilters({ brands: [brand] });
-        router.push({
-            pathname: "/(tabs)/(home)/(search)/results",
-            params: params
+        runWhenConnected(() => {
+            router.push({
+                pathname: "/(tabs)/(home)/(search)/results",
+                params: createParamsFromFilters({ brands: [brand] })
+            });
         });
-    }
+    };
 
     if (search.isLoading) {
         return (
@@ -54,7 +65,10 @@ export default function HomeScreen() {
     return (
         <ThemedView style={styles.container}>
             <Header withNotificationsButton />
-            <SearchWithFilter onFilter={onFilter} onFocus={onSearchFocus} />
+            {isConnected
+                ? <SearchWithFilter onFilter={onFilter} onFocus={onSearchFocus} />
+                : <NetworkWarningBox style={styles.networkWarning} />
+            }
             <FlatList
                 data={search.cars}
                 contentContainerStyle={styles.contentContainer}
@@ -63,6 +77,9 @@ export default function HomeScreen() {
                     <AvailableCarCard car={item} onPress={() => onCarPress(item)} />
                 )}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ListEmptyComponent={(
+                    <ErrorBox message="We couldn't find any cars." />
+                )}
                 ListHeaderComponent={(
                     <>
                         <ThemedText variant="headingMedium" style={styles.heading}>Top Brands</ThemedText>
@@ -102,6 +119,9 @@ const styles = StyleSheet.create({
     },
     heading: {
         marginBottom: 10
+    },
+    networkWarning: {
+        marginBottom: 24
     },
     separator: {
         height: 15

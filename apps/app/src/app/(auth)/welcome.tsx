@@ -8,6 +8,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/base";
+import { WarningBox } from "@/components/common";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -15,6 +17,8 @@ export default function WelcomeScreen() {
     const theme = useTheme();
     const router = useRouter();
     const styles = useStyles(theme);
+
+    const { isConnected } = useNetworkStatus();
 
     return (
         <View style={styles.container}>
@@ -50,10 +54,11 @@ export default function WelcomeScreen() {
                     transition={{ type: "timing", duration: 1000, delay: 400 }}
                     style={styles.actions}
                 >
-                    <PrimaryButton onPress={() => router.push("/register")}>
+                    {!isConnected && <WarningBox message="No internet connection" />}
+                    <PrimaryButton onPress={() => router.push("/register")} disabled={!isConnected}>
                         Register
                     </PrimaryButton>
-                    <SecondaryButton onPress={() => router.push("/login")}>
+                    <SecondaryButton onPress={() => router.push("/login")} disabled={!isConnected}>
                         Log In
                     </SecondaryButton>
                 </MotiView>

@@ -198,7 +198,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: AutoMaat@localhost
+    from: automaat@headtrixz.dev
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**

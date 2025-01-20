@@ -4,18 +4,20 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { NavigateButton, SecondaryButton } from "@/components/common/buttons";
 import { ThemedText, ThemedView } from "@/components/base";
 
-import { ErrorBox } from "@/components/common";
+import { ErrorBox, NetworkWarningBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
 import { Image } from "expo-image";
-import { useAuth } from "@/hooks/useAuth";
-import { useTheme } from "@/hooks/useTheme";
 import { useAccount } from "@/hooks/account/useAccount";
+import { useAuth } from "@/hooks/useAuth";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function ProfileScreen() {
     const theme = useTheme();
     const styles = useStyles(theme);
 
     const { setToken } = useAuth();
+    const { isConnected } = useNetworkStatus();
     const { account, error, isLoading } = useAccount();
 
     const onSignOut = () => {
@@ -45,6 +47,7 @@ export default function ProfileScreen() {
             <Header title="Profile" />
             <View style={styles.contentContainer}>
                 <View style={styles.mainContent}>
+                    {!isConnected && <NetworkWarningBox />}
                     <View style={styles.profileSection}>
                         <Image source={account.imageUrl || `avatar${account.id % 5}`} style={styles.avatar} />
                         <View>
@@ -60,7 +63,7 @@ export default function ProfileScreen() {
                             Settings
                         </ThemedText>
                         <View style={styles.settingsGroup}>
-                            <NavigateButton destination="/profile/settings/account" icon="user">
+                            <NavigateButton destination="/profile/settings/account" icon="user" disabled={!isConnected}>
                                 Account
                             </NavigateButton>
                             <NavigateButton destination="/profile/settings/appearance" icon="pallete-2">

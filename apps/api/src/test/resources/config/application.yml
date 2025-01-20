@@ -61,8 +61,8 @@ jhipster:
   clientApp:
     name: 'autoMaatApp'
   mail:
-    from: AutoMaat@localhost.com
-    base-url: http://127.0.0.1:8080
+    from: automaat@headtrixz.dev
+    base-url: https://automaat.headtrixz.dev
   logging:
     # To test json console appender
     use-json-format: false
