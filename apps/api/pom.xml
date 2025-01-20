@@ -592,7 +592,7 @@
                         <installDirectory>target</installDirectory>
                         <nodeVersion>${node.version}</nodeVersion>
                         <npmVersion>${npm.version}</npmVersion>
-                        <downloadRoot>https://nodejs.org/dist/</downloadRoot>
+                        <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                     </configuration>
                 </plugin>
                 <plugin>
