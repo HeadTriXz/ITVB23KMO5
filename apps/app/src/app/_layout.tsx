@@ -9,6 +9,7 @@ import { SettingsProvider } from "@/context/SettingsContext";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useServices } from "@/hooks/useServices";
 import { useOnlineManager } from "@/hooks/useOnlineManager";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -61,8 +62,9 @@ function AuthGuard({ children }: AuthGuardProps) {
 }
 
 function AppLayout() {
-    const theme = useTheme();
+    useServices()
 
+    const theme = useTheme();
     return (
         <>
             <StatusBar style="auto" />
@@ -97,5 +99,5 @@ export default function RootLayout() {
                 </DataProvider>
             </AuthProvider>
         </QueryClientProvider>
-    )
+    );
 }
