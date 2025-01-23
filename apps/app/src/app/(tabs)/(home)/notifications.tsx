@@ -13,21 +13,27 @@ import { ThemedText, ThemedView } from "@/components/base";
 
 import { Header } from "@/components/layout/header";
 import { NotificationItem } from "@/components/NotificationItem";
-import { isToday } from "date-fns";
+import { isToday } from "@/utils/dates";
 import { useMarkNotificationAsRead } from "@/hooks/notifications/useMarkNotificationAsRead";
 import { useMemo } from "react";
 import { useNotifications } from "@/hooks/notifications/useNotifications";
+import { useRouter } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 
 export default function NotificationsScreen() {
     const theme = useTheme();
     const styles = useStyles(theme);
+    const router = useRouter();
 
     const { error, isLoading, notifications, refresh } = useNotifications();
-    const { markAsRead } = useMarkNotificationAsRead();
+    const { markAsReadAsync } = useMarkNotificationAsRead();
 
-    const onPress = (notification: Notification) => {
-        markAsRead(notification.id);
+    const onPress = async (notification: Notification) => {
+        if (!notification.isRead) {
+            await markAsReadAsync(notification.id);
+        }
+
+        router.push(`/(tabs)/trips/${notification.rentalId}`);
     }
 
     const sections = useMemo(() => {

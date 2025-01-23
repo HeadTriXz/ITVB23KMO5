@@ -98,3 +98,45 @@ export function getTimeAgo(date: Date): string {
 
     return `${years}y`;
 }
+
+/**
+ * Check if a date is in the past.
+ *
+ * @param date The date to check.
+ * @returns Whether the date is in the past.
+ */
+export function isPast(date: Date): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return date < today;
+}
+
+/**
+ * Check if a date is today.
+ *
+ * @param date The date to check.
+ * @returns Whether the date is today.
+ */
+export function isToday(date: Date): boolean {
+    const today = new Date();
+
+    return date.getDate() === today.getDate()
+        && date.getMonth() === today.getMonth()
+        && date.getFullYear() === today.getFullYear();
+}
+
+/**
+ * Check if a date is tomorrow.
+ *
+ * @param date The date to check.
+ * @returns Whether the date is tomorrow.
+ */
+export function isTomorrow(date: Date): boolean {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    return date.getDate() === tomorrow.getDate()
+        && date.getMonth() === tomorrow.getMonth()
+        && date.getFullYear() === tomorrow.getFullYear();
+}

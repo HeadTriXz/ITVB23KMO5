@@ -1,5 +1,5 @@
 import type { ExpoSQLiteDatabase } from "drizzle-orm/expo-sqlite";
-import { and, eq, lte } from "drizzle-orm";
+import { and, eq, inArray, lte } from "drizzle-orm";
 import { getDateString } from "@/utils/dates";
 import * as schema from "@/data/local/schema";
 
@@ -55,6 +55,15 @@ export class RentalsRepository {
 
     async getAll(): Promise<schema.Rental[]> {
         return this.#db.query.rentals.findMany({
+            with: {
+                car: true
+            }
+        });
+    }
+
+    async getActive(): Promise<schema.Rental[]> {
+        return this.#db.query.rentals.findMany({
+            where: inArray(schema.rentals.state, ["ACTIVE", "RESERVED"]),
             with: {
                 car: true
             }

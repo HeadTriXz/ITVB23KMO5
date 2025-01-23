@@ -9,11 +9,13 @@ import { SettingsProvider } from "@/context/SettingsContext";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
-import { useServices } from "@/hooks/useServices";
+import { useNotificationScheduler } from "@/hooks/useNotificationScheduler";
 import { useOnlineManager } from "@/hooks/useOnlineManager";
+import { useRentalStateManager } from "@/hooks/useRentalStateManager";
 import { useTheme } from "@/hooks/useTheme";
 
 import * as SplashScreen from "expo-splash-screen";
+import * as Notifications from "expo-notifications";
 
 interface AuthGuardProps {
     children: ReactNode;
@@ -62,7 +64,8 @@ function AuthGuard({ children }: AuthGuardProps) {
 }
 
 function AppLayout() {
-    useServices()
+    useNotificationScheduler();
+    useRentalStateManager();
 
     const theme = useTheme();
     return (
@@ -83,8 +86,15 @@ function AppLayout() {
 export default function RootLayout() {
     useOnlineManager();
 
-    const queryClient = new QueryClient();
+    Notifications.setNotificationHandler({
+        handleNotification: async () => Promise.resolve({
+            shouldPlaySound: true,
+            shouldShowAlert: true,
+            shouldSetBadge: true
+        })
+    });
 
+    const queryClient = new QueryClient();
     return (
         <QueryClientProvider client={queryClient}>
             <AuthProvider>

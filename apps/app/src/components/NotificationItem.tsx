@@ -20,7 +20,6 @@ export function NotificationItem({ notification, onPress }: NotificationItemProp
         <TouchableOpacity
             onPress={() => onPress(notification)}
             style={styles.container}
-            disabled={notification.isRead}
             activeOpacity={0.7}
         >
             <SolarOutline name="bell" size={24} color={theme.colors.textSecondary} style={styles.icon} />
