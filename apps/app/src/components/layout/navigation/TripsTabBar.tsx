@@ -41,7 +41,12 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         flexDirection: "row",
-        marginBottom: 15,
-        padding: 10
+        height: 72,
+        left: 16,
+        padding: 10,
+        position: "absolute",
+        right: 16,
+        top: 16,
+        zIndex: 1
     }
 });

@@ -117,8 +117,8 @@ export default function NotificationsScreen() {
 const useStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1,
-        paddingBottom: 76,
-        paddingHorizontal: 24
+        paddingBottom: 68,
+        paddingHorizontal: 16
     },
     contentContainer: {
         gap: 15,

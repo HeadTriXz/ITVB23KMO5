@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import type { Theme } from "@/types/theme";
 
 import { Modal, StyleSheet, View } from "react-native";
 import { PrimaryButton, SecondaryButton } from "../buttons";
 import { ThemedText, ThemedView } from "../../base";
+import { useTheme } from "@/hooks/useTheme";
 
 interface ConfirmationModalProps {
     cancelText?: string;
@@ -25,6 +27,9 @@ export function ConfirmationModal({
     onConfirm,
     title
 }: ConfirmationModalProps) {
+    const theme = useTheme();
+    const styles = useStyles(theme);
+
     return (
         <Modal
             animationType="fade"
@@ -52,7 +57,7 @@ export function ConfirmationModal({
     );
 }
 
-const styles = StyleSheet.create({
+const useStyles = (theme: Theme) => StyleSheet.create({
     button: {
         flex: 1
     },
@@ -62,8 +67,9 @@ const styles = StyleSheet.create({
         marginTop: 24
     },
     content: {
-        borderRadius: 16,
-        margin: 24,
+        borderColor: theme.colors.border,
+        borderRadius: 10,
+        borderWidth: 1,
         padding: 24,
         width: "100%"
     },
@@ -72,7 +78,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#00000080",
         flex: 1,
         justifyContent: "center",
-        padding: 24
+        padding: 16
     },
     title: {
         marginBottom: 16

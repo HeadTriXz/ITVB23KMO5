@@ -96,15 +96,15 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         width: "50%"
     },
     contentContainer: {
-        padding: 24
+        padding: 16
     },
     detailsSection: {
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         flex: 1,
         justifyContent: "space-between",
-        padding: 24,
-        paddingBottom: 100
+        padding: 16,
+        paddingBottom: 94
     },
     image: {
         aspectRatio: 16 / 9,

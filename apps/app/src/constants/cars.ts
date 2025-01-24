@@ -22,12 +22,12 @@ export const CAR_BRANDS_AND_MODELS = [
     { brand: "Ford", models: ["F-150", "Escape", "Explorer"] },
     { brand: "Chevrolet", models: ["Impala", "Traverse", "Malibu"] },
     { brand: "BMW", models: ["3 Series", "5 Series", "7 Series"] },
+    { brand: "Hyundai", models: ["Santa Fe", "Kona Electric"] },
     { brand: "Mercedes-Benz", models: ["E-Class", "GLC-Class", "A-Class"] },
     { brand: "Audi", models: ["Q5", "A4", "Q3"] },
     { brand: "Jeep", models: ["Wrangler", "Cherokee"] },
     { brand: "Nissan", models: ["Altima", "Murano"] },
-    { brand: "Subaru", models: ["Outback", "Forester"] },
-    { brand: "Hyundai", models: ["Santa Fe", "Kona Electric"] }
+    { brand: "Subaru", models: ["Outback", "Forester"] }
 ] satisfies Array<{ brand: CarBrand, models: string[] }>;
 
 export const FUEL_TYPES: LabeledValue[] = [

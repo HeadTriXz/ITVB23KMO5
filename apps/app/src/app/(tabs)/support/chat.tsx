@@ -104,8 +104,8 @@ export default function SupportLiveChatScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingBottom: 100,
-        paddingHorizontal: 24
+        paddingBottom: 94,
+        paddingHorizontal: 16
     },
     contentContainer: {
         flex: 1,

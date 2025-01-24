@@ -33,14 +33,15 @@ export function CollapsibleFilterSection({ title, children }: CollapsibleFilterS
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 30
+        marginBottom: 10
     },
     content: {
-        paddingVertical: 10
+        marginBottom: 10
     },
     header: {
         alignItems: "center",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        paddingVertical: 10
     }
 });

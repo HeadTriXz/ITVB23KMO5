@@ -2,6 +2,7 @@ import type { APIGetCarResult } from "@/types/api";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ErrorBox, WarningBox } from "@/components/common";
 import { NavigateButton, PrimaryButton } from "@/components/common/buttons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
@@ -9,7 +10,6 @@ import { ThemedText, ThemedView } from "@/components/base";
 import { BookingHeader } from "@/components/booking/BookingHeader";
 import { ConfirmationModal } from "@/components/common/modals/ConfirmationModal";
 import { DateDisplay } from "@/components/booking/calendar";
-import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
 import { Image } from "expo-image";
 import { LocationPreview } from "@/components/maps/LocationPreview";
@@ -73,6 +73,15 @@ export default function TripDetailsScreen() {
         );
     }
 
+    if (rental.state === "RETURNED") {
+        return (
+            <ThemedView style={styles.container}>
+                <Header withBackButton />
+                <WarningBox message="This trip has already ended." />
+            </ThemedView>
+        );
+    }
+
     const isActive = rental.state === "ACTIVE";
     const renderNavigateButton = () => {
         if (isActive) {
@@ -132,8 +141,8 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 24,
-        paddingBottom: 100
+        padding: 16,
+        paddingBottom: 94
     },
     contentContainer: {
         flex: 1,

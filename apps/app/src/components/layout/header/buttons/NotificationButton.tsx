@@ -19,7 +19,7 @@ export function NotificationButton() {
     };
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPressOut={onPress}>
             <SolarOutline
                 name="bell"
                 size={24}

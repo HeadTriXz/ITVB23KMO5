@@ -18,7 +18,7 @@ export default function TabLayout() {
     const styles = useStyles(theme);
 
     return (
-        <Tabs>
+        <Tabs options={{ backBehavior: "history" }}>
             <TabSlot />
             <TabList style={styles.tabList}>
                 <TabTrigger name="index" href="/(tabs)/(home)" asChild>
@@ -48,13 +48,13 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderColor: darkTheme.colors.border,
         borderRadius: 10,
         borderWidth: 1,
-        bottom: 24,
+        bottom: 16,
         flexDirection: "row",
         height: 62,
         justifyContent: "space-between",
-        left: 24,
+        left: 16,
         paddingHorizontal: 24,
         position: "absolute",
-        right: 24
+        right: 16
     }
 });

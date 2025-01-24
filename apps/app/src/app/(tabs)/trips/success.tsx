@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
         justifyContent: "space-between",
-        padding: 24,
-        paddingBottom: 100
+        padding: 16,
+        paddingBottom: 94
     },
     text: {
         textAlign: "center"
