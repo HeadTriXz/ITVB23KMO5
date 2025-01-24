@@ -40,7 +40,7 @@ export function FavoriteButton({ id, style }: FavoriteButtonProps) {
     }, [isFavorite]);
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPressOut={onPress}>
             <SolarIcon
                 name="heart"
                 size={24}

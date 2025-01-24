@@ -53,9 +53,7 @@ export function AddressForm({ disabled, onChange }: AddressFormProps) {
                     placeholder="Postal Code"
                     style={styles.postalCodeInput}
                     value={address.postalCode}
-                    onChangeText={(text) => {
-                        setAddress({ ...address, postalCode: text });
-                    }}
+                    onChangeText={(text) => setAddress({ ...address, postalCode: text })}
                 />
             </View>
         </View>

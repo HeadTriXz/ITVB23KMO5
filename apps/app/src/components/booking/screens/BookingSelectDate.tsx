@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     },
     screenContainer: {
         flex: 1,
-        padding: 24,
-        paddingBottom: 100
+        padding: 16,
+        paddingBottom: 94
     }
 });

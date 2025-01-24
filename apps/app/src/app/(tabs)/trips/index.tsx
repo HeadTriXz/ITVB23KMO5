@@ -52,7 +52,9 @@ export default function TripsScreen() {
 
         switch (selectedTab) {
             case TripsTab.Active:
-                return rentals.filter((rental) => rental.state === "ACTIVE");
+                return rentals
+                    .filter((rental) => rental.state === "ACTIVE")
+                    .sort((a, b) => new Date(a.toDate).getTime() - new Date(b.toDate).getTime());
             case TripsTab.Upcoming:
                 return rentals
                     .filter((rental) => rental.state === "RESERVED")
@@ -109,12 +111,14 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 24,
-        paddingBottom: 76
+        paddingBottom: 68,
+        paddingHorizontal: 16,
+        paddingTop: 78
     },
     contentContainer: {
         gap: 15,
-        paddingBottom: 25
+        paddingBottom: 26,
+        paddingTop: 26
     },
     selectedTabText: {
         backgroundColor: theme.colors.buttonPrimary,

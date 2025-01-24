@@ -23,10 +23,10 @@ export function BackButton({ dismissAll }: BackButtonProps) {
         if (router.canGoBack()) {
             router.back();
         }
-    }, []);
+    }, [router, dismissAll]);
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPressOut={onPress}>
             <Ionicons
                 name="chevron-back"
                 size={24}

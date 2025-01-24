@@ -44,8 +44,7 @@ export function Header({ dismissAll, title = "", withBackButton, withNotificatio
 const useStyles = (theme: Theme) => StyleSheet.create({
     headerButtons: {
         flexDirection: "row",
-        gap: 15,
-        marginHorizontal: 8
+        gap: 15
     },
     headerContainer: {
         backgroundColor: theme.colors.background,
@@ -55,7 +54,6 @@ const useStyles = (theme: Theme) => StyleSheet.create({
     },
     headerIcon: {
         height: 30,
-        marginLeft: 8,
         marginRight: 15,
         width: 30
     },

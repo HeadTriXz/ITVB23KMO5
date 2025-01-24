@@ -32,7 +32,7 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: 24
+        marginBottom: 16
     },
     content: {
         alignItems: "center"

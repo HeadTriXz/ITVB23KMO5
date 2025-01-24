@@ -52,8 +52,8 @@ export default function SupportSelectDamageScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
-        paddingBottom: 100
+        padding: 16,
+        paddingBottom: 94
     },
     contentContainer: {
         gap: 15,

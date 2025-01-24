@@ -93,15 +93,8 @@ export default function SearchScreen() {
 const useStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
-        paddingBottom: 76
-    },
-    recentHeader: {
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginBottom: 12,
-        marginTop: 24
+        padding: 16,
+        paddingBottom: 68
     },
     recentIcon: {
         borderColor: theme.colors.border,

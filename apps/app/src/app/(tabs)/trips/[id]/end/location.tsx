@@ -14,6 +14,7 @@ import { useEndRental } from "@/hooks/useEndRental";
 import { useRental } from "@/hooks/rentals/useRental";
 
 import * as Location from "expo-location";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 export default function UploadLocationScreen() {
     const router = useRouter();
@@ -123,42 +124,44 @@ export default function UploadLocationScreen() {
         <ThemedView style={styles.container}>
             <Header />
             <BookingHeader car={rental.car} />
-            <View style={styles.content}>
-                <View style={styles.body}>
-                    <View>
-                        <ThemedText variant="headingMedium">
-                            Drop-off Location
-                        </ThemedText>
-                        <ThemedText style={styles.description}>
-                            Choose where you&#39;d like to return the car. By default, we&#39;ll use your current
-                            location.
-                        </ThemedText>
-                    </View>
-                    <View style={styles.inputContainer}>
-                        {error && <ErrorBox message={error} />}
-                        <View style={styles.buttonGroup}>
-                            <SelectableButton
-                                icon="gps"
-                                onPress={() => setUseCustomLocation(false)}
-                                selected={!useCustomLocation}
-                            >
-                                Use Current Location
-                            </SelectableButton>
-                            <SelectableButton
-                                icon="map-point-wave"
-                                onPress={() => setUseCustomLocation(true)}
-                                selected={useCustomLocation}
-                            >
-                                Set Custom Location
-                            </SelectableButton>
+            <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
+                <View style={styles.content}>
+                    <View style={styles.body}>
+                        <View>
+                            <ThemedText variant="headingMedium">
+                                Drop-off Location
+                            </ThemedText>
+                            <ThemedText style={styles.description}>
+                                Choose where you&#39;d like to return the car. By default, we&#39;ll use your current
+                                location.
+                            </ThemedText>
                         </View>
-                        <AddressForm onChange={setAddress} disabled={!useCustomLocation} />
+                        <View style={styles.inputContainer}>
+                            {error && <ErrorBox message={error} />}
+                            <View style={styles.buttonGroup}>
+                                <SelectableButton
+                                    icon="gps"
+                                    onPress={() => setUseCustomLocation(false)}
+                                    selected={!useCustomLocation}
+                                >
+                                    Use Current Location
+                                </SelectableButton>
+                                <SelectableButton
+                                    icon="map-point-wave"
+                                    onPress={() => setUseCustomLocation(true)}
+                                    selected={useCustomLocation}
+                                >
+                                    Set Custom Location
+                                </SelectableButton>
+                            </View>
+                            <AddressForm onChange={setAddress} disabled={!useCustomLocation} />
+                        </View>
                     </View>
+                    <PrimaryButton onPress={onNext} disabled={isFormIncomplete} loading={isLoading}>
+                        Next
+                    </PrimaryButton>
                 </View>
-                <PrimaryButton onPress={onNext} disabled={isFormIncomplete} loading={isLoading}>
-                    Next
-                </PrimaryButton>
-            </View>
+            </KeyboardAwareScrollView>
         </ThemedView>
     );
 }
@@ -173,11 +176,12 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 24,
-        paddingBottom: 100
+        padding: 16,
+        paddingBottom: 94
     },
     content: {
         flex: 1,
+        gap: 30,
         justifyContent: "space-between"
     },
     description: {
@@ -185,5 +189,8 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         gap: 15
+    },
+    scrollContainer: {
+        flexGrow: 1
     }
 });
