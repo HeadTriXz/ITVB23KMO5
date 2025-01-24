@@ -1,15 +1,15 @@
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 
 export type Car = typeof cars.$inferSelect;
 export type Rental = typeof rentals.$inferSelect & { car: Car };
 export type Favorite = typeof favorites.$inferSelect;
-export type RecentSearch = typeof recentSearches.$inferSelect;
+export type Notification = typeof notifications.$inferSelect;
 
 export type CarInsert = typeof cars.$inferInsert;
 export type RentalInsert = typeof rentals.$inferInsert;
 export type FavoriteInsert = typeof favorites.$inferInsert;
-export type RecentSearchInsert = typeof recentSearches.$inferInsert;
+export type NotificationInsert = typeof notifications.$inferInsert;
 
 export const cars = sqliteTable("cars", {
     id: integer().primaryKey(),
@@ -58,7 +58,25 @@ export const favoritesRelations = relations(favorites, ({ one }) => ({
     })
 }));
 
-export const recentSearches = sqliteTable("recent_searches", {
+export const notifications = sqliteTable("notifications", {
     id: integer().primaryKey({ autoIncrement: true }),
-    query: text().notNull()
+    body: text().notNull(),
+    isRead: integer({ mode: "boolean" })
+        .notNull()
+        .default(false),
+    title: text().notNull(),
+    type: text().notNull(),
+    rentalId: integer()
+        .notNull()
+        .references(() => rentals.id, { onDelete: "cascade" }),
+    createdAt: integer({ mode: "timestamp" })
+        .notNull()
+        .default(sql`(unixepoch())`)
 });
+
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+    rental: one(rentals, {
+        fields: [notifications.rentalId],
+        references: [rentals.id]
+    })
+}));

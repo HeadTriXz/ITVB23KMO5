@@ -1,6 +1,11 @@
 import type { ExpoSQLiteDatabase } from "drizzle-orm/expo-sqlite";
-import { eq } from "drizzle-orm";
+import { and, eq, inArray, lte } from "drizzle-orm";
+import { getDateString } from "@/utils/dates";
 import * as schema from "@/data/local/schema";
+
+interface PartialEntity {
+    id: number;
+}
 
 /**
  * The repository for the rentals table.
@@ -54,6 +59,27 @@ export class RentalsRepository {
                 car: true
             }
         });
+    }
+
+    async getActive(): Promise<schema.Rental[]> {
+        return this.#db.query.rentals.findMany({
+            where: inArray(schema.rentals.state, ["ACTIVE", "RESERVED"]),
+            with: {
+                car: true
+            }
+        });
+    }
+
+    async updatePending(): Promise<PartialEntity[]> {
+        return this.#db.update(schema.rentals)
+            .set({ state: "ACTIVE" })
+            .where(
+                and(
+                    eq(schema.rentals.state, "RESERVED"),
+                    lte(schema.rentals.fromDate, getDateString(new Date()))
+                )
+            )
+            .returning({ id: schema.rentals.id });
     }
 
     async upsert(rental: schema.RentalInsert): Promise<void> {

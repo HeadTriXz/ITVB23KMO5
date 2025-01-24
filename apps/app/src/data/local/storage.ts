@@ -4,6 +4,7 @@ import type * as schema from "@/data/local/schema";
 import {
     CarsRepository,
     FavoritesRepository,
+    NotificationsRepository,
     RentalsRepository
 } from "@/data/local/repositories";
 
@@ -22,6 +23,11 @@ export class LocalStorage {
     readonly favorites: FavoritesRepository;
 
     /**
+     * The repository for notifications.
+     */
+    readonly notifications: NotificationsRepository;
+
+    /**
      * The repository for rentals.
      */
     readonly rentals: RentalsRepository;
@@ -34,6 +40,7 @@ export class LocalStorage {
     constructor(db: ExpoSQLiteDatabase<typeof schema>) {
         this.cars = new CarsRepository(db);
         this.favorites = new FavoritesRepository(db);
+        this.notifications = new NotificationsRepository(db);
         this.rentals = new RentalsRepository(db);
     }
 
@@ -43,6 +50,7 @@ export class LocalStorage {
     async clear() {
         await this.cars.clear();
         await this.favorites.clear();
+        await this.notifications.clear();
         await this.rentals.clear();
     }
 }

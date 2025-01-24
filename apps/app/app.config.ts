@@ -10,6 +10,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     scheme: "automaat",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
+    notification: {
+        icon: "./assets/images/notification_icon.png"
+    },
     android: {
         adaptiveIcon: {
             foregroundImage: "./assets/images/adaptive_icon.png",
