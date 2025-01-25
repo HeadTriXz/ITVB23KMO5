@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/HeadTriXz/ITVB23KMO5">
-        <img src="https://github.com/user-attachments/assets/39db3bc2-39a6-4d9b-a481-3624f29f3be5" alt="Logo AutoMaat">
+        <img src="https://github.com/user-attachments/assets/00d63ca5-5c67-47cb-b57c-da3a7d1ccae4" alt="Logo AutoMaat">
     </a>
 </p>
 <h1 align="center">AutoMaat</h1>
