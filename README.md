@@ -19,6 +19,10 @@
 
 - [About](#about)
 - [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [API Setup](#api-setup)
+  - [App Development](#app-development)
+  - [Building for Production](#building-for-production)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
@@ -128,7 +132,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <!-- Image References -->
 [banner]:https://github.com/user-attachments/assets/00d63ca5-5c67-47cb-b57c-da3a7d1ccae4
-[badge-build]:https://img.shields.io/github/actions/workflow/status/HeadTriXz/Barry/test.yml?branch=main&style=for-the-badge
+[badge-build]:https://img.shields.io/github/actions/workflow/status/HeadTriXz/ITVB23KMO5/build.yml?branch=main&style=for-the-badge
 [badge-license]:https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge
 [badge-platform]:https://img.shields.io/badge/platform-Android%20%7C%20iOS-green?style=for-the-badge
 [badge-expo]:https://img.shields.io/badge/expo-v52-green?style=for-the-badge
