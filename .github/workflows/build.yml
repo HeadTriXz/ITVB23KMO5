@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build Android App (APK)
@@ -42,10 +46,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build APK
-        run: npm run build:android:preview -- --output ${{ github.workspace }}/app-release.apk
+      - name: Create .env file
+        run: echo EXPO_PUBLIC_API_URL="$EXPO_PUBLIC_API_URL" >> .env
         env:
           EXPO_PUBLIC_API_URL: ${{ secrets.EXPO_PUBLIC_API_URL }}
+
+      - name: Build APK
+        run: npm run build:android:preview -- --output ${{ github.workspace }}/app-release.apk
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
