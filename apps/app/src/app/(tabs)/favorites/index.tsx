@@ -25,7 +25,7 @@ export default function FavoritesScreen() {
 
     const onCarPress = (car: APIGetCarResult) => {
         runWhenConnected(() => {
-            router.push(`/(tabs)/favorites/(car)/${car.id}`);
+            router.push(`/cars/${car.id}`);
         });
     };
 

@@ -61,7 +61,7 @@ export default function PaymentScreen() {
             });
 
             router.dismissTo("/(tabs)/trips");
-            router.push("/(tabs)/trips/success");
+            router.push("/trips/success");
         } catch {
             setError("Failed to process payment. Please try again.");
         } finally {
@@ -109,8 +109,7 @@ export default function PaymentScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     content: {
         flex: 1,

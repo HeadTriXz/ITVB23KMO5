@@ -36,7 +36,7 @@ export default function TripDetailsScreen() {
     const onEndPress = () => {
         runWhenConnected(() => {
             if (rental?.state === "ACTIVE") {
-                return router.push(`/(tabs)/trips/${id}/end/mileage`);
+                return router.push(`/trips/${id}/end/mileage`);
             }
 
             setShowCancelModal(true);
@@ -46,7 +46,6 @@ export default function TripDetailsScreen() {
     const onCancel = async () => {
         try {
             await deleteRentalAsync(Number(id));
-
             router.back();
         } catch {
             setShowCancelModal(false);
@@ -57,7 +56,7 @@ export default function TripDetailsScreen() {
 
     if (error) {
         return (
-            <ThemedView style={styles.container}>
+            <ThemedView style={[styles.screenContainer, styles.contentContainer]}>
                 <Header withBackButton />
                 <ErrorBox message={error.message} />
             </ThemedView>
@@ -66,7 +65,7 @@ export default function TripDetailsScreen() {
 
     if (isLoading || !rental?.car) {
         return (
-            <ThemedView style={styles.container}>
+            <ThemedView style={[styles.screenContainer, styles.contentContainer]}>
                 <Header withBackButton />
                 <ActivityIndicator />
             </ThemedView>
@@ -75,7 +74,7 @@ export default function TripDetailsScreen() {
 
     if (rental.state === "RETURNED") {
         return (
-            <ThemedView style={styles.container}>
+            <ThemedView style={[styles.screenContainer, styles.contentContainer]}>
                 <Header withBackButton />
                 <WarningBox message="This trip has already ended." />
             </ThemedView>
@@ -86,36 +85,43 @@ export default function TripDetailsScreen() {
     const renderNavigateButton = () => {
         if (isActive) {
             return (
-                <NavigateButton destination={`/(tabs)/trips/${id}/damage`} icon="sledgehammer" disabled={!isConnected}>
+                <NavigateButton destination={`/trips/${id}/damage`} icon="sledgehammer" disabled={!isConnected}>
                     Report Damage
                 </NavigateButton>
             );
         }
 
         return (
-            <NavigateButton destination={`/(tabs)/trips/${id}/adjust-date`} icon="clock-circle" disabled={!isConnected}>
+            <NavigateButton destination={`/trips/${id}/adjust-date`} icon="clock-circle" disabled={!isConnected}>
                 Adjust Booking Date
             </NavigateButton>
         );
     }
 
     return (
-        <ThemedView style={styles.container}>
+        <ThemedView style={styles.screenContainer}>
             <Header />
-            <BookingHeader car={rental.car as APIGetCarResult} />
             <View style={styles.contentContainer}>
+                <BookingHeader car={rental.car as APIGetCarResult} />
                 <Image source={`data:image/png;base64,${rental.car.picture}`} style={styles.image} />
-                <DateDisplay fromDate={rental.fromDate} toDate={rental.toDate} />
-                <View style={styles.actionsContainer}>
-                    <View style={styles.idk}>
+            </View>
+            <ThemedView style={styles.detailsSection}>
+                <View>
+                    <DateDisplay fromDate={rental.fromDate} toDate={rental.toDate} style={styles.dateRow} />
+                    <View style={styles.detailsContainer}>
                         <LocationPreview latitude={rental.latitude} longitude={rental.longitude} />
                         {renderNavigateButton()}
                     </View>
-                    <PrimaryButton onPress={onEndPress} loading={isCancelling} disabled={!isConnected}>
-                        {isActive ? "End Booking" : "Cancel Booking"}
-                    </PrimaryButton>
                 </View>
-            </View>
+                <PrimaryButton
+                    onPress={onEndPress}
+                    loading={isCancelling}
+                    disabled={!isConnected}
+                    style={styles.actionButton}
+                >
+                    {isActive ? "End Booking" : "Cancel Booking"}
+                </PrimaryButton>
+            </ThemedView>
 
             <ConfirmationModal
                 isVisible={showCancelModal}
@@ -135,21 +141,26 @@ export default function TripDetailsScreen() {
 }
 
 const useStyles = (theme: Theme) => StyleSheet.create({
-    actionsContainer: {
-        flex: 1,
-        justifyContent: "space-between"
-    },
-    container: {
-        flex: 1,
-        padding: 16,
-        paddingBottom: 94
+    actionButton: {
+        width: '100%'
     },
     contentContainer: {
-        flex: 1,
-        gap: 24
+        padding: 16
     },
-    idk: {
-        gap: 15
+    dateRow: {
+        marginBottom: 40,
+        marginTop: 16
+    },
+    detailsContainer: {
+        gap: 16
+    },
+    detailsSection: {
+        backgroundColor: theme.colors.background,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        flex: 1,
+        justifyContent: "space-between",
+        padding: 16
     },
     image: {
         aspectRatio: 16 / 9,
@@ -160,7 +171,8 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         gap: 16,
         paddingVertical: 8
     },
-    modalNote: {
-        color: theme.colors.textSecondary
+    screenContainer: {
+        backgroundColor: theme.colors.card,
+        flex: 1
     }
 });

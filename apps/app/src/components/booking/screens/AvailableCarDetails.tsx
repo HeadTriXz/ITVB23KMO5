@@ -103,8 +103,7 @@ const useStyles = (theme: Theme) => StyleSheet.create({
         borderTopRightRadius: 30,
         flex: 1,
         justifyContent: "space-between",
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     image: {
         aspectRatio: 16 / 9,

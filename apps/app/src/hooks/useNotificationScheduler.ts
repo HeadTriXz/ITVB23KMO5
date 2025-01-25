@@ -230,7 +230,7 @@ export function useNotificationScheduler() {
 
                     const rentalId = response.notification.request.content.data.rentalId as string | undefined;
                     if (rentalId) {
-                        router.push(`/(tabs)/trips/${rentalId}`);
+                        router.push(`/trips/${rentalId}`);
                     }
                 });
 

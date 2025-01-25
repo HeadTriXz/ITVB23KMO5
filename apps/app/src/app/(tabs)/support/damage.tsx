@@ -18,7 +18,7 @@ export default function SupportSelectDamageScreen() {
 
     const onTripPress = (rental: Rental) => {
         router.back();
-        router.push(`/(tabs)/trips/${rental.id}/damage`);
+        router.push(`/trips/${rental.id}/damage`);
     }
 
     return (
