@@ -32,7 +32,7 @@ export default function SearchResultsScreen() {
     }, []);
 
     const onCarPress = useCallback((car: APIGetCarResult) => {
-        router.push(`/(tabs)/(home)/(car)/${car.id}`);
+        router.push(`/cars/${car.id}`);
     }, []);
 
     const renderFooter = () => {

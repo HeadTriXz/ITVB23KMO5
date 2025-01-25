@@ -115,8 +115,7 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     content: {
         flex: 1

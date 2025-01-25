@@ -8,32 +8,37 @@ import { useCallback, useEffect, useState } from "react";
 import { AvailableCarCard } from "@/components/cards/AvailableCarCard";
 import { Header } from "@/components/layout/header";
 import { useData } from "@/hooks/useData";
+import { useFavorites } from "@/hooks/favorites/useFavorites";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRouter } from "expo-router";
 
 export default function FavoritesScreen() {
     const router = useRouter();
-    const { api, storage } = useData();
-    const { isConnected, runWhenConnected } = useNetworkStatus();
 
     const [cars, setCars] = useState<APIGetCarResult[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
 
-    const favorites = storage!.favorites.getLiveFavorites();
+    const { api } = useData();
+    const { favorites } = useFavorites();
+    const { isConnected, runWhenConnected } = useNetworkStatus();
 
     const onCarPress = (car: APIGetCarResult) => {
         runWhenConnected(() => {
-            router.push(`/(tabs)/favorites/(car)/${car.id}`);
+            router.push(`/cars/${car.id}`);
         });
     };
 
     const fetchCars = useCallback(async () => {
+        if (!api || !favorites) {
+            return;
+        }
+
         setIsLoading(true);
 
         try {
             const cars = await Promise.all(
-                favorites.map(({ carId }) => api!.cars.getCar(carId))
+                favorites.map((carId) => api.cars.getCar(carId))
             );
 
             setCars(cars);

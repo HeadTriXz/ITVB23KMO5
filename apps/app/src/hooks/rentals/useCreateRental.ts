@@ -11,7 +11,6 @@ export function useCreateRental() {
     const { api, storage } = useData();
 
     const mutation = useMutation({
-        mutationKey: QueryKeys.RENTALS,
         mutationFn: async (options: APIPostRentalBody) => {
             if (!api || !storage) {
                 throw new Error("The app is not ready yet.");
@@ -24,8 +23,8 @@ export function useCreateRental() {
 
             const transformed = transformRental(rental);
 
-            await storage.rentals.upsert(transformed);
             await storage.cars.upsert(transformed.car);
+            await storage.rentals.upsert(transformed);
 
             return transformed;
         },

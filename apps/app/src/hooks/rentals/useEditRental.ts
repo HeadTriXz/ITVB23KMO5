@@ -16,7 +16,6 @@ export function useEditRental() {
     const { api, storage } = useData();
 
     const mutation = useMutation({
-        mutationKey: QueryKeys.RENTALS,
         mutationFn: async ({ id, options }: EditRentalOptions) => {
             if (!api || !storage) {
                 throw new Error("The app is not ready yet.");

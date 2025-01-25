@@ -1,5 +1,5 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
 import { BookingOverview } from "@/components/booking/screens";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 type BookingOverviewParams = {
     id: string;
@@ -17,7 +17,7 @@ export default function BookingOverviewScreen() {
 
     const onSuccess = () => {
         router.dismissAll();
-        router.replace("/(tabs)/favorites/(car)/success");
+        router.replace("/cars/success");
     }
 
     return (

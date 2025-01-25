@@ -32,15 +32,15 @@ export default function HomeScreen() {
         });
     };
 
-    const onCarPress = (car: APIGetCarResult) => {
-        runWhenConnected(() => {
-            router.push(`/(tabs)/(home)/(car)/${car.id}`);
-        });
-    };
-
     const onSearchFocus = () => {
         runWhenConnected(() => {
             router.push("/(tabs)/(home)/(search)/search");
+        });
+    };
+
+    const onCarPress = (car: APIGetCarResult) => {
+        runWhenConnected(() => {
+            router.push(`/cars/${car.id}`);
         });
     };
 

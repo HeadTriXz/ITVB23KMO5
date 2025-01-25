@@ -7,10 +7,10 @@ export default function HomeSelectDateScreen() {
 
     const onPress = (fromDate: string, toDate: string) => {
         router.push({
-            pathname: "/(tabs)/favorites/(car)/[id]/overview",
+            pathname: "/cars/[id]/overview",
             params: { id, fromDate, toDate }
         });
-    }
+    };
 
     return <BookingSelectDate carId={Number(id)} button={{ onPress }} />;
 }

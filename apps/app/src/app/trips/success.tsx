@@ -7,9 +7,13 @@ import { SolarBoldDuotone } from "@/components/icons/solar";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 
-export default function ReportDamageSuccessScreen() {
+export default function PaymentSuccessScreen() {
     const theme = useTheme();
     const router = useRouter();
+    const onHomePress = () => {
+        router.dismissAll();
+        router.push("/");
+    };
 
     return (
         <ThemedView style={styles.screenContainer}>
@@ -17,15 +21,13 @@ export default function ReportDamageSuccessScreen() {
             <View style={styles.contentContainer}>
                 <SolarBoldDuotone name="verified-check" size={100} color={theme.colors.textPrimary} />
                 <ThemedText variant="headingLarge" style={styles.heading}>
-                    Damage Reported
+                    Payment Confirmed
                 </ThemedText>
                 <ThemedText style={styles.text}>
-                    Your damage report has been successfully submitted.
+                    Your payment has been successfully processed.
                 </ThemedText>
             </View>
-            <PrimaryButton onPress={() => router.back()}>
-                Go Back
-            </PrimaryButton>
+            <PrimaryButton onPress={onHomePress}>Back to Home</PrimaryButton>
         </ThemedView>
     );
 }
@@ -43,8 +45,7 @@ const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
         justifyContent: "space-between",
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     text: {
         textAlign: "center"

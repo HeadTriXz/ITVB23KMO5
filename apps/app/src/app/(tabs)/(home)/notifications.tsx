@@ -33,7 +33,7 @@ export default function NotificationsScreen() {
             await markAsReadAsync(notification.id);
         }
 
-        router.push(`/(tabs)/trips/${notification.rentalId}`);
+        router.push(`/trips/${notification.rentalId}`);
     }
 
     const sections = useMemo(() => {

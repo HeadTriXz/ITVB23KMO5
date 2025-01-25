@@ -87,7 +87,7 @@ export default function UploadLocationScreen() {
                 longitude: location.longitude
             });
 
-            router.push(`/(tabs)/trips/${id}/end/payment`);
+            router.push(`/trips/${id}/end/payment`);
         } catch {
             setError("Location not found.");
         } finally {
@@ -176,8 +176,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     content: {
         flex: 1,

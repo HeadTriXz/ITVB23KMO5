@@ -18,7 +18,7 @@ export default function SupportSelectDamageScreen() {
 
     const onTripPress = (rental: Rental) => {
         router.back();
-        router.push(`/(tabs)/trips/${rental.id}/damage`);
+        router.push(`/trips/${rental.id}/damage`);
     }
 
     return (
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        paddingBottom: 94
+        paddingBottom: 68
     },
     contentContainer: {
         gap: 15,

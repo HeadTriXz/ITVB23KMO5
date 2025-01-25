@@ -70,7 +70,7 @@ function AppLayout() {
     const theme = useTheme();
     return (
         <>
-            <StatusBar style="auto" />
+            <StatusBar style={theme.dark ? "light" : "dark"} />
             <AuthGuard>
                 <Stack screenOptions={{
                     contentStyle: {

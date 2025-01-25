@@ -53,7 +53,7 @@ export default function UploadMileageScreen() {
             value: parseInt(mileage)
         });
 
-        router.push(`/(tabs)/trips/${id}/end/location`);
+        router.push(`/trips/${id}/end/location`);
     }
 
     if (error) {
@@ -122,8 +122,7 @@ export default function UploadMileageScreen() {
 const useStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     content: {
         flex: 1,

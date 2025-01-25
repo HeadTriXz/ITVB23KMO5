@@ -11,7 +11,7 @@ export function BookingSuccess() {
     const theme = useTheme();
     const router = useRouter();
     const onHomePress = () => {
-        router.replace("/(tabs)/(home)/");
+        router.replace("/");
     };
 
     return (
@@ -44,8 +44,7 @@ const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
         justifyContent: "space-between",
-        padding: 16,
-        paddingBottom: 94
+        padding: 16
     },
     text: {
         textAlign: "center"

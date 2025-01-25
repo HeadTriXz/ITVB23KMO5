@@ -38,11 +38,11 @@ export default function TripsScreen() {
     const onTripPress = (rental: Rental) => {
         if (rental.state === "RETURNED") {
             return runWhenConnected(() => {
-                router.push(`/(tabs)/(home)/${rental.car.id}`);
+                router.push(`/cars/${rental.car.id}`);
             });
         }
 
-        router.push(`/(tabs)/trips/${rental.id}`);
+        router.push(`/trips/${rental.id}`);
     }
 
     const selectedRentals = useMemo(() => {
