@@ -1,10 +1,10 @@
 import { type TextStyle, StyleSheet, TouchableOpacity } from "react-native";
 
-import { useCallback, useEffect, useState } from "react";
 import { SolarIcon } from "@/components/icons/solar/SolarIcon";
 import { Theme } from "@/types/theme";
+import { useFavorite } from "@/hooks/favorites/useFavorite";
 import { useTheme } from "@/hooks/useTheme";
-import { useData } from "@/hooks/useData";
+import { useToggleFavorite } from "@/hooks/favorites/useToggleFavorite";
 
 interface FavoriteButtonProps {
     id: number;
@@ -12,35 +12,14 @@ interface FavoriteButtonProps {
 }
 
 export function FavoriteButton({ id, style }: FavoriteButtonProps) {
-    const { storage } = useData();
-
     const theme = useTheme();
     const styles = useStyles(theme);
 
-    const [isFavorite, setIsFavorite] = useState(false);
-
-    useEffect(() => {
-        storage!.favorites
-            .isFavorite(id)
-            .then(setIsFavorite);
-    }, [id]);
-
-    const onPress = useCallback(async () => {
-        try {
-            if (isFavorite) {
-                await storage!.favorites.removeFavorite(id);
-            } else {
-                await storage!.favorites.addFavorite(id);
-            }
-
-            setIsFavorite(!isFavorite);
-        } catch (error) {
-            console.error("Failed to toggle favorite", error);
-        }
-    }, [isFavorite]);
+    const { isFavorite } = useFavorite(id);
+    const { toggleFavorite } = useToggleFavorite();
 
     return (
-        <TouchableOpacity onPressOut={onPress}>
+        <TouchableOpacity onPressOut={() => toggleFavorite(id)}>
             <SolarIcon
                 name="heart"
                 size={24}

@@ -9,7 +9,6 @@ export function useDeleteRental() {
     const { api, storage } = useData();
 
     const mutation = useMutation({
-        mutationKey: QueryKeys.RENTALS,
         mutationFn: async (id: number) => {
             if (!api || !storage) {
                 throw new Error("The app is not ready yet.");

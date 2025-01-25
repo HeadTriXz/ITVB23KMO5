@@ -9,7 +9,6 @@ export function useCreateNotification() {
     const { storage } = useData();
 
     const mutation = useMutation({
-        mutationKey: QueryKeys.NOTIFICATIONS,
         mutationFn: async (options: NotificationInsert) => {
             if (!storage) {
                 throw new Error("The app is not ready yet.");

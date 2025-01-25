@@ -1,4 +1,4 @@
-import { type ExpoSQLiteDatabase, useLiveQuery } from "drizzle-orm/expo-sqlite";
+import type { ExpoSQLiteDatabase } from "drizzle-orm/expo-sqlite";
 
 import { eq } from "drizzle-orm";
 import * as schema from "@/data/local/schema";
@@ -23,17 +23,6 @@ export class FavoritesRepository {
     }
 
     /**
-     * Adds a car to the favorites.
-     *
-     * @param carId The ID of the car.
-     */
-    async addFavorite(carId: number): Promise<void> {
-        await this.#db
-            .insert(schema.favorites)
-            .values({ carId });
-    }
-
-    /**
      * Clears the favorite cars.
      */
     async clear(): Promise<void> {
@@ -41,25 +30,36 @@ export class FavoritesRepository {
     }
 
     /**
-     * Gets a list of favorite cars.
+     * Adds a car to the favorites.
      *
-     * @returns A list of favorite cars.
+     * @param carId The ID of the car.
      */
-    async getFavorites(): Promise<number[]> {
-        const result = await this.#db.query.favorites.findMany();
+    async create(carId: number): Promise<void> {
+        await this.#db
+            .insert(schema.favorites)
+            .values({ carId });
+    }
 
-        return result.map((row) => row.carId);
+    /**
+     * Removes a car from the favorites.
+     *
+     * @param carId The ID of the car.
+     */
+    async delete(carId: number): Promise<void> {
+        await this.#db
+            .delete(schema.favorites)
+            .where(eq(schema.favorites.carId, carId));
     }
 
     /**
      * Gets a list of favorite cars.
-     * It will update the list when the data changes.
      *
      * @returns A list of favorite cars.
      */
-    getLiveFavorites(): schema.Favorite[] {
-        const { data } = useLiveQuery(this.#db.query.favorites.findMany());
-        return data;
+    async getAll(): Promise<number[]> {
+        const result = await this.#db.query.favorites.findMany();
+
+        return result.map((row) => row.carId);
     }
 
     /**
@@ -73,16 +73,5 @@ export class FavoritesRepository {
         });
 
         return result !== undefined;
-    }
-
-    /**
-     * Removes a car from the favorites.
-     *
-     * @param carId The ID of the car.
-     */
-    async removeFavorite(carId: number): Promise<void> {
-        await this.#db
-            .delete(schema.favorites)
-            .where(eq(schema.favorites.carId, carId));
     }
 }
