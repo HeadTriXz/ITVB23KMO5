@@ -14,9 +14,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "cross-env TZ=UTC jest",
-    "test:watch": "cross-env TZ=UTC jest --watch",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "test:watch": "cross-env TZ=UTC jest --watch"
   },
   "jest": {
     "preset": "jest-expo"

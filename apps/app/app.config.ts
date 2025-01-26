@@ -9,7 +9,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     icon: "./assets/images/icon.png",
     scheme: "automaat",
     userInterfaceStyle: "automatic",
-    newArchEnabled: false,
+    newArchEnabled: true,
     notification: {
         icon: "./assets/images/notification_icon.png"
     },

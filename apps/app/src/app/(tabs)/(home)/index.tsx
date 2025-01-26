@@ -10,11 +10,11 @@ import { Header } from "@/components/layout/header";
 import { SearchWithFilter } from "@/components/common/forms";
 import { TopBrandCard } from "@/components/cards/TopBrandCard";
 import { createParamsFromFilters } from "@/utils/filterParams";
+import { useCarSearch } from "@/hooks/cars/useCarSearch";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRouter } from "expo-router";
 
 import React from "react";
-import { useCarSearch } from "@/hooks/cars/useCarSearch";
 
 export default function HomeScreen() {
     const { isConnected, runWhenConnected } = useNetworkStatus();
