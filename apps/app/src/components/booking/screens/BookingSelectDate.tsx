@@ -1,11 +1,11 @@
-import type { APIGetCarResult, APIGetRentalResult } from "@/types/api";
+import type { APIGetRentalResult } from "@/types/api";
 import type { DateData } from "react-native-calendars";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { Calendar, DateDisplay } from "@/components/booking/calendar";
 import { ThemedText, ThemedView } from "@/components/base";
 import { getDatesBetween, getDateString, isDateInRange } from "@/utils/dates";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { BookingHeader } from "@/components/booking/BookingHeader";
 import { Header } from "@/components/layout/header";
@@ -14,6 +14,7 @@ import { PrimaryButton } from "@/components/common/buttons";
 import { WarningBox } from "@/components/common";
 import { useData } from "@/hooks/useData";
 import { useTheme } from "@/hooks/useTheme";
+import { useCar } from "@/hooks/cars/useCar";
 
 interface SelectDateButtonProps {
     isLoading?: boolean;
@@ -40,19 +41,26 @@ export function BookingSelectDate({
         onPress
     }
 }: SelectDateProps) {
-    const { api } = useData();
     const theme = useTheme();
+
+    const { api } = useData();
+    const { car, isLoading: isLoadingCar, error: carError } = useCar(carId);
+
+    const [rentals, setRentals] = useState<APIGetRentalResult[]>([]);
+    const [isLoadingRentals, setIsLoadingRentals] = useState(true);
 
     const [fromDate, setFromDate] = useState<string | null>(initialFromDate);
     const [toDate, setToDate] = useState<string | null>(initialToDate);
     const [days, setDays] = useState<number>(0);
 
-    const [car, setCar] = useState<APIGetCarResult | null>(null);
-    const [rentals, setRentals] = useState<APIGetRentalResult[]>([]);
-    const [isLoadingRentals, setIsLoadingRentals] = useState(true);
-
     const [warning, setWarning] = useState<string>("");
     const [error, setError] = useState<string>("");
+
+    const handleNext = () => {
+        if (fromDate && toDate) {
+            onPress(fromDate, toDate);
+        }
+    };
 
     const isDateAvailable = (date: string): boolean => {
         return !rentals.some((rental) => isDateInRange(date, rental.fromDate, rental.toDate));
@@ -149,28 +157,29 @@ export function BookingSelectDate({
     };
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchRentals = async () => {
+            if (!api) {
+                return;
+            }
+
             try {
-                const car = await api!.cars.getCar(carId);
-                const rentals = await api!.rentals.getRentals({
-                    "carId.equals": car.id,
+                const rentals = await api.rentals.getRentals({
+                    "carId.equals": carId,
                     "id.notIn": excludedRentals,
                     "toDate.greaterThanOrEqual": getDateString(new Date()),
                     "state.notEquals": "RETURNED",
                     "sort": ["fromDate,asc"]
                 });
 
-                setCar(car);
                 setRentals(rentals);
-            } catch (error) {
-                console.error(error);
-                setError("Failed to fetch car details.");
+            } catch {
+                setError("Failed to fetch rentals.");
             } finally {
                 setIsLoadingRentals(false);
             }
         }
 
-        fetchData();
+        fetchRentals();
     }, [carId, excludedRentals]);
 
     useEffect(() => {
@@ -193,22 +202,16 @@ export function BookingSelectDate({
         }
     }, [fromDate, toDate]);
 
-    const handleNext = useCallback(() => {
-        if (fromDate && toDate) {
-            onPress(fromDate, toDate);
-        }
-    }, [fromDate, toDate, onPress]);
-
-    if (error) {
+    if (carError || error) {
         return (
             <ThemedView style={styles.screenContainer}>
                 <Header withBackButton />
-                <ThemedText>{error}</ThemedText>
+                <ThemedText>{carError?.message || error}</ThemedText>
             </ThemedView>
         );
     }
 
-    if (isLoadingRentals || !car) {
+    if (isLoadingRentals || isLoadingCar || !car) {
         return (
             <ThemedView style={styles.screenContainer}>
                 <Header withBackButton />

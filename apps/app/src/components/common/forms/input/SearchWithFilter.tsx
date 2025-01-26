@@ -38,7 +38,7 @@ export function SearchWithFilter({ autoFocus, onChange, onFilter, onFocus, onSea
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        marginBottom: 24
+        marginBottom: 16
     },
     filterButton: {
         marginLeft: 10,

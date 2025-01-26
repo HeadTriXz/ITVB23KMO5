@@ -1,9 +1,7 @@
-import type { APIGetCarResult } from "@/types/api";
 import type { Theme } from "@/types/theme";
 
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { ThemedText, ThemedView } from "@/components/base";
-import { useEffect, useState } from "react";
 
 import { BookingHeader } from "@/components/booking/BookingHeader";
 import { ErrorBox } from "@/components/common";
@@ -12,7 +10,7 @@ import { Image } from "expo-image";
 import { LocationPreview } from "@/components/maps/LocationPreview";
 import { PrimaryButton } from "@/components/common/buttons";
 import { prettyFuel } from "@/utils/car";
-import { useData } from "@/hooks/useData";
+import { useCar } from "@/hooks/cars/useCar";
 import { useTheme } from "@/hooks/useTheme";
 
 interface CarDetailsProps {
@@ -21,26 +19,16 @@ interface CarDetailsProps {
 }
 
 export function AvailableCarDetails({ id, onBook }: CarDetailsProps) {
-    const { api } = useData();
     const theme = useTheme();
     const styles = useStyles(theme);
 
-    const [car, setCar] = useState<APIGetCarResult | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string>("");
-
-    useEffect(() => {
-        api!.cars.getCar(Number(id))
-            .then(setCar)
-            .catch(() => setError("Failed to fetch car details."))
-            .finally(() => setIsLoading(false));
-    }, []);
+    const { car, isLoading, error } = useCar(Number(id));
 
     if (error) {
         return (
             <ThemedView style={[styles.screenContainer, styles.contentContainer]}>
                 <Header withBackButton />
-                <ErrorBox message={error} />
+                <ErrorBox message={error.message} />
             </ThemedView>
         );
     }

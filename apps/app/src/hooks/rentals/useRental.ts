@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { QueryKeys } from "@/constants/queryKeys";
-import { useData } from "../useData";
 import { transformRental } from "@/utils/transforms";
+import { useData } from "../useData";
 
 interface UseRentalOptions {
     /**
@@ -43,24 +43,31 @@ export function useRental(id: number, options: UseRentalOptions = {}) {
                 throw new Error("The app is not ready yet.");
             }
 
-            const rental = await api.rentals.getRental(id);
-            if (rental.car && rental.car.model === undefined) {
-                rental.car = await api.cars.getCar(rental.car.id);
-            }
-
-            const transformed = transformRental(rental);
-
-            await storage.cars.upsert(transformed.car);
-            await storage.rentals.upsert(transformed);
-
-            return transformed;
+            return api.rentals.getRental(id);
         }
     });
 
+    const transformedRental = rental
+        ? transformRental(rental)
+        : undefined;
+
+    useEffect(() => {
+        if (!storage || !transformedRental) {
+            return;
+        }
+
+        const storeData = async () => {
+            await storage.cars.upsert(transformedRental.car);
+            await storage.rentals.upsert(transformedRental);
+        };
+
+        storeData().catch(console.error);
+    }, [storage, transformedRental?.id]);
+
     return {
-        rental,
-        isLoading,
-        error,
+        rental: transformedRental,
+        isLoading: isLoading,
+        error: error,
         refresh: refetch
     };
 }
