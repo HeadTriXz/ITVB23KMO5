@@ -10,7 +10,7 @@ import { SearchWithFilter } from "@/components/common/forms";
 import { ThemedView } from "@/components/base";
 import { parseFiltersFromParams } from "@/utils/filterParams";
 import { useCallback } from "react";
-import { useCarSearch } from "@/hooks/useCarSearch";
+import { useCarSearch } from "@/hooks/cars/useCarSearch";
 
 export default function SearchResultsScreen() {
     const params = useLocalSearchParams<SearchParams>();
@@ -58,12 +58,12 @@ export default function SearchResultsScreen() {
                 renderItem={({ item }) => (
                     <AvailableCarCard car={item} onPress={() => onCarPress(item)} />
                 )}
-                onEndReached={search.loadMore}
+                onEndReached={() => search.loadMore()}
                 onEndReachedThreshold={0.5}
                 ListFooterComponent={renderFooter}
                 ListEmptyComponent={search.isLoading
                     ? <ActivityIndicator />
-                    : <ErrorBox message={search.error || "Could not find any cars"} />
+                    : <ErrorBox message={search.error?.message || "Could not find any cars"} />
                 }
                 refreshing={search.isLoading}
                 onRefresh={search.refresh}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         gap: 15,
-        paddingBottom: 25
+        paddingBottom: 10
     },
     footer: {
         paddingVertical: 15

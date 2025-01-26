@@ -1,5 +1,3 @@
-import type { APIGetCarResult } from "@/types/api";
-
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useCallback, useEffect, useState } from "react";
 
@@ -9,6 +7,7 @@ import { ErrorBox } from "@/components/common";
 import { Header } from "@/components/layout/header";
 import { PrimaryButton } from "@/components/common/buttons";
 import { ThemedView } from "@/components/base";
+import { useCar } from "@/hooks/cars/useCar";
 import { useCreateRental } from "@/hooks/rentals/useCreateRental";
 import { useData } from "@/hooks/useData";
 
@@ -21,47 +20,44 @@ interface BookingOverviewProps {
 
 export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOverviewProps) {
     const { api } = useData();
+    const { car, isLoading: isLoadingCar, error: carError } = useCar(id);
 
-    const [car, setCar] = useState<APIGetCarResult | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string>("");
 
     const { createRentalAsync } = useCreateRental();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const car = await api!.cars.getCar(id);
-                const rentals = await api!.rentals.getRentals({
-                    "carId.equals": car.id,
-                    "fromDate.greaterThanOrEqual": fromDate,
-                    "toDate.lessThanOrEqual": toDate,
-                    "state.notEquals": "RETURNED",
-                    "sort": ["fromDate,asc"]
-                });
-
-                if (rentals && rentals.length > 0) {
-                    return setError("This car is not available for the selected dates.");
-                }
-
-                setCar(car);
-            } catch {
-                setError("Failed to fetch car details.");
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchData();
-    }, [id, fromDate, toDate]);
-
-    const onConfirm = useCallback(async () => {
-        if (!car) {
+    const checkAvailability = useCallback(async () => {
+        if (!api) {
             return;
         }
 
         try {
-            const customer = await api!.customers.getCustomer();
+            const rentals = await api.rentals.getRentals({
+                "carId.equals": id,
+                "fromDate.greaterThanOrEqual": fromDate,
+                "toDate.lessThanOrEqual": toDate,
+                "state.notEquals": "RETURNED",
+                "sort": ["fromDate,asc"]
+            });
+
+            if (rentals && rentals.length > 0) {
+                setError("This car is not available for the selected dates.");
+            }
+        } catch {
+            setError("Failed to check car availability.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, [api, fromDate, toDate]);
+
+    const onConfirm = useCallback(async () => {
+        if (!api || !car) {
+            return;
+        }
+
+        try {
+            const customer = await api.customers.getCustomer();
             await createRentalAsync({
                 car: {
                     id: car.id
@@ -82,16 +78,20 @@ export function BookingOverview({ id, fromDate, toDate, onSuccess }: BookingOver
         }
     }, [car, fromDate, toDate, onSuccess]);
 
-    if (error) {
+    useEffect(() => {
+        checkAvailability();
+    }, [checkAvailability]);
+
+    if (carError || error) {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />
-                <ErrorBox message={error} />
+                <ErrorBox message={carError?.message || error} />
             </ThemedView>
         );
     }
 
-    if (isLoading || !car) {
+    if (isLoading || isLoadingCar || !car) {
         return (
             <ThemedView style={styles.container}>
                 <Header withBackButton />

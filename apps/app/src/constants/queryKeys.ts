@@ -3,6 +3,8 @@
  */
 export const QueryKeys = {
     ACCOUNT: ["account"] as const,
+    CAR: (id: number) => ["cars", id] as const,
+    CARS: ["cars"] as const,
     FAVORITE: (id: number) => ["favorites", id] as const,
     FAVORITES: ["favorites"] as const,
     NOTIFICATIONS: ["notifications"] as const,

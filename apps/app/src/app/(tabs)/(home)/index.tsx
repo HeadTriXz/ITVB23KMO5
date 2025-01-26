@@ -10,7 +10,7 @@ import { Header } from "@/components/layout/header";
 import { SearchWithFilter } from "@/components/common/forms";
 import { TopBrandCard } from "@/components/cards/TopBrandCard";
 import { createParamsFromFilters } from "@/utils/filterParams";
-import { useCarSearch } from "@/hooks/useCarSearch";
+import { useCarSearch } from "@/hooks/cars/useCarSearch";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useRouter } from "expo-router";
 
@@ -20,11 +20,9 @@ export default function HomeScreen() {
     const { isConnected, runWhenConnected } = useNetworkStatus();
 
     const router = useRouter();
-    const search = useCarSearch({
-        filters: {},
-        query: "",
+    const { cars, isLoading, refresh } = useCarSearch({
         pageSize: 5
-    })
+    });
 
     const onFilter = () => {
         runWhenConnected(() => {
@@ -53,7 +51,7 @@ export default function HomeScreen() {
         });
     };
 
-    if (search.isLoading) {
+    if (isLoading) {
         return (
             <ThemedView style={[styles.container, styles.centered]}>
                 <Header withNotificationsButton />
@@ -70,7 +68,7 @@ export default function HomeScreen() {
                 : <NetworkWarningBox style={styles.networkWarning} />
             }
             <FlatList
-                data={search.cars}
+                data={cars}
                 contentContainerStyle={styles.contentContainer}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
@@ -92,8 +90,8 @@ export default function HomeScreen() {
                         <ThemedText variant="headingMedium" style={styles.heading}>Available Cars</ThemedText>
                     </>
                 )}
-                refreshing={search.isLoading}
-                onRefresh={search.refresh}
+                refreshing={isLoading}
+                onRefresh={refresh}
             />
         </ThemedView>
     );

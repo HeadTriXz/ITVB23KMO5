@@ -55,10 +55,14 @@ export default function TripDetailsScreen() {
     }
 
     if (error) {
+        const message = error.message === "404 NOT_FOUND"
+            ? "This trip has been cancelled."
+            : error.message;
+
         return (
             <ThemedView style={[styles.screenContainer, styles.contentContainer]}>
                 <Header withBackButton />
-                <ErrorBox message={error.message} />
+                <ErrorBox message={message} />
             </ThemedView>
         );
     }
